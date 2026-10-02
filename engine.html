@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How It Works — J&J Co.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root{
+      --ink:#080705;--cream:#F2EFE9;
+      --a:rgba(242,239,233,.7);--b:rgba(242,239,233,.35);
+      --c:rgba(242,239,233,.12);--d:rgba(242,239,233,.05);
+      --gold:#d4b896;--green:#7ecf82;
+      --card:rgba(11,9,7,.97);
+      --mono:'JetBrains Mono',monospace;
+    }
+    
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { width: 100%; min-height: 100vh; background: var(--ink); color: var(--cream); overflow-x: hidden; }
+    body { font-family: 'Inter', sans-serif; cursor: none; }
+    
+    /* Cursor */
+    #cur{position:fixed;top:0;left:0;width:34px;height:34px;border-radius:50%;
+    border:1px solid var(--b);pointer-events:none;z-index:9999;
+    transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .2s}
+    #dot{position:fixed;top:0;left:0;width:4px;height:4px;background:var(--cream);
+    border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+    body.hov #cur{width:52px;height:52px;border-color:rgba(242,239,233,.6)}
+    @media(pointer:coarse){#cur,#dot{display:none}body{cursor:auto}}
+
+    /* Nav */
+    #nav{position:fixed;top:0;left:0;right:0;z-index:8000;
+    padding:clamp(.9rem,1.8vw,1.3rem) clamp(1.5rem,5vw,4rem);
+    display:flex;align-items:center;justify-content:space-between;
+    transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+    #nav.scl{background:rgba(8,7,5,.94);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-color:var(--d)}
+    .logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;cursor:none;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;
+    letter-spacing:-.02em;color:var(--cream)}
+    .logo-tag{font-family:var(--mono);font-size:.46rem;letter-spacing:.12em;
+    border:1px solid var(--c);color:var(--b);padding:.12em .45em;border-radius:20px}
+    .nav-links{display:flex;gap:2.2rem}
+    @media(max-width:720px){.nav-links{display:none}}
+    .nl{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--b);text-decoration:none;cursor:none;transition:color .2s}
+    .nl:hover{color:var(--cream)}
+    .nl.active{color:var(--cream)}
+    .nav-live{display:flex;align-items:center;gap:.45rem;font-family:var(--mono);
+    font-size:.52rem;color:var(--b);letter-spacing:.04em}
+    @media(max-width:860px){.nav-live{display:none}}
+    .pls{width:6px;height:6px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 8px rgba(126,207,130,.9);animation:blink 2s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+    /* Grain */
+    #grain{position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.028;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:180px;animation:gr .1s steps(1) infinite}
+    @keyframes gr{0%{transform:translate(0,0)}50%{transform:translate(-3px,3px)}100%{transform:translate(3px,-3px)}}
+
+    /* Background: Animated Noise Grid */
+    .eng-bg{position:fixed;inset:0;z-index:0; pointer-events: none;}
+    .eng-bg::before{content:'';position:absolute;inset:0;
+    background:repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(242,239,233,0.015) 80px, rgba(242,239,233,0.015) 81px),
+    repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(242,239,233,0.015) 80px, rgba(242,239,233,0.015) 81px);
+    transform:perspective(800px) rotateX(1deg);transform-origin:center 80%}
+    .eng-bg::after{content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse at 30% 40%, rgba(126,207,130,0.04), transparent 60%),
+    radial-gradient(ellipse at 70% 60%, rgba(100,180,160,0.03), transparent 50%);
+    filter:blur(40px);animation:engGlow 15s ease infinite alternate}
+    @keyframes engGlow{0%{opacity:.6}100%{opacity:1;transform:translate(2%,-1%)}}
+
+    /* Page Entry Transition */
+    #page-entry { position: fixed; inset: 0; background: var(--ink); z-index: 9000; pointer-events: none; display: flex; justify-content: center; align-items: center; }
+    .page-entry-inner { width: 100%; height: 100%; background: var(--ink); transform: scale(1); opacity: 1; }
+
+    /* Page Transition Container (Exit) */
+    #page-trans { position: fixed; inset: 0; z-index: 9500; pointer-events: none; display: none; }
+    .pt-panel { position: absolute; inset: 0; background: var(--ink); transform: scale(0); opacity: 0; transform-origin: center; }
+
+    /* Layout */
+    .content-wrapper { position: relative; z-index: 1; }
+
+    /* Section 1: Hero */
+    .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(1.5rem,5vw,4rem); position: relative; }
+    .hero-label { font-family: var(--mono); font-size: .65rem; letter-spacing: .2em; color: var(--gold); text-transform: uppercase; display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+    .hero-label::after { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
+    .hero-title { font-size: clamp(3rem, 8vw, 8rem); line-height: .9; margin-bottom: 1.5rem; text-transform: uppercase; }
+    .hero-title .sg { font-family: 'Space Grotesk', sans-serif; font-weight: 700; display: block; overflow: hidden; }
+    .hero-title .is { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; display: block; text-transform: none; overflow: hidden; padding-right: 0.1em; }
+    .hero-title .char { display: inline-block; ; opacity: 0; }
+    .hero-sub { font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(1rem, 1.5vw, 1.4rem); color: var(--a); max-width: 600px; overflow: hidden; }
+    .hero-sub .word { display: inline-block; opacity: 0; transform: translateY(10px); }
+    .hero-ghost { position: absolute; bottom: 2rem; right: 2rem; font-family: var(--mono); font-size: 15rem; line-height: .8; color: var(--cream); opacity: 0.03; pointer-events: none; }
+
+    /* Section 2: Phases */
+    .phases-container { position: relative; width: 100%; }
+    .phase-section { height: 100vh; width: 100%; display: flex; align-items: center; position: relative; padding: 0 clamp(1.5rem,5vw,4rem); overflow: hidden; }
+    .phase-content { max-width: 600px; position: relative; z-index: 2; }
+    .phase-section:nth-child(even) { justify-content: flex-end; }
+    
+    .phase-ghost { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--mono); font-size: clamp(10rem, 25vw, 30rem); line-height: 1; color: var(--cream); opacity: 0.03; z-index: 0; user-select: none; pointer-events: none; }
+    .phase-section:nth-child(odd) .phase-ghost { left: -2%; }
+    .phase-section:nth-child(even) .phase-ghost { right: -2%; }
+    
+    .phase-label { font-family: var(--mono); font-size: .6rem; letter-spacing: .2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; display: inline-block; position: relative; }
+    .phase-label::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 0%; height: 1px; background: var(--gold); transition: width 0.8s ease; }
+    .phase-section.is-active .phase-label::after { width: 100%; }
+    
+    .phase-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 1rem; color: var(--cream); line-height: 1.1; }
+    .phase-desc { font-family: 'Inter', sans-serif; font-size: clamp(0.9rem, 1.2vw, 1.1rem); color: var(--a); line-height: 1.6; max-width: 550px; margin-bottom: 2rem; }
+    .phase-metric { font-family: var(--mono); font-size: .85rem; border: 1px solid var(--c); padding: .8rem 1.2rem; border-radius: 4px; display: inline-flex; align-items: center; gap: .8rem; background: rgba(8,7,5,.4); backdrop-filter: blur(8px); }
+    .phase-metric-val { color: var(--green); }
+    .phase-metric-lbl { color: var(--cream); opacity: .7; }
+
+    /* Progress Line between phases */
+    .progress-line-container { position: absolute; left: clamp(1.5rem,5vw,4rem); right: clamp(1.5rem,5vw,4rem); height: 1px; background: var(--d); z-index: 5; }
+    .progress-line { height: 100%; width: 0%; background: var(--gold); transform-origin: left; }
+
+    /* Section 3: Tech Stack */
+    .tech-stack { padding: 8rem clamp(1.5rem,5vw,4rem); text-align: center; border-top: 1px solid var(--d); position: relative; z-index: 2; background: var(--ink); }
+    .tech-label { font-family: var(--mono); font-size: .65rem; letter-spacing: .2em; color: var(--a); text-transform: uppercase; margin-bottom: 3rem; }
+    .tech-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; max-width: 800px; margin: 0 auto; }
+    .tech-item { font-family: var(--mono); font-size: .75rem; color: var(--cream); border: 1px solid var(--c); padding: .6rem 1.2rem; border-radius: 40px; transition: border-color .3s, color .3s; }
+    .tech-item:hover { border-color: var(--a); color: var(--gold); }
+
+    /* Section 4: CTA */
+    .cta { padding: 6rem clamp(1.5rem,5vw,4rem) 10rem; text-align: center; position: relative; z-index: 2; background: var(--ink); }
+    .cta-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 2rem; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 1rem 2.5rem; background: var(--gold); color: var(--ink); text-decoration: none; font-family: 'Space Grotesk', sans-serif; font-size: .9rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; border-radius: 40px; transition: transform .3s, background .3s; cursor: none; }
+    .btn:hover { background: var(--cream); transform: translateY(-2px); }
+
+    /* Footer CSS */
+    #ft{background:rgba(5,4,3,.98);position:relative;z-index:2;
+padding:clamp(4rem,6vw,6rem) clamp(1.5rem,5vw,4rem) clamp(1.2rem,2.5vw,1.8rem);
+border-top:1px solid rgba(242,239,233,.032)}
+.ft-wm{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(4rem,16vw,16rem);letter-spacing:-.055em;line-height:.85;
+  position:relative;user-select:none;margin-bottom:2.8rem;
+  overflow:hidden;cursor:none
+}
+.ft-wm-dark{
+  color:rgba(242,239,233,.06);
+  position:relative;z-index:1;display:block;white-space:nowrap
+}
+.ft-wm-light{
+  position:absolute;inset:0;z-index:2;display:block;white-space:nowrap;
+  color:rgba(242,239,233,.96);
+  -webkit-mask-image:radial-gradient(circle 180px at var(--mx,50%) var(--my,-50%),#fff 0%,transparent 100%);
+  mask-image:radial-gradient(circle 180px at var(--mx,50%) var(--my,-50%),#fff 0%,transparent 100%);
+  pointer-events:none;transition:--my .05s
+}
+#ft:hover .ft-wm{color:rgba(242,239,233,.035)}
+.ft-bot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+gap:.8rem;padding-top:1.2rem;border-top:1px solid rgba(242,239,233,.032)}
+.ft-copy{font-family:var(--mono);font-size:.56rem;color:rgba(242,239,233,.18);letter-spacing:.04em}
+.ft-links{display:flex;gap:1.4rem}
+.fa{font-family:var(--mono);font-size:.56rem;color:rgba(242,239,233,.18);
+text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
+.fa:hover{color:var(--cream)}
+  </style>
+</head>
+<body>
+
+  <!-- Entry Animation -->
+  <div id="page-entry"><div class="page-entry-inner"></div></div>
+  <div id="page-trans"><div class="pt-panel"></div></div>
+
+  <!-- Cursor & Grain -->
+  <div id="cur" aria-hidden="true"></div>
+  <div id="dot" aria-hidden="true"></div>
+  <div id="grain"></div>
+
+  <!-- Background -->
+  <div class="eng-bg"></div>
+
+  <!-- EXACT Nav -->
+  <header id="nav">
+    <a href="index.html" class="logo">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      J&amp;J Co.
+      <span class="logo-tag">EST. 2026</span>
+    </a>
+    <nav class="nav-links">
+      <a href="studio.html" class="nl">Studio</a>
+      <a href="engine.html" class="nl active">How It Works</a>
+      <a href="services.html" class="nl">Services</a>
+      <a href="contact.html" class="nl">Contact</a>
+    </nav>
+    <div class="nav-live"><span class="pls"></span><span id="navt">MORBI • ONLINE</span></div>
+  </header>
+
+  <div class="content-wrapper">
+    
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-label">OUR PROCESS</div>
+      <h1 class="hero-title">
+        <span class="sg">How It</span>
+        <span class="is">Works</span>
+      </h1>
+      <p class="hero-sub">Five phases. Zero guesswork. One autonomous system.</p>
+      <div class="hero-ghost">05</div>
+    </section>
+
+    <!-- Process Phases -->
+    <section class="phases-container">
+      
+      <!-- Phase 1 -->
+      <div class="phase-section ps-1">
+        <div class="phase-ghost">01</div>
+        <div class="phase-content">
+          <div class="phase-label">PHASE 01</div>
+          <h2 class="phase-title">Discovery &amp; Audit</h2>
+          <p class="phase-desc">We map your existing tools, workflows, and hidden bottlenecks. We identify where manual effort is bleeding time and where automation can have the highest immediate impact.</p>
+          <div class="phase-metric">
+            <span class="phase-metric-val">72h</span>
+            <span class="phase-metric-lbl">turnaround</span>
+          </div>
+        </div>
+        <div class="progress-line-container" style="bottom: 0;"><div class="progress-line"></div></div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase-section ps-2">
+        <div class="phase-ghost">02</div>
+        <div class="phase-content">
+          <div class="phase-label">PHASE 02</div>
+          <h2 class="phase-title">Model Selection</h2>
+          <p class="phase-desc">We don't just use one AI. We match the precise LLM architecture (OpenAI, Anthropic, open-source) to each specific problem to balance intelligence, speed, and cost-efficiency.</p>
+          <div class="phase-metric">
+            <span class="phase-metric-val">15+</span>
+            <span class="phase-metric-lbl">models evaluated</span>
+          </div>
+        </div>
+        <div class="progress-line-container" style="bottom: 0;"><div class="progress-line"></div></div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase-section ps-3">
+        <div class="phase-ghost">03</div>
+        <div class="phase-content">
+          <div class="phase-label">PHASE 03</div>
+          <h2 class="phase-title">Build &amp; Integration</h2>
+          <p class="phase-desc">The entire stack is connected via robust APIs and serverless functions. Data flows seamlessly from your CRM to AI agents and back, with zero human intervention required.</p>
+          <div class="phase-metric">
+            <span class="phase-metric-val">180ms</span>
+            <span class="phase-metric-lbl">avg latency</span>
+          </div>
+        </div>
+        <div class="progress-line-container" style="bottom: 0;"><div class="progress-line"></div></div>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="phase-section ps-4">
+        <div class="phase-ghost">04</div>
+        <div class="phase-content">
+          <div class="phase-label">PHASE 04</div>
+          <h2 class="phase-title">QA &amp; Hardening</h2>
+          <p class="phase-desc">Systems are stress-tested in sandbox environments. Edge cases are eliminated, fallbacks are programmed, and rate limits are managed before a single workflow touches production.</p>
+          <div class="phase-metric">
+            <span class="phase-metric-val">99.98%</span>
+            <span class="phase-metric-lbl">uptime</span>
+          </div>
+        </div>
+        <div class="progress-line-container" style="bottom: 0;"><div class="progress-line"></div></div>
+      </div>
+
+      <!-- Phase 5 -->
+      <div class="phase-section ps-5">
+        <div class="phase-ghost">05</div>
+        <div class="phase-content">
+          <div class="phase-label">PHASE 05</div>
+          <h2 class="phase-title">Deploy &amp; Compound</h2>
+          <p class="phase-desc">Once live, the system begins generating value immediately. We monitor, tweak, and optimise, ensuring that the automation compounds your operational efficiency over time.</p>
+          <div class="phase-metric">
+            <span class="phase-metric-val">+38%</span>
+            <span class="phase-metric-lbl">gain/quarter</span>
+          </div>
+        </div>
+      </div>
+      
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="tech-stack">
+      <div class="tech-label">BUILT WITH</div>
+      <div class="tech-list">
+        <span class="tech-item">Python</span>
+        <span class="tech-item">Node.js</span>
+        <span class="tech-item">OpenAI</span>
+        <span class="tech-item">Anthropic</span>
+        <span class="tech-item">Make</span>
+        <span class="tech-item">n8n</span>
+        <span class="tech-item">Custom APIs</span>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <h2 class="cta-title">Ready to start?</h2>
+      <a href="contact.html" class="btn">Connect With Us</a>
+    </section>
+
+    <!-- EXACT Footer -->
+    <footer id="ft">
+  <div class="ft-wm" id="ft-wm" aria-hidden="true"><span class="ft-wm-dark">J&amp;J Co.</span><span class="ft-wm-light" aria-hidden="true">J&amp;J Co.</span></div>
+  <div class="ft-bot">
+    <p class="ft-copy">&copy; 2026 J&amp;J Co. — AI Automation &amp; Engineering Studio. Morbi, Gujarat, India. All rights reserved.</p>
+    <nav class="ft-links" aria-label="Footer links">
+      <a href="https://wa.me/919537097033" class="fa" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a href="mailto:jndjcoai@gmail.com" class="fa copy-email">Email</a>
+      <a href="https://instagram.com/jndj_co" class="fa" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </nav>
+  </div>
+</footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/libs/gsap.min.js"></script>
+  <script src="assets/libs/ScrollTrigger.min.js"></script>
+  <script src="assets/libs/lenis.min.js"></script>
+  
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    // ----------------------------------------------------
+    // EXACT Cursor Code
+    // ----------------------------------------------------
+    var curEl = document.getElementById('cur'), dotEl = document.getElementById('dot');
+    var cx = -200, cy = -200, rx = -200, ry = -200;
+    window.addEventListener('mousemove', function(e) {
+      cx = e.clientX; cy = e.clientY;
+      gsap.to(dotEl, { x: cx, y: cy, duration: .04, ease: 'none' });
+    });
+    (function curLoop() {
+      rx += (cx - rx) * .1; ry += (cy - ry) * .1;
+      gsap.set(curEl, { x: rx, y: ry });
+      requestAnimationFrame(curLoop);
+    })();
+    document.querySelectorAll('a,button,.wc,.faq-q,.btn,.tech-item').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { document.body.classList.add('hov'); });
+      el.addEventListener('mouseleave', function() { document.body.classList.remove('hov'); });
+    });
+
+    // ----------------------------------------------------
+    // EXACT Lenis Setup
+    // ----------------------------------------------------
+    var lenis = new Lenis({ lerp: .07, smoothWheel: true, wheelMultiplier: .92 });
+    gsap.ticker.add(function(time) { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+    lenis.on('scroll', ScrollTrigger.update);
+
+    // Nav Scroll Background
+    ScrollTrigger.create({
+      start: 'top -60', onUpdate: function(self) {
+        document.getElementById('nav').classList.toggle('scl', self.progress > 0);
+      }
+    });
+
+    // Clock
+    void function updateClock() {
+      var now = new Date();
+      var ist = new Date(now.getTime() + (330 + now.getTimezoneOffset()) * 60000);
+      var h = ist.getHours(), m = ist.getMinutes();
+      var ap = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      var el = document.getElementById('navt');
+      if (el) el.textContent = 'MORBI ' + (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ' ' + ap + ' \u00b7 ONLINE';
+      setTimeout(updateClock, 10000);
+    }();
+
+    // Page Transition (Exit)
+    document.querySelectorAll('a[href$=".html"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var href = link.getAttribute('href');
+        if (!href) return;
+        if (window.location.pathname.endsWith(href)) return;
+        e.preventDefault();
+        var trans = document.getElementById('page-trans');
+        if (!trans) { window.location.href = href; return; }
+        trans.style.display = 'block';
+        trans.style.pointerEvents = 'all';
+        var children = trans.children;
+        if (children.length >= 1) {
+          gsap.to(children[0], { scale: 1, opacity: 1, duration: 0.7, ease: 'power3.inOut',
+            onComplete: function() { window.location.href = href; }
+          });
+        }
+      });
+    });
+
+    // ----------------------------------------------------
+    // Custom Page Logic
+    // ----------------------------------------------------
+    
+    // Split text manually for hero
+    function splitText(selector, classStr) {
+      const el = document.querySelector(selector);
+      if(!el) return;
+      const text = el.innerText;
+      el.innerHTML = '';
+      text.split('').forEach(char => {
+        let span = document.createElement('span');
+        span.className = classStr;
+        span.innerHTML = char === ' ' ? '&nbsp;' : char;
+        el.appendChild(span);
+      });
+    }
+    function splitWords(selector, classStr) {
+      const el = document.querySelector(selector);
+      if(!el) return;
+      const text = el.innerText;
+      el.innerHTML = '';
+      text.split(' ').forEach(word => {
+        let span = document.createElement('span');
+        span.className = classStr;
+        span.innerHTML = word + '&nbsp;';
+        el.appendChild(span);
+      });
+    }
+    
+    splitText('.sg', 'char');
+    splitText('.is', 'char');
+    splitWords('.hero-sub', 'word');
+
+    // Page Entry Animation
+    window.addEventListener('load', () => {
+      const tl = gsap.timeline();
+      
+      // Zoom out entry
+      tl.to('.page-entry-inner', {
+        scale: 2,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power3.inOut'
+      }, 0);
+      tl.set('#page-entry', { display: 'none' });
+
+      // Hero reveal
+      tl.to('.hero-title .char', {
+        y: 0,
+        opacity: 1,
+        stagger: 0.02,
+        duration: 0.8,
+        ease: 'power3.out'
+      }, "-=0.6");
+      tl.to('.hero-sub .word', {
+        y: 0,
+        opacity: 1,
+        stagger: 0.05,
+        duration: 0.8,
+        ease: 'power3.out'
+      }, "-=0.6");
+    });
+
+    // Phases Scroll Animations
+    const phases = gsap.utils.toArray('.phase-section');
+    phases.forEach((phase, i) => {
+      const content = phase.querySelector('.phase-content');
+      const line = phase.querySelector('.progress-line');
+      
+      // Content enters with y:60->0, opacity:0->1, stagger 0.15s
+      // Content exits with y:0->-40, opacity:1->0
+      const contentTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: phase,
+          start: "top center",
+          end: "bottom center",
+          scrub: true,
+          toggleClass: {targets: phase, className: "is-active"}
+        }
+      });
+      
+      const elements = phase.querySelectorAll('.phase-label, .phase-title, .phase-desc, .phase-metric');
+      
+      gsap.fromTo(elements, 
+        { y: 60, opacity: 0 },
+        { 
+          y: 0, opacity: 1, 
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: phase,
+            start: "top 80%",
+            end: "top 20%",
+            scrub: true
+          }
+        }
+      );
+
+      gsap.to(elements, {
+        y: -40, opacity: 0,
+        scrollTrigger: {
+          trigger: phase,
+          start: "bottom 80%",
+          end: "bottom 20%",
+          scrub: true
+        }
+      });
+
+      // Pin the section
+      ScrollTrigger.create({
+        trigger: phase,
+        start: "top top",
+        end: "+=100%",
+        pin: true,
+        pinSpacing: true
+      });
+
+      // Progress line transition
+      if(line) {
+        gsap.to(line, {
+          width: '100%',
+          ease: "none",
+          scrollTrigger: {
+            trigger: phase,
+            start: "top top",
+            end: "+=100%",
+            scrub: true
+          }
+        });
+      }
+    });
+
+    // Tech Stack reveal
+    gsap.fromTo('.tech-item', 
+      { y: 30, opacity: 0 },
+      { 
+        y: 0, opacity: 1, 
+        stagger: 0.05, 
+        duration: 0.8, 
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.tech-stack',
+          start: 'top 80%'
+        }
+      }
+    );
+
+    // CTA reveal
+    gsap.fromTo('.cta-title, .btn',
+      { y: 30, opacity: 0 },
+      {
+        y: 0, opacity: 1,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.cta',
+          start: 'top 80%'
+        }
+      }
+    );
+
+  
+/* -- FOOTER WATERMARK SPOTLIGHT -- */
+void function() {
+  var wm = document.getElementById('ft-wm');
+  if (!wm) return;
+  var light = wm.querySelector('.ft-wm-light');
+  if (!light) return;
+  wm.addEventListener('mousemove', function(e) {
+    var rect = wm.getBoundingClientRect();
+    var mx = ((e.clientX - rect.left) / rect.width  * 100).toFixed(2) + '%';
+    var my = ((e.clientY - rect.top)  / rect.height * 100).toFixed(2) + '%';
+    light.style.setProperty('--mx', mx);
+    light.style.setProperty('--my', my);
+  });
+  wm.addEventListener('mouseleave', function() {
+    light.style.setProperty('--mx', '50%');
+    light.style.setProperty('--my', '-60%');
+  });
+}();
+</script>
+</body>
+</html>

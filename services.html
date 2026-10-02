@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | J&J Co.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --ink: #080705;
+      --cream: #F2EFE9;
+      --a: rgba(242, 239, 233, .7);
+      --b: rgba(242, 239, 233, .35);
+      --c: rgba(242, 239, 233, .12);
+      --d: rgba(242, 239, 233, .05);
+      --gold: #d4b896;
+      --green: #7ecf82;
+      --card: rgba(11, 9, 7, .97);
+      --mono: 'JetBrains Mono', monospace;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      background: var(--ink);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    #cur { position: fixed; top: 0; left: 0; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--b); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width .25s, height .25s, border-color .2s; }
+    #dot { position: fixed; top: 0; left: 0; width: 4px; height: 4px; background: var(--cream); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+    body.hov #cur { width: 52px; height: 52px; border-color: rgba(242,239,233,.6); }
+    @media(pointer: coarse) { #cur, #dot { display: none; } body { cursor: auto; } }
+
+    #grain { position: fixed; inset: 0; pointer-events: none; z-index: 9990; opacity: .028; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 180px; animation: gr .1s steps(1) infinite; }
+    @keyframes gr { 0% { transform: translate(0, 0); } 50% { transform: translate(-3px, 3px); } 100% { transform: translate(3px, -3px); } }
+
+    #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 8000; padding: clamp(.9rem, 1.8vw, 1.3rem) clamp(1.5rem, 5vw, 4rem); display: flex; align-items: center; justify-content: space-between; transition: background .4s, border-color .4s; border-bottom: 1px solid transparent; }
+    #nav.scl { background: rgba(8,7,5,.94); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-color: var(--d); }
+    .logo { display: flex; align-items: center; gap: .5rem; text-decoration: none; cursor: none; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: .95rem; letter-spacing: -.02em; color: var(--cream); }
+    .logo-tag { font-family: var(--mono); font-size: .46rem; letter-spacing: .12em; border: 1px solid var(--c); color: var(--b); padding: .12em .45em; border-radius: 20px; }
+    .nav-links { display: flex; gap: 2.2rem; }
+    @media(max-width: 720px) { .nav-links { display: none; } }
+    .nl { font-family: 'Space Grotesk', sans-serif; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--b); text-decoration: none; cursor: none; transition: color .2s; }
+    .nl:hover { color: var(--cream); }
+    .nl.active { color: var(--cream); }
+    .nav-live { display: flex; align-items: center; gap: .45rem; font-family: var(--mono); font-size: .52rem; color: var(--b); letter-spacing: .04em; }
+    @media(max-width: 860px) { .nav-live { display: none; } }
+    .pls { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px rgba(126,207,130,.9); animation: blink 2s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+
+    #ft { position: relative; z-index: 2; padding: 3rem clamp(1.5rem, 5vw, 4rem) 1.2rem; background: var(--ink); border-top: 1px solid var(--d); }
+    .ft-wm { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(4rem, 12vw, 11rem); color: rgba(242, 239, 233, .02); text-align: center; line-height: 1; margin-bottom: 1rem; user-select: none; overflow: hidden; position: relative; }
+    .ft-wm-dark { display: block; }
+    .ft-wm-light { position: absolute; inset: 0; color: rgba(242, 239, 233, .06); clip-path: inset(0 100% 0 0); }
+    .ft-bot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .ft-copy { font-family: var(--mono); font-size: .48rem; color: var(--b); letter-spacing: .06em; }
+    .ft-links { display: flex; gap: 1.5rem; }
+    .fa { font-family: var(--mono); font-size: .5rem; letter-spacing: .12em; text-transform: uppercase; color: var(--b); text-decoration: none; cursor: none; transition: color .2s; }
+    .fa:hover { color: var(--cream); }
+
+    /* Page Transition */
+    #page-trans { position: fixed; inset: 0; z-index: 99999; pointer-events: none; display: flex; flex-direction: column; }
+    #pt-top { flex: 1; background: var(--ink); transform: translateY(0%); }
+    #pt-bot { flex: 1; background: var(--ink); transform: translateY(0%); }
+
+    /* Custom Page Styles */
+    .srv-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .srv-bg::before { content: ''; position: absolute; inset: -30%; width: 160%; height: 160%; background: radial-gradient(45% 55% at 15% 40%, rgba(212,184,150,0.12) 0%, transparent 70%), radial-gradient(40% 50% at 80% 25%, rgba(180,120,60,0.08) 0%, transparent 70%), radial-gradient(50% 60% at 55% 80%, rgba(200,150,80,0.06) 0%, transparent 70%); filter: blur(80px) saturate(1.2); animation: srvAurora 25s ease-in-out infinite alternate; }
+    @keyframes srvAurora { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-5%,3%) scale(1.05) rotate(2deg); } }
+
+    /* Hero */
+    .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(1.5rem, 5vw, 4rem); z-index: 1; }
+    .hero-lbl { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 2rem; overflow: hidden; }
+    .hero-lbl span { display: inline-block; }
+    .hero-title { font-size: clamp(2.6rem, 6vw, 7rem); line-height: 1; margin-bottom: 2rem; display: flex; flex-direction: column; }
+    .hero-title-1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; overflow: hidden; }
+    .hero-title-2 { font-family: 'Instrument Serif', serif; font-style: italic; overflow: hidden; color: var(--gold); }
+    .hero-title-1 span, .hero-title-2 span { display: inline-block; }
+    .hero-sub { font-family: 'Inter', sans-serif; font-size: clamp(0.84rem, 1.2vw, 0.94rem); color: var(--a); max-width: 400px; line-height: 1.5; overflow: hidden; }
+    .hero-sub span { display: inline-block; }
+
+    /* Services Wrap */
+    .srv-wrap { position: relative; height: 600vh; z-index: 1; }
+    .srv-pin { position: sticky; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden; }
+    
+    .srv-panel { position: absolute; inset: 0; padding: 0 clamp(1.5rem, 5vw, 4rem); display: flex; flex-direction: column; justify-content: center; pointer-events: none; }
+    .srv-panel.right { align-items: flex-end; text-align: right; }
+    .srv-panel.left { align-items: flex-start; text-align: left; }
+    
+    .ghost-num { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--mono); font-size: 20vw; color: var(--cream); opacity: 0.03; font-weight: 500; pointer-events: none; line-height: 1; }
+    .srv-panel.left .ghost-num { left: 70%; }
+    .srv-panel.right .ghost-num { left: 30%; }
+
+    .srv-num { font-family: var(--mono); font-size: 0.8rem; color: var(--gold); margin-bottom: 1rem; }
+    .srv-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; margin-bottom: 0.5rem; }
+    .srv-subtitle { font-family: var(--mono); font-size: 0.75rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+    .srv-desc { font-family: 'Inter', sans-serif; font-size: clamp(0.9rem, 1.2vw, 1rem); color: var(--a); line-height: 1.6; max-width: 550px; margin-bottom: 2.5rem; }
+    
+    .srv-metrics { display: flex; gap: 3rem; }
+    .srv-panel.right .srv-metrics { justify-content: flex-end; }
+    .metric-val { font-family: var(--mono); font-size: 2rem; color: var(--green); margin-bottom: 0.2rem; }
+    .metric-lbl { font-family: var(--mono); font-size: 0.6rem; color: var(--cream); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    .srv-progress-wrap { position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--d); }
+    .srv-progress-bar { width: 0%; height: 100%; background: var(--gold); }
+
+    /* CTA Section */
+    .cta-sec { position: relative; padding: 15vh clamp(1.5rem, 5vw, 4rem); text-align: center; z-index: 1; background: var(--ink); border-top: 1px solid var(--c); }
+    .cta-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem, 4vw, 4rem); margin-bottom: 2rem; }
+    .cta-btn { display: inline-flex; align-items: center; justify-content: center; padding: 1rem 3rem; background: var(--gold); color: var(--ink); font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: transform 0.3s, background 0.3s; }
+    .cta-btn:hover { background: var(--cream); transform: translateY(-3px); }
+
+  </style>
+</head>
+<body>
+  
+  <div id="page-trans" aria-hidden="true">
+    <div id="pt-top"></div>
+    <div id="pt-bot"></div>
+  </div>
+  
+  <div id="cur" aria-hidden="true"></div>
+  <div id="dot" aria-hidden="true"></div>
+  <div id="grain" aria-hidden="true"></div>
+  
+  <header id="nav">
+    <a href="index.html" class="logo">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      J&amp;J Co.
+      <span class="logo-tag">EST. 2026</span>
+    </a>
+    <nav class="nav-links">
+      <a href="studio.html" class="nl">Studio</a>
+      <a href="engine.html" class="nl">How It Works</a>
+      <a href="services.html" class="nl active">Services</a>
+      <a href="contact.html" class="nl">Contact</a>
+    </nav>
+    <div class="nav-live"><span class="pls"></span><span id="navt">MORBI • ONLINE</span></div>
+  </header>
+
+  <div class="srv-bg"></div>
+
+  <section class="hero">
+    <div class="hero-lbl"><span class="h-rev">OUR SERVICES</span></div>
+    <h1 class="hero-title">
+      <span class="hero-title-1"><span class="h-rev">What we</span></span>
+      <span class="hero-title-2"><span class="h-rev">deliver.</span></span>
+    </h1>
+    <p class="hero-sub"><span class="h-rev">Six autonomous systems. Zero manual work. Permanent results.</span></p>
+  </section>
+
+  <div class="srv-wrap" id="srv-wrap">
+    <div class="srv-pin">
+      
+      <!-- Service 1 -->
+      <div class="srv-panel left">
+        <div class="ghost-num">01</div>
+        <div class="srv-cont">
+          <div class="srv-num">01</div>
+          <h2 class="srv-title">AI Call Agents</h2>
+          <div class="srv-subtitle">Outbound Automation</div>
+          <p class="srv-desc">Autonomous voice agents that handle thousands of calls simultaneously. Human-like conversational logic capable of qualifying leads, booking meetings, and providing customer support without script constraints.</p>
+          <div class="srv-metrics">
+            <div>
+              <div class="metric-val">340%</div>
+              <div class="metric-lbl">More Calls</div>
+            </div>
+            <div>
+              <div class="metric-val">£0</div>
+              <div class="metric-lbl">Per Seat</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Service 2 -->
+      <div class="srv-panel right">
+        <div class="ghost-num">02</div>
+        <div class="srv-cont">
+          <div class="srv-num">02</div>
+          <h2 class="srv-title">Social Media Pipeline</h2>
+          <div class="srv-subtitle">Content Intelligence</div>
+          <p class="srv-desc">Automated research, generation, and publishing pipelines. AI analyzes market trends, crafts highly engaging content tailored to your brand voice, and distributes it across all major platforms completely autonomously.</p>
+          <div class="srv-metrics">
+            <div>
+              <div class="metric-val">60+</div>
+              <div class="metric-lbl">Posts/Month</div>
+            </div>
+            <div>
+              <div class="metric-val">92%</div>
+              <div class="metric-lbl">Traffic Lift</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="srv-panel left">
+        <div class="ghost-num">03</div>
+        <div class="srv-cont">
+          <div class="srv-num">03</div>
+          <h2 class="srv-title">Workflow Automation</h2>
+          <div class="srv-subtitle">Operations Engineering</div>
+          <p class="srv-desc">We replace fragmented manual workflows with cohesive automated systems. Invoicing, onboarding, reporting, and data entry are handled instantly by integrated scripts, entirely removing operational bottlenecks.</p>
+          <div class="srv-metrics">
+            <div>
+              <div class="metric-val">14hrs</div>
+              <div class="metric-lbl">Saved/Week</div>
+            </div>
+            <div>
+              <div class="metric-val">£0</div>
+              <div class="metric-lbl">SaaS Fees</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="srv-panel right">
+        <div class="ghost-num">04</div>
+        <div class="srv-cont">
+          <div class="srv-num">04</div>
+          <h2 class="srv-title">Lead Generation</h2>
+          <div class="srv-subtitle">Growth Architecture</div>
+          <p class="srv-desc">Hyper-targeted, multi-channel outreach pipelines. Our systems scrape prospect data, enrich it, and deploy personalized campaigns at scale, delivering warm, qualified leads directly into your calendar.</p>
+          <div class="srv-metrics">
+            <div>
+              <div class="metric-val">2,800</div>
+              <div class="metric-lbl">Leads/Month</div>
+            </div>
+            <div>
+              <div class="metric-val">38%</div>
+              <div class="metric-lbl">Conversion</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 5 -->
+      <div class="srv-panel left">
+        <div class="ghost-num">05</div>
+        <div class="srv-cont">
+          <div class="srv-num">05</div>
+          <h2 class="srv-title">CRM Integration</h2>
+          <div class="srv-subtitle">Data Infrastructure</div>
+          <p class="srv-desc">A unified data layer connecting all your disparate software. We engineer custom webhooks and API integrations that synchronize customer data instantly, providing a single source of truth without manual entry.</p>
+          <div class="srv-metrics">
+            <div>
+              <div class="metric-val">12+</div>
+              <div class="metric-lbl">Tools Linked</div>
+            </div>
+            <div>
+              <div class="metric-val">0</div>
+              <div class="metric-lbl">Manual Syncs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 6 -->
+      <div class="srv-panel right">
+        <div class="ghost-num">06</div>
+        <div class="srv-cont">
+          <div class="srv-num">06</div>
+          <h2 class="srv-title">Custom AI Software</h2>
+          <div class="srv-subtitle">Proprietary Engineering</div>
+          <p class="srv-desc">Bespoke software solutions built exactly for your business model. From internal dashboard tools to specialized client-facing portals, we build lightweight, scalable applications with zero ongoing licensing fees.</p>
+          <div class="srv-metrics">
+            <div>
+              <div class="metric-val">100%</div>
+              <div class="metric-lbl">Code Ownership</div>
+            </div>
+            <div>
+              <div class="metric-val">£0</div>
+              <div class="metric-lbl">Licensing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="srv-progress-wrap">
+        <div class="srv-progress-bar" id="srv-prog"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <section class="cta-sec">
+    <h2 class="cta-title">Ready to automate?</h2>
+    <a href="contact.html" class="cta-btn">Start the process</a>
+  </section>
+
+  <footer id="ft">
+  <div class="ft-wm" id="ft-wm" aria-hidden="true"><span class="ft-wm-dark">J&amp;J Co.</span><span class="ft-wm-light" aria-hidden="true">J&amp;J Co.</span></div>
+  <div class="ft-bot">
+    <p class="ft-copy">&copy; 2026 J&amp;J Co. — AI Automation &amp; Engineering Studio. Morbi, Gujarat, India. All rights reserved.</p>
+    <nav class="ft-links" aria-label="Footer links">
+      <a href="https://wa.me/919537097033" class="fa" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a href="mailto:jndjcoai@gmail.com" class="fa copy-email">Email</a>
+      <a href="https://instagram.com/jndj_co" class="fa" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </nav>
+  </div>
+</footer>
+
+  <script src="assets/libs/gsap.min.js"></script>
+  <script src="assets/libs/ScrollTrigger.min.js"></script>
+  <script src="assets/libs/ScrollToPlugin.min.js"></script>
+  <script src="assets/libs/CustomEase.min.js"></script>
+  <script src="assets/libs/lenis.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+    // Entry Animation
+    window.addEventListener('load', () => {
+      gsap.to('#pt-top', { y: '-100%', duration: 1.2, ease: 'power4.inOut' });
+      gsap.to('#pt-bot', { y: '100%', duration: 1.2, ease: 'power4.inOut', onComplete: () => {
+        document.getElementById('page-trans').style.display = 'none';
+        
+        // Hero text reveal
+        const revs = document.querySelectorAll('.h-rev');
+        revs.forEach((r, i) => {
+          let parts = r.textContent.split(' ');
+          r.innerHTML = '';
+          parts.forEach(p => {
+            let sp = document.createElement('span');
+            sp.style.display = 'inline-block';
+            sp.style.transform = 'translateY(100%)';
+            sp.textContent = p + ' ';
+            r.appendChild(sp);
+          });
+          gsap.to(r.children, { y: '0%', duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: i * 0.1 });
+        });
+      }});
+    });
+
+    // Lenis & ScrollTrigger Base
+    var lenis = new Lenis({ lerp: .07, smoothWheel: true, wheelMultiplier: .92 });
+    gsap.ticker.add(function(time) { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+    lenis.on('scroll', ScrollTrigger.update);
+
+    // Nav Background
+    ScrollTrigger.create({
+      start: 'top -60', onUpdate: function(self) {
+        document.getElementById('nav').classList.toggle('scl', self.progress > 0);
+      }
+    });
+
+    // Clock
+    void function updateClock() {
+      var now = new Date();
+      var ist = new Date(now.getTime() + (330 + now.getTimezoneOffset()) * 60000);
+      var h = ist.getHours(), m = ist.getMinutes();
+      var ap = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      var el = document.getElementById('navt');
+      if (el) el.textContent = 'MORBI ' + (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ' ' + ap + ' \u00b7 ONLINE';
+      setTimeout(updateClock, 10000);
+    }();
+
+    // Cursor
+    var curEl = document.getElementById('cur'), dotEl = document.getElementById('dot');
+    var cx = -200, cy = -200, rx = -200, ry = -200;
+    window.addEventListener('mousemove', function(e) {
+      cx = e.clientX; cy = e.clientY;
+      gsap.to(dotEl, { x: cx, y: cy, duration: .04, ease: 'none' });
+    });
+    (function curLoop() {
+      rx += (cx - rx) * .1; ry += (cy - ry) * .1;
+      gsap.set(curEl, { x: rx, y: ry });
+      requestAnimationFrame(curLoop);
+    })();
+    document.querySelectorAll('a,button,.wc,.faq-q').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { document.body.classList.add('hov'); });
+      el.addEventListener('mouseleave', function() { document.body.classList.remove('hov'); });
+    });
+
+    // Exit Transitions
+    document.querySelectorAll('a[href$=".html"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var href = link.getAttribute('href');
+        if (!href) return;
+        if (window.location.pathname.endsWith(href)) return;
+        e.preventDefault();
+        var trans = document.getElementById('page-trans');
+        if (!trans) { window.location.href = href; return; }
+        trans.style.display = 'flex';
+        trans.style.pointerEvents = 'all';
+        var children = trans.children;
+        if (children.length >= 2) {
+          gsap.to(children[0], { x: '0%', y: '0%', scale: 1, opacity: 1, duration: 0.7, ease: 'power4.inOut' });
+          gsap.to(children[1], { x: '0%', y: '0%', scale: 1, opacity: 1, duration: 0.7, ease: 'power4.inOut',
+            onComplete: function() { window.location.href = href; }
+          });
+        }
+      });
+    });
+
+    // Services Scroll Animation
+    var panels = gsap.utils.toArray('.srv-panel');
+    var totalPanels = panels.length;
+    var wrapHeight = totalPanels * 100; // 600vh total
+
+    // Set first panel visible
+    if (panels[0]) {
+      gsap.set(panels[0], { opacity: 1, y: 0, pointerEvents: 'auto' });
+      gsap.set(panels[0].querySelectorAll('.srv-cont > *'), { y: 0, opacity: 1 });
+    }
+
+    // Animate progress bar
+    gsap.to('#srv-prog', {
+      width: '100%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#srv-wrap',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true
+      }
+    });
+
+    // Create a master timeline scrubbed by scroll
+    var srvTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#srv-wrap',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.2,
+        pin: false
+      }
+    });
+
+    panels.forEach(function(panel, i) {
+      var children = panel.querySelectorAll('.srv-cont > *');
+      
+      if (i > 0) {
+        // Fade in this panel
+        srvTl.to(panel, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, i - 0.3);
+        srvTl.to(children, { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, ease: 'power2.out' }, i - 0.25);
+      }
+      
+      if (i < totalPanels - 1) {
+        // Fade out this panel
+        srvTl.to(children, { y: -20, opacity: 0, duration: 0.2, stagger: 0.03, ease: 'power2.in' }, i + 0.6);
+        srvTl.to(panel, { opacity: 0, y: -40, duration: 0.2, ease: 'power2.in' }, i + 0.65);
+      }
+    });
+
+    // Set initial state for panels 2-6
+    panels.forEach(function(p, i) {
+      if (i > 0) {
+        gsap.set(p, { opacity: 0, y: 50 });
+        gsap.set(p.querySelectorAll('.srv-cont > *'), { y: 30, opacity: 0 });
+      }
+    });
+
+  
+/* -- FOOTER WATERMARK SPOTLIGHT -- */
+void function() {
+  var wm = document.getElementById('ft-wm');
+  if (!wm) return;
+  var light = wm.querySelector('.ft-wm-light');
+  if (!light) return;
+  wm.addEventListener('mousemove', function(e) {
+    var rect = wm.getBoundingClientRect();
+    var mx = ((e.clientX - rect.left) / rect.width  * 100).toFixed(2) + '%';
+    var my = ((e.clientY - rect.top)  / rect.height * 100).toFixed(2) + '%';
+    light.style.setProperty('--mx', mx);
+    light.style.setProperty('--my', my);
+  });
+  wm.addEventListener('mouseleave', function() {
+    light.style.setProperty('--mx', '50%');
+    light.style.setProperty('--my', '-60%');
+  });
+}();
+</script>
+</body>
+</html>

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | J&J Co.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --ink:#080705;--cream:#F2EFE9;
+      --a:rgba(242,239,233,.7);--b:rgba(242,239,233,.35);
+      --c:rgba(242,239,233,.12);--d:rgba(242,239,233,.05);
+      --gold:#d4b896;--green:#7ecf82;
+      --card:rgba(11,9,7,.97);
+      --mono:'JetBrains Mono',monospace;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+    .lenis.lenis-smooth iframe { pointer-events: none; }
+    
+    body {
+      background: var(--ink); color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden; cursor: none;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    ::selection { background: var(--cream); color: var(--ink); }
+
+    /* EXACT Cursor Code */
+    #cur{position:fixed;top:0;left:0;width:34px;height:34px;border-radius:50%;
+    border:1px solid var(--b);pointer-events:none;z-index:9999;
+    transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .2s}
+    #dot{position:fixed;top:0;left:0;width:4px;height:4px;background:var(--cream);
+    border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+    body.hov #cur{width:52px;height:52px;border-color:rgba(242,239,233,.6)}
+    @media(pointer:coarse){#cur,#dot{display:none}body{cursor:auto}}
+
+    /* EXACT Logo/Nav Code */
+    #nav{position:fixed;top:0;left:0;right:0;z-index:8000;
+    padding:clamp(.9rem,1.8vw,1.3rem) clamp(1.5rem,5vw,4rem);
+    display:flex;align-items:center;justify-content:space-between;
+    transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+    #nav.scl{background:rgba(8,7,5,.94);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-color:var(--d)}
+    .logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;cursor:none;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;
+    letter-spacing:-.02em;color:var(--cream)}
+    .logo-tag{font-family:var(--mono);font-size:.46rem;letter-spacing:.12em;
+    border:1px solid var(--c);color:var(--b);padding:.12em .45em;border-radius:20px}
+    .nav-links{display:flex;gap:2.2rem}
+    @media(max-width:720px){.nav-links{display:none}}
+    .nl{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--b);text-decoration:none;cursor:none;transition:color .2s}
+    .nl:hover{color:var(--cream)}
+    .nl.active{color:var(--cream)}
+    .nav-live{display:flex;align-items:center;gap:.45rem;font-family:var(--mono);
+    font-size:.52rem;color:var(--b);letter-spacing:.04em}
+    @media(max-width:860px){.nav-live{display:none}}
+    .pls{width:6px;height:6px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 8px rgba(126,207,130,.9);animation:blink 2s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+    /* Grain Overlay */
+    #grain{position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.028;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:180px;animation:gr .1s steps(1) infinite}
+    @keyframes gr{0%{transform:translate(0,0)}50%{transform:translate(-3px,3px)}100%{transform:translate(3px,-3px)}}
+
+    /* Footer CSS */
+    #ft{background:rgba(5,4,3,.98);position:relative;z-index:2;
+padding:clamp(4rem,6vw,6rem) clamp(1.5rem,5vw,4rem) clamp(1.2rem,2.5vw,1.8rem);
+border-top:1px solid rgba(242,239,233,.032)}
+.ft-wm{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(4rem,16vw,16rem);letter-spacing:-.055em;line-height:.85;
+  position:relative;user-select:none;margin-bottom:2.8rem;
+  overflow:hidden;cursor:none
+}
+.ft-wm-dark{
+  color:rgba(242,239,233,.06);
+  position:relative;z-index:1;display:block;white-space:nowrap
+}
+.ft-wm-light{
+  position:absolute;inset:0;z-index:2;display:block;white-space:nowrap;
+  color:rgba(242,239,233,.96);
+  -webkit-mask-image:radial-gradient(circle 180px at var(--mx,50%) var(--my,-50%),#fff 0%,transparent 100%);
+  mask-image:radial-gradient(circle 180px at var(--mx,50%) var(--my,-50%),#fff 0%,transparent 100%);
+  pointer-events:none;transition:--my .05s
+}
+#ft:hover .ft-wm{color:rgba(242,239,233,.035)}
+.ft-bot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+gap:.8rem;padding-top:1.2rem;border-top:1px solid rgba(242,239,233,.032)}
+.ft-copy{font-family:var(--mono);font-size:.56rem;color:rgba(242,239,233,.18);letter-spacing:.04em}
+.ft-links{display:flex;gap:1.4rem}
+.fa{font-family:var(--mono);font-size:.56rem;color:rgba(242,239,233,.18);
+text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
+.fa:hover{color:var(--cream)}
+
+    /* Page Entry Transition */
+    #page-trans{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:var(--ink);z-index:9900;
+      transform-origin:center;
+      pointer-events:none;
+    }
+
+    /* Background Elements */
+    #bg-container{
+      position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .bg-rings{
+      position:absolute;
+      width:150vmin;height:150vmin;
+      opacity:0.025;
+      animation: spin 120s linear infinite;
+    }
+    .bg-rings svg{width:100%;height:100%;}
+    .bg-rings.r2{width:120vmin;height:120vmin;animation-direction:reverse;animation-duration:90s;}
+    .bg-rings.r3{width:90vmin;height:90vmin;animation-duration:150s;}
+    @keyframes spin { 100% { transform:rotate(360deg); } }
+    #bg-canvas{
+      position:absolute;inset:0;width:100%;height:100%;
+    }
+
+    /* Main Content */
+    main { position:relative; z-index:1; }
+    
+    /* Section 1: Hero */
+    .hero {
+      min-height:100vh;
+      display:flex;flex-direction:column;justify-content:center;
+      padding:0 clamp(1.5rem,5vw,4rem);
+    }
+    .hero-label {
+      font-family:var(--mono);font-size:0.75rem;letter-spacing:0.15em;
+      color:var(--gold);margin-bottom:2rem;
+      text-transform:uppercase;
+    }
+    .hero-title {
+      font-size:clamp(3rem, 7vw, 7rem);
+      line-height:1;margin-bottom:2rem;
+      display:flex;flex-direction:column;
+    }
+    .hero-t1 {
+      font-family:'Instrument Serif',serif;font-style:italic;
+      color:var(--cream);font-weight:400;
+    }
+    .hero-t2 {
+      font-family:'Space Grotesk',sans-serif;font-weight:500;
+      color:rgba(242,239,233,.25);
+    }
+    .hero-t1 .word, .hero-t2 .word { display:inline-block; overflow:hidden; vertical-align:top; }
+    .hero-t1 .word-inner, .hero-t2 .word-inner { display:inline-block; transform:translateY(110%); }
+
+    .hero-sub {
+      font-family:'Inter',sans-serif;
+      font-size:clamp(0.9rem,1.2vw,1.1rem);
+      color:var(--a);
+      max-width:600px;
+      line-height:1.6;
+    }
+    .scroll-ind {
+      position:absolute;bottom:2rem;left:clamp(1.5rem,5vw,4rem);
+      font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;
+      color:var(--b);display:flex;align-items:center;gap:1rem;
+    }
+    .scroll-line {
+      width:1px;height:40px;background:var(--c);position:relative;overflow:hidden;
+    }
+    .scroll-dot {
+      position:absolute;top:0;left:0;width:100%;height:30%;background:var(--cream);
+      animation: sdot 2s infinite ease-in-out;
+    }
+    @keyframes sdot { 0%{transform:translateY(-100%);} 100%{transform:translateY(350%);} }
+
+    /* Section 2: Contact Methods */
+    .contact-sec {
+      padding:8rem clamp(1.5rem,5vw,4rem);
+    }
+    .methods {
+      display:flex; justify-content:space-between; gap:2rem;
+      border-top:1px solid var(--c);
+      border-bottom:1px solid var(--c);
+      padding:4rem 0;
+    }
+    .method-col {
+      flex:1; display:flex; flex-direction:column; gap:1.5rem;
+      position:relative; opacity:0;
+    }
+    .method-col:not(:last-child)::after {
+      content:'';position:absolute;right:-1rem;top:0;bottom:0;
+      width:1px;background:linear-gradient(to bottom, transparent, rgba(212,184,150,0.3), transparent);
+    }
+    .m-label {
+      font-family:var(--mono);font-size:0.7rem;letter-spacing:0.15em;
+      color:var(--gold);text-transform:uppercase;
+    }
+    .m-detail {
+      font-family:'Space Grotesk',sans-serif;font-weight:500;
+      font-size:1.1rem;color:var(--cream);
+    }
+    .m-cta {
+      font-family:'Inter',sans-serif;font-size:0.85rem;color:var(--a);
+      text-decoration:none;cursor:none;display:inline-flex;align-items:center;gap:0.5rem;
+      position:relative; width:fit-content;
+    }
+    .m-cta::after {
+      content:'';position:absolute;left:0;bottom:-4px;width:100%;height:1px;
+      background:var(--a);transform:scaleX(0);transform-origin:right;transition:transform 0.4s ease;
+    }
+    .m-cta:hover::after { transform:scaleX(1);transform-origin:left; }
+    @media(max-width:768px){
+      .methods { flex-direction:column; gap:4rem; }
+      .method-col:not(:last-child)::after {
+        width:100%;height:1px;right:0;bottom:-2rem;top:auto;
+        background:linear-gradient(to right, transparent, rgba(212,184,150,0.3), transparent);
+      }
+    }
+
+    /* Section 3: Location & Status */
+    .loc-stat {
+      padding:4rem clamp(1.5rem,5vw,4rem);
+      display:flex;gap:4rem;
+    }
+    .ls-col { flex:1; }
+    .ls-label {
+      font-family:var(--mono);font-size:0.7rem;letter-spacing:0.15em;
+      color:var(--b);margin-bottom:1.5rem;text-transform:uppercase;
+    }
+    .ls-main {
+      font-family:'Instrument Serif',serif;font-style:italic;
+      font-size:clamp(2.5rem,4vw,4rem);color:var(--cream);line-height:1;margin-bottom:0.5rem;
+    }
+    .ls-sub {
+      font-family:'Space Grotesk',sans-serif;font-size:1rem;color:var(--a);margin-bottom:1.5rem;
+    }
+    .ls-clock {
+      font-family:var(--mono);font-size:0.8rem;color:var(--b);letter-spacing:0.05em;
+    }
+    .avail-box {
+      display:flex;align-items:center;gap:1rem;margin-bottom:1rem;
+    }
+    .avail-dot {
+      width:10px;height:10px;border-radius:50%;background:var(--green);
+      box-shadow:0 0 12px rgba(126,207,130,0.8);animation:blink 2s infinite;
+    }
+    .avail-text {
+      font-family:'Space Grotesk',sans-serif;font-size:1.1rem;color:var(--cream);
+    }
+    .avail-slots {
+      font-family:var(--mono);font-size:0.85rem;color:var(--gold);letter-spacing:0.05em;
+    }
+    @media(max-width:768px){ .loc-stat { flex-direction:column; gap:4rem; } }
+
+    /* Section 4: FAQ */
+    .faq-sec { padding:8rem clamp(1.5rem,5vw,4rem); max-width:1000px; margin:0 auto; }
+    .faq-label {
+      font-family:var(--mono);font-size:0.75rem;letter-spacing:0.15em;
+      color:var(--b);margin-bottom:3rem;text-transform:uppercase;text-align:center;
+    }
+    .faq-item {
+      border-bottom:1px solid rgba(212,184,150,0.3);
+      padding:1.5rem 0; cursor:none;
+    }
+    .faq-q {
+      display:flex;justify-content:space-between;align-items:center;
+      font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.1rem;color:var(--cream);
+    }
+    .faq-icon {
+      font-size:1.5rem;font-weight:300;color:var(--gold);transition:transform 0.4s ease;
+    }
+    .faq-item.active .faq-icon { transform:rotate(45deg); }
+    .faq-a {
+      font-family:'Inter',sans-serif;font-size:0.9rem;color:var(--a);line-height:1.6;
+      height:0;overflow:hidden;
+    }
+    .faq-a-inner { padding-top:1rem; }
+
+    /* Section 5: Final CTA */
+    .cta-sec {
+      min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;padding:4rem clamp(1.5rem,5vw,4rem);
+    }
+    .cta-t1 {
+      font-family:'Instrument Serif',serif;font-style:italic;
+      font-size:clamp(3rem,6vw,6rem);color:var(--cream);line-height:1;margin-bottom:0.5rem;
+    }
+    .cta-t2 {
+      font-family:'Space Grotesk',sans-serif;font-weight:700;
+      font-size:clamp(2.5rem,5vw,5rem);color:var(--gold);line-height:1;margin-bottom:3rem;
+    }
+    .btn {
+      display:inline-flex;align-items:center;gap:1rem;
+      padding:1rem 2.5rem;border:1px solid var(--gold);border-radius:40px;
+      font-family:var(--mono);font-size:0.85rem;letter-spacing:0.1em;
+      color:var(--gold);text-decoration:none;cursor:none;
+      transition:all 0.4s ease;background:transparent;
+      position:relative;overflow:hidden;
+    }
+    .btn::before {
+      content:'';position:absolute;top:0;left:0;width:100%;height:100%;
+      background:var(--gold);transform:scaleY(0);transform-origin:bottom;transition:transform 0.4s ease;
+      z-index:-1;
+    }
+    .btn:hover { color:var(--ink); box-shadow:0 0 20px rgba(212,184,150,0.4); }
+    .btn:hover::before { transform:scaleY(1); }
+
+    /* Toast */
+    #toast {
+      position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);
+      background:var(--ink);color:var(--cream);border:1px solid var(--c);border-radius:8px;
+      padding:.6rem 1.5rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;
+      z-index:9500;transition:transform .4s cubic-bezier(.22,1,.36,1);
+    }
+    #toast.show { transform:translateX(-50%) translateY(0); }
+
+  </style>
+</head>
+<body>
+
+  <!-- Entry Animation -->
+  <div id="page-trans"></div>
+
+  <!-- Cursor -->
+  <div id="cur" aria-hidden="true"></div>
+  <div id="dot" aria-hidden="true"></div>
+
+  <!-- Grain -->
+  <div id="grain" aria-hidden="true"></div>
+
+  <!-- Background -->
+  <div id="bg-container">
+    <div class="bg-rings"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="none" stroke="#F2EFE9" stroke-width="0.2" stroke-dasharray="2 4"/></svg></div>
+    <div class="bg-rings r2"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="none" stroke="#F2EFE9" stroke-width="0.3" stroke-dasharray="1 8"/></svg></div>
+    <div class="bg-rings r3"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="none" stroke="#F2EFE9" stroke-width="0.2" stroke-dasharray="4 6"/></svg></div>
+    <canvas id="bg-canvas"></canvas>
+  </div>
+
+  <!-- Nav -->
+  <header id="nav">
+    <a href="index.html" class="logo">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      J&amp;J Co.
+      <span class="logo-tag">EST. 2026</span>
+    </a>
+    <nav class="nav-links">
+      <a href="studio.html" class="nl">Studio</a>
+      <a href="engine.html" class="nl">How It Works</a>
+      <a href="services.html" class="nl">Services</a>
+      <a href="contact.html" class="nl active">Contact</a>
+    </nav>
+    <div class="nav-live"><span class="pls"></span><span id="navt">MORBI • ONLINE</span></div>
+  </header>
+
+  <main>
+    <!-- Section 1: Hero -->
+    <section class="hero">
+      <div class="hero-label rv">GET IN TOUCH</div>
+      <div class="hero-title">
+        <div class="hero-t1" id="split-1">Let's build</div>
+        <div class="hero-t2" id="split-2">something extraordinary.</div>
+      </div>
+      <div class="hero-sub rv">We take on a small number of engagements at a time. If you're serious about replacing manual processes with autonomous AI systems — let's talk.</div>
+      <div class="scroll-ind rv">
+        SCROLL
+        <div class="scroll-line"><div class="scroll-dot"></div></div>
+      </div>
+    </section>
+
+    <!-- Section 2: Contact Methods -->
+    <section class="contact-sec">
+      <div class="methods">
+        <div class="method-col m-1">
+          <div class="m-label">WHATSAPP</div>
+          <div class="m-detail">+91 95370 97033</div>
+          <a href="https://wa.me/919537097033" target="_blank" class="m-cta">Start a chat &rarr;</a>
+        </div>
+        <div class="method-col m-2">
+          <div class="m-label">EMAIL</div>
+          <div class="m-detail">jndjcoai@gmail.com</div>
+          <a href="#" class="m-cta copy-email-btn">Copy to clipboard &rarr;</a>
+        </div>
+        <div class="method-col m-3">
+          <div class="m-label">INSTAGRAM</div>
+          <div class="m-detail">@jndj_co</div>
+          <a href="https://instagram.com/jndj_co" target="_blank" class="m-cta">Follow us &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Location & Status -->
+    <section class="loc-stat rv">
+      <div class="ls-col">
+        <div class="ls-label">LOCATION</div>
+        <div class="ls-main">Morbi, Gujarat</div>
+        <div class="ls-sub">India</div>
+        <div class="ls-clock" id="loc-clock">--:-- --</div>
+      </div>
+      <div class="ls-col">
+        <div class="ls-label">AVAILABILITY</div>
+        <div class="avail-box">
+          <div class="avail-dot"></div>
+          <div class="avail-text">Currently accepting projects</div>
+        </div>
+        <div class="avail-slots">2 SLOTS OPEN</div>
+      </div>
+    </section>
+
+    <!-- Section 4: FAQ -->
+    <section class="faq-sec rv">
+      <div class="faq-label">COMMON QUESTIONS</div>
+      
+      <div class="faq-item">
+        <div class="faq-q">How long does a typical project take? <span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">We deliver a functional prototype in 48 hours to validate the approach. A full production-ready deployment typically takes 2 to 4 weeks depending on the complexity of your systems and requirements.</div></div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-q">What does it cost? <span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">We operate on a fixed-price model for defined outcomes, meaning you won't get surprised by hourly billing. Prices are determined after our initial scoping call and are based on the value the automation brings to your business.</div></div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-q">Do I need technical knowledge? <span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Not at all. We handle the entire engineering process from architecture to deployment. You just need to explain your current workflows and business goals.</div></div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-q">What happens after deployment? <span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Once deployed, you own the system. We ensure thorough documentation and handoff. We also offer optional maintenance and support retainers if you prefer ongoing assistance and iterations.</div></div>
+      </div>
+    </section>
+
+    <!-- Section 5: Final CTA -->
+    <section class="cta-sec rv">
+      <div class="cta-t1">The best time to automate</div>
+      <div class="cta-t2">was yesterday.</div>
+      <a href="https://wa.me/919537097033" target="_blank" class="btn">START YOUR PROJECT &rarr;</a>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="ft">
+  <div class="ft-wm" id="ft-wm" aria-hidden="true"><span class="ft-wm-dark">J&amp;J Co.</span><span class="ft-wm-light" aria-hidden="true">J&amp;J Co.</span></div>
+  <div class="ft-bot">
+    <p class="ft-copy">&copy; 2026 J&amp;J Co. — AI Automation &amp; Engineering Studio. Morbi, Gujarat, India. All rights reserved.</p>
+    <nav class="ft-links" aria-label="Footer links">
+      <a href="https://wa.me/919537097033" class="fa" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a href="mailto:jndjcoai@gmail.com" class="fa copy-email">Email</a>
+      <a href="https://instagram.com/jndj_co" class="fa" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </nav>
+  </div>
+</footer>
+
+  <div id="toast">Email copied</div>
+
+  <!-- Scripts -->
+  <script src="assets/libs/gsap.min.js"></script>
+  <script src="assets/libs/ScrollTrigger.min.js"></script>
+  <script src="assets/libs/lenis.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    // EXACT Cursor Code
+    var curEl = document.getElementById('cur'), dotEl = document.getElementById('dot');
+    var cx = -200, cy = -200, rx = -200, ry = -200;
+    window.addEventListener('mousemove', function(e) {
+      cx = e.clientX; cy = e.clientY;
+      gsap.to(dotEl, { x: cx, y: cy, duration: .04, ease: 'none' });
+    });
+    (function curLoop() {
+      rx += (cx - rx) * .1; ry += (cy - ry) * .1;
+      gsap.set(curEl, { x: rx, y: ry });
+      requestAnimationFrame(curLoop);
+    })();
+    document.querySelectorAll('a,button,.wc,.faq-q,.faq-item').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { document.body.classList.add('hov'); });
+      el.addEventListener('mouseleave', function() { document.body.classList.remove('hov'); });
+    });
+
+    // Lenis + ScrollTrigger
+    var lenis = new Lenis({ lerp: .07, smoothWheel: true, wheelMultiplier: .92 });
+    gsap.ticker.add(function(time) { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+    lenis.on('scroll', ScrollTrigger.update);
+
+    // Nav Scroll Background
+    ScrollTrigger.create({
+      start: 'top -60', onUpdate: function(self) {
+        document.getElementById('nav').classList.toggle('scl', self.progress > 0);
+      }
+    });
+
+    // Clocks
+    void function updateClock() {
+      var now = new Date();
+      var ist = new Date(now.getTime() + (330 + now.getTimezoneOffset()) * 60000);
+      var h = ist.getHours(), m = ist.getMinutes();
+      var ap = h >= 12 ? 'PM' : 'AM';
+      var dH = h % 12 || 12;
+      var timeStr = (dH < 10 ? '0' : '') + dH + ':' + (m < 10 ? '0' : '') + m + ' ' + ap;
+      
+      var el = document.getElementById('navt');
+      if (el) el.textContent = 'MORBI ' + timeStr + ' \u00b7 ONLINE';
+      
+      var locEl = document.getElementById('loc-clock');
+      if (locEl) locEl.textContent = timeStr + ' IST';
+      
+      setTimeout(updateClock, 10000);
+    }();
+
+    // Page Entry Animation
+    window.addEventListener('load', function() {
+      var trans = document.getElementById('page-trans');
+      gsap.to(trans, {
+        scale: 0,
+        borderRadius: '50%',
+        duration: 1.2,
+        ease: 'power3.inOut',
+        onComplete: function() {
+          trans.style.display = 'none';
+        }
+      });
+      
+      // Hero Text Split & Reveal
+      function wrapWords(id) {
+        var el = document.getElementById(id);
+        var words = el.innerText.split(' ');
+        el.innerHTML = '';
+        words.forEach(function(w) {
+          el.innerHTML += '<span class="word"><span class="word-inner">' + w + '</span></span> ';
+        });
+      }
+      wrapWords('split-1');
+      wrapWords('split-2');
+      
+      gsap.to('#split-1 .word-inner', {
+        y: '0%', duration: 1.2, stagger: 0.1, ease: 'expo.out', delay: 0.5
+      });
+      gsap.to('#split-2 .word-inner', {
+        y: '0%', duration: 1.2, stagger: 0.1, ease: 'expo.out', delay: 0.8
+      });
+    });
+
+    // Background Canvas Particles
+    var canvas = document.getElementById('bg-canvas');
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var maxParticles = 30;
+    
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for(let i=0; i<maxParticles; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        radius: Math.random() * 1.5 + 0.5
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(242,239,233,0.3)';
+      ctx.strokeStyle = 'rgba(242,239,233,0.05)';
+      
+      for(let i=0; i<maxParticles; i++) {
+        let p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        
+        if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI*2);
+        ctx.fill();
+        
+        for(let j=i+1; j<maxParticles; j++) {
+          let p2 = particles[j];
+          let dx = p.x - p2.x, dy = p.y - p2.y;
+          let dist = Math.sqrt(dx*dx + dy*dy);
+          if(dist < 150) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // Scroll Reveal Basic
+    gsap.utils.toArray('.rv').forEach(function(el) {
+      gsap.fromTo(el, { opacity:0, y:24 }, { opacity:1, y:0, duration:1, ease:'expo',
+        scrollTrigger: { trigger:el, start:'top 88%', once:true } });
+    });
+
+    // Contact Methods Stagger Reveal
+    ScrollTrigger.create({
+      trigger: '.methods',
+      start: 'top 80%',
+      once: true,
+      onEnter: function() {
+        gsap.fromTo('.m-1', {opacity:0, x:-50}, {opacity:1, x:0, duration:1, ease:'power3.out'});
+        gsap.fromTo('.m-2', {opacity:0, x:0}, {opacity:1, x:0, duration:1, ease:'power3.out', delay:0.2});
+        gsap.fromTo('.m-3', {opacity:0, x:50}, {opacity:1, x:0, duration:1, ease:'power3.out', delay:0.4});
+      }
+    });
+
+    // FAQ Accordion
+    var faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(function(item) {
+      var q = item.querySelector('.faq-q');
+      var a = item.querySelector('.faq-a');
+      q.addEventListener('click', function() {
+        var isOpen = item.classList.contains('active');
+        
+        // Close all
+        faqItems.forEach(function(other) {
+          other.classList.remove('active');
+          gsap.to(other.querySelector('.faq-a'), {height: 0, duration:0.4, ease:'power2.out'});
+        });
+        
+        if(!isOpen) {
+          item.classList.add('active');
+          gsap.set(a, {height: 'auto'});
+          var targetHeight = a.offsetHeight;
+          gsap.set(a, {height: 0});
+          gsap.to(a, {height: targetHeight, duration:0.4, ease:'power2.out'});
+        }
+      });
+    });
+
+    // Toast Notification
+    function showToast() {
+      var toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(function(){ toast.classList.remove('show'); }, 2000);
+    }
+
+    document.querySelectorAll('.copy-email-btn, .copy-email').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        navigator.clipboard.writeText('jndjcoai@gmail.com').then(showToast);
+      });
+    });
+
+    // Page Transition (Exit)
+    document.querySelectorAll('a[href$=".html"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var href = link.getAttribute('href');
+        if (!href) return;
+        if (window.location.pathname.endsWith(href)) return;
+        e.preventDefault();
+        var trans = document.getElementById('page-trans');
+        if (!trans) { window.location.href = href; return; }
+        trans.style.display = '';
+        trans.style.pointerEvents = 'all';
+        gsap.to(trans, {
+          scale: 1,
+          borderRadius: '0%',
+          duration: 0.7,
+          ease: 'power3.inOut',
+          onComplete: function() { window.location.href = href; }
+        });
+      });
+    });
+  
+/* -- FOOTER WATERMARK SPOTLIGHT -- */
+void function() {
+  var wm = document.getElementById('ft-wm');
+  if (!wm) return;
+  var light = wm.querySelector('.ft-wm-light');
+  if (!light) return;
+  wm.addEventListener('mousemove', function(e) {
+    var rect = wm.getBoundingClientRect();
+    var mx = ((e.clientX - rect.left) / rect.width  * 100).toFixed(2) + '%';
+    var my = ((e.clientY - rect.top)  / rect.height * 100).toFixed(2) + '%';
+    light.style.setProperty('--mx', mx);
+    light.style.setProperty('--my', my);
+  });
+  wm.addEventListener('mouseleave', function() {
+    light.style.setProperty('--mx', '50%');
+    light.style.setProperty('--my', '-60%');
+  });
+}();
+</script>
+</body>
+</html>
