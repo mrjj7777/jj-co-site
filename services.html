@@ -87,7 +87,7 @@
     .hero-sub span { display: inline-block; }
 
     /* Services Wrap */
-    .srv-wrap { position: relative; height: 600vh; z-index: 1; }
+    .srv-wrap { position: relative; height: 360vh; z-index: 1; }
     .srv-pin { position: sticky; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden; }
     
     .srv-panel { position: absolute; inset: 0; padding: 0 clamp(1.5rem, 5vw, 4rem); display: flex; flex-direction: column; justify-content: center; pointer-events: none; }
@@ -442,15 +442,15 @@
       var children = panel.querySelectorAll('.srv-cont > *');
       
       if (i > 0) {
-        // Fade in this panel
-        srvTl.to(panel, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, i - 0.3);
-        srvTl.to(children, { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, ease: 'power2.out' }, i - 0.25);
+        // Fade in — fast, clean
+        srvTl.to(panel, { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' }, i * 0.9 - 0.2);
+        srvTl.to(children, { y: 0, opacity: 1, duration: 0.2, stagger: 0.04, ease: 'power2.out' }, i * 0.9 - 0.15);
       }
       
       if (i < totalPanels - 1) {
-        // Fade out this panel
-        srvTl.to(children, { y: -20, opacity: 0, duration: 0.2, stagger: 0.03, ease: 'power2.in' }, i + 0.6);
-        srvTl.to(panel, { opacity: 0, y: -40, duration: 0.2, ease: 'power2.in' }, i + 0.65);
+        // Fade out — fast exit
+        srvTl.to(children, { y: -15, opacity: 0, duration: 0.15, stagger: 0.02, ease: 'power2.in' }, i * 0.9 + 0.55);
+        srvTl.to(panel, { opacity: 0, y: -30, duration: 0.15, ease: 'power2.in' }, i * 0.9 + 0.6);
       }
     });
 
