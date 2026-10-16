@@ -366,7 +366,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     })();
 
     // Lenis & ScrollTrigger Base
-    var lenis = new Lenis({ lerp: .07, smoothWheel: true, wheelMultiplier: .92 });
+    var lenis = new Lenis({ lerp: .09, smoothWheel: true, wheelMultiplier: 1.0 });
     gsap.ticker.add(function(time) { lenis.raf(time * 1000); });
     gsap.ticker.lagSmoothing(0);
     lenis.on('scroll', ScrollTrigger.update);

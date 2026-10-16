@@ -310,7 +310,7 @@ section { padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem); }
 <script>
     gsap.registerPlugin(ScrollTrigger);
 // LENIS
-var lenis = new Lenis({ lerp: .07, smoothWheel: true, wheelMultiplier: .92 });
+var lenis = new Lenis({ lerp: .09, smoothWheel: true, wheelMultiplier: 1.0 });
 gsap.ticker.add(function(time) { lenis.raf(time * 1000); });
 gsap.ticker.lagSmoothing(0);
 lenis.on('scroll', ScrollTrigger.update);
@@ -404,7 +404,7 @@ if (prinWrap && window.innerWidth > 768) {
       pin: true,
       scrub: 1,
       start: 'top top',
-      end: function() { return '+=' + Math.max(400, (prinWrap.scrollWidth - window.innerWidth) * 0.85); },
+      end: function() { return '+=' + Math.min(1100, Math.max(400, (prinWrap.scrollWidth - window.innerWidth) * 0.45)); },
       invalidateOnRefresh: true
     }
   });
