@@ -363,8 +363,8 @@ align-items:center;margin-top:clamp(.8rem,2vh,1.8rem)}
 font-size:clamp(3.2rem,min(6vw,11vh),5.6rem);line-height:1}
 .pr-dtrack{will-change:transform}
 .pr-dtrack span{display:block;height:1.05em;line-height:1.05;font-family:'Instrument Serif',serif;font-style:italic;
-background:linear-gradient(180deg,#f2efe9 15%,#8be8b0 95%);-webkit-background-clip:text;background-clip:text;
--webkit-text-fill-color:transparent;color:transparent;padding:0 .08em}
+background:linear-gradient(180deg,#f3dcb4 10%,#d4a86a 95%);-webkit-background-clip:text;background-clip:text;
+-webkit-text-fill-color:transparent;color:transparent;padding:0 .08em;filter:drop-shadow(0 2px 14px rgba(8,7,5,.85))}
 .pr-items{position:relative;height:100%;min-height:240px}
 .pr-item{position:absolute;left:0;top:50%;width:100%;transform:translateY(-50%);opacity:0;pointer-events:none;will-change:transform,opacity}
 .pr-item.on{opacity:1;pointer-events:auto}
@@ -1673,8 +1673,8 @@ void function() {
       '  if (d > .5) discard;',
       '  float n = clamp(vD * .85 + .5, 0., 1.);',
       '  vec3 col = mix(vec3(.94, .96, .94), uCol, .40 + n * .48);',
-      '  float a = (1. - smoothstep(.22, .5, d)) * mix(.12, .55, smoothstep(0., .55, n)) * vA;',
-      '  a *= vK > .5 ? 1. : .5;',
+      '  float a = (1. - smoothstep(.22, .5, d)) * mix(.07, .34, smoothstep(0., .55, n)) * vA;',
+      '  a *= vK > .5 ? 1. : .45;',
       '  gl_FragColor = vec4(col, a);',
       '}'
     ].join('\n');
