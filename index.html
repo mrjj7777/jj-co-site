@@ -327,7 +327,6 @@ font-size:clamp(5rem,12vw,13rem);letter-spacing:-.04em;line-height:.85;
 opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}
 .out-m.on{opacity:1;transform:translateY(0)}
 .out-cue{display:flex;align-items:center;gap:.6rem;margin-top:.8rem}
-50%{transform:translateY(7px)}}
 .out-cue-t{font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--b)}
 .out-pills{display:flex;gap:.5rem;margin-bottom:1.4rem;flex-wrap:wrap}
 .out-pill{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;
@@ -1059,8 +1058,7 @@ function heroIn() {
   tl.fromTo(['#hsb','#ctas'], { opacity:0, y:18 }, { opacity:1, y:0, duration:.9, stagger:.1 }, .5);
 }
 
-/* ── NAV CLOCK ── */
-setInterval(updateClock, 30000); updateClock();
+/* ── NAV SCROLL ── */
 ScrollTrigger.create({ start:'top -60px', onUpdate: function(s) {
   document.getElementById('nav').classList.toggle('scl', s.progress > 0);
 }});

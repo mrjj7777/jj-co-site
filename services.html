@@ -378,7 +378,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     });
 
     // Clock
-    void ();
 
     // Cursor
     var curEl = document.getElementById('cur'), dotEl = document.getElementById('dot');
@@ -434,7 +433,8 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
 
     panels.forEach(function(panel) {
       var children = panel.querySelectorAll('.srv-cont > *');
-      var ghost = panel.querySelector(',
+      gsap.fromTo(children,
+        { y: 30, opacity: 0 },
         {
           y: 0, opacity: 1,
           duration: 0.75,
@@ -446,22 +446,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
           }
         }
       );
-
-      if (ghost) {
-        gsap.fromTo(ghost,
-          { yPercent: 15 },
-          {
-            yPercent: -15,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: panel,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: true
-            }
-          }
-        );
-      }
     });
 
   

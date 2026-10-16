@@ -99,7 +99,6 @@ text-transform:uppercase;color:var(--b);text-decoration:none;cursor:none;transit
     .hero-title .char { display: inline-block; ; opacity: 0; }
     .hero-sub { font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(1rem, 1.5vw, 1.4rem); color: var(--a); max-width: 600px; overflow: hidden; }
     .hero-sub .word { display: inline-block; opacity: 0; transform: translateY(10px); }
-    .hero-ghost { position: absolute; bottom: 2rem; right: 2rem; font-family: var(--mono); font-size: 15rem; line-height: .8; color: var(--cream); opacity: 0.03; pointer-events: none; }
 
     /* Section 2: Phases */
     .phases-container { position: relative; width: 100%; }
@@ -107,14 +106,9 @@ text-transform:uppercase;color:var(--b);text-decoration:none;cursor:none;transit
     .phase-content { max-width: 600px; position: relative; z-index: 2; }
     .phase-section:nth-child(even) { justify-content: flex-end; }
     
-    .phase-ghost { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--mono); font-size: clamp(8rem, 22vw, 24rem); line-height: 1; color: var(--cream); opacity: 0.035; z-index: 0; user-select: none; pointer-events: none; }
-    .phase-section:nth-child(odd) .phase-ghost { left: 2%; }
-    .phase-section:nth-child(even) .phase-ghost { right: 2%; }
     @media(max-width:768px){
       .hero { padding-top: 6rem; min-height: 85vh; height: auto; }
-      .hero-ghost { font-size: 7rem; bottom: 1rem; right: 1rem; }
       .phase-section { min-height: auto; padding: 4.5rem 1.5rem; justify-content: flex-start !important; }
-      .phase-section:nth-child(odd) .phase-ghost, .phase-section:nth-child(even) .phase-ghost { left: auto; right: 1rem; font-size: 7rem; }
     }
     
     .phase-label { font-family: var(--mono); font-size: .6rem; letter-spacing: .2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; display: inline-block; position: relative; }
@@ -211,7 +205,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
         <span class="is">Works</span>
       </h1>
       <p class="hero-sub">Five phases. Zero guesswork. One autonomous system.</p>
-      <div class="hero-ghost">05</div>
     </section>
 
     <!-- Process Phases -->
@@ -219,7 +212,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       
       <!-- Phase 1 -->
       <div class="phase-section ps-1">
-        <div class="phase-ghost">01</div>
         <div class="phase-content">
           <div class="phase-label">PHASE 01</div>
           <h2 class="phase-title">Discovery &amp; Audit</h2>
@@ -233,7 +225,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
 
       <!-- Phase 2 -->
       <div class="phase-section ps-2">
-        <div class="phase-ghost">02</div>
         <div class="phase-content">
           <div class="phase-label">PHASE 02</div>
           <h2 class="phase-title">Model Selection</h2>
@@ -247,7 +238,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
 
       <!-- Phase 3 -->
       <div class="phase-section ps-3">
-        <div class="phase-ghost">03</div>
         <div class="phase-content">
           <div class="phase-label">PHASE 03</div>
           <h2 class="phase-title">Build &amp; Integration</h2>
@@ -261,7 +251,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
 
       <!-- Phase 4 -->
       <div class="phase-section ps-4">
-        <div class="phase-ghost">04</div>
         <div class="phase-content">
           <div class="phase-label">PHASE 04</div>
           <h2 class="phase-title">QA &amp; Hardening</h2>
@@ -275,7 +264,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
 
       <!-- Phase 5 -->
       <div class="phase-section ps-5">
-        <div class="phase-ghost">05</div>
         <div class="phase-content">
           <div class="phase-label">PHASE 05</div>
           <h2 class="phase-title">Deploy &amp; Compound</h2>
@@ -366,7 +354,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     });
 
     // Clock
-    void ();
 
     // Page Transition (Exit)
     document.querySelectorAll('a[href$=".html"]').forEach(function(link) {
@@ -452,8 +439,8 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     const phases = gsap.utils.toArray('.phase-section');
     phases.forEach((phase) => {
       const els   = phase.querySelectorAll('.phase-label, .phase-title, .phase-desc, .phase-metric');
-      const ghost = phase.querySelector('.phase-ghost');
-      const line  = phase.querySelector(',
+      gsap.fromTo(els,
+        { y: 32, opacity: 0 },
         {
           y: 0, opacity: 1,
           stagger: 0.08,
@@ -466,37 +453,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
           }
         }
       );
-
-      if (ghost) {
-        gsap.fromTo(ghost,
-          { yPercent: 15, opacity: 0 },
-          {
-            yPercent: -15, opacity: 0.04,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: phase,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: true
-            }
-          }
-        );
-      }
-
-      if (line) {
-        gsap.fromTo(line,
-          { width: '0%' },
-          {
-            width: '100%',
-            duration: 1.0,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: phase,
-              start: 'top 75%'
-            }
-          }
-        );
-      }
     });
 
     // Tech Stack reveal
