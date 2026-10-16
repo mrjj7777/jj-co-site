@@ -45,28 +45,40 @@
     @media(pointer:coarse){#cur,#dot{display:none}body{cursor:auto}}
 
     /* EXACT Logo/Nav Code */
-    #nav{position:fixed;top:0;left:0;right:0;z-index:8000;
-    padding:clamp(.9rem,1.8vw,1.3rem) clamp(1.5rem,5vw,4rem);
-    display:flex;align-items:center;justify-content:space-between;
-    transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
-    #nav.scl{background:rgba(8,7,5,.94);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-color:var(--d)}
-    .logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;cursor:none;
-    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;
-    letter-spacing:-.02em;color:var(--cream)}
-    .logo-tag{font-family:var(--mono);font-size:.46rem;letter-spacing:.12em;
-    border:1px solid var(--c);color:var(--b);padding:.12em .45em;border-radius:20px}
-    .nav-links{display:flex;gap:2.2rem}
-    @media(max-width:720px){.nav-links{display:none}}
-    .nl{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.2em;
-    text-transform:uppercase;color:var(--b);text-decoration:none;cursor:none;transition:color .2s}
-    .nl:hover{color:var(--cream)}
-    .nl.active{color:var(--cream)}
-    .nav-live{display:flex;align-items:center;gap:.45rem;font-family:var(--mono);
-    font-size:.52rem;color:var(--b);letter-spacing:.04em}
-    @media(max-width:860px){.nav-live{display:none}}
-    .pls{width:6px;height:6px;border-radius:50%;background:var(--green);
-    box-shadow:0 0 8px rgba(126,207,130,.9);animation:blink 2s infinite}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+#nav{position:fixed;top:0;left:0;right:0;z-index:8000;
+padding:clamp(.9rem,1.8vw,1.3rem) clamp(1.5rem,5vw,4rem);
+display:flex;align-items:center;justify-content:space-between;
+transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+#nav.scl{background:rgba(8,7,5,.94);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-color:var(--d)}
+.logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;cursor:none;
+font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;
+letter-spacing:-.02em;color:var(--cream);flex-shrink:0}
+.logo-tag{font-family:var(--mono);font-size:.46rem;letter-spacing:.12em;
+border:1px solid var(--c);color:var(--b);padding:.12em .45em;border-radius:20px}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nl{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.2em;
+text-transform:uppercase;color:var(--b);text-decoration:none;cursor:none;transition:all .2s;white-space:nowrap}
+.nl:hover,.nl.active{color:var(--cream)}
+.nl[href="contact.html"]{border:1px solid rgba(212,184,150,.45);color:var(--gold);padding:.42em 1em;border-radius:100px;background:rgba(212,184,150,.06)}
+.nl[href="contact.html"]:hover,.nl[href="contact.html"].active{background:var(--gold);color:var(--ink)}
+.nav-live{display:flex;align-items:center;gap:.45rem;font-family:var(--mono);
+font-size:.52rem;color:var(--b);letter-spacing:.04em;flex-shrink:0}
+@media(max-width:900px){.nav-live{display:none}}
+@media(max-width:768px){
+  #nav{padding:.75rem 1rem;background:rgba(8,7,5,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-color:var(--d);flex-wrap:wrap;gap:.45rem}
+  .logo{font-size:.86rem}
+  .logo-tag{display:none}
+  .nav-links{display:flex!important;gap:.65rem;margin-left:auto}
+  .nl{font-size:.52rem;letter-spacing:.1em;color:var(--a)}
+  .nl[href="contact.html"]{padding:.36em .78em;font-size:.5rem}
+}
+@media(max-width:430px){
+  #nav{justify-content:space-between}
+  .nav-links{width:100%;justify-content:space-between;padding-top:.45rem;border-top:1px solid var(--d);margin-left:0}
+}
+.pls{width:6px;height:6px;border-radius:50%;background:var(--green);
+box-shadow:0 0 8px rgba(126,207,130,.9);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
     /* Grain Overlay */
     #grain{position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.028;
@@ -138,7 +150,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     .hero {
       min-height:100vh;
       display:flex;flex-direction:column;justify-content:center;
-      padding:0 clamp(1.5rem,5vw,4rem);
+      padding:6rem clamp(1.5rem,5vw,4rem) 4rem;
     }
     .hero-label {
       font-family:var(--mono);font-size:0.75rem;letter-spacing:0.15em;
@@ -426,7 +438,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       
       <div class="faq-item">
         <div class="faq-q">What does it cost? <span class="faq-icon">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">We operate on a fixed-price model for defined outcomes, meaning you won't get surprised by hourly billing. Prices are determined after our initial scoping call and are based on the value the automation brings to your business.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">We operate on a transparent fixed-price model in ₹ (INR) for defined outcomes, meaning you never get surprised by hourly billing or hidden retainers. Prices are determined after our initial scoping call and are based on the value the automation brings to your business.</div></div>
       </div>
       
       <div class="faq-item">
@@ -519,22 +531,11 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       setTimeout(updateClock, 10000);
     }();
 
-    // Page Entry Animation
-    window.addEventListener('load', function() {
-      var trans = document.getElementById('page-trans');
-      gsap.to(trans, {
-        scale: 0,
-        borderRadius: '50%',
-        duration: 1.2,
-        ease: 'power3.inOut',
-        onComplete: function() {
-          trans.style.display = 'none';
-        }
-      });
-      
-      // Hero Text Split & Reveal
+    // Page Entry Animation & Hero Split — run immediately without waiting for slow window.load
+    (function runEntry() {
       function wrapWords(id) {
         var el = document.getElementById(id);
+        if (!el) return;
         var words = el.innerText.split(' ');
         el.innerHTML = '';
         words.forEach(function(w) {
@@ -543,14 +544,27 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       }
       wrapWords('split-1');
       wrapWords('split-2');
-      
+
+      var trans = document.getElementById('page-trans');
+      if (trans) {
+        gsap.to(trans, {
+          scale: 0,
+          borderRadius: '50%',
+          duration: 0.7,
+          ease: 'power3.inOut',
+          onComplete: function() {
+            trans.style.display = 'none';
+          }
+        });
+      }
+
       gsap.to('#split-1 .word-inner', {
-        y: '0%', duration: 1.2, stagger: 0.1, ease: 'expo.out', delay: 0.5
+        y: '0%', duration: 0.9, stagger: 0.08, ease: 'expo.out', delay: 0.15
       });
       gsap.to('#split-2 .word-inner', {
-        y: '0%', duration: 1.2, stagger: 0.1, ease: 'expo.out', delay: 0.8
+        y: '0%', duration: 0.9, stagger: 0.08, ease: 'expo.out', delay: 0.3
       });
-    });
+    })();
 
     // Background Canvas Particles
     var canvas = document.getElementById('bg-canvas');
@@ -610,7 +624,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
 
     // Scroll Reveal Basic
     gsap.utils.toArray('.rv').forEach(function(el) {
-      gsap.fromTo(el, { opacity:0, y:24 }, { opacity:1, y:0, duration:1, ease:'expo',
+      gsap.fromTo(el, { opacity:0, y:24 }, { opacity:1, y:0, duration:0.9, ease:'expo.out',
         scrollTrigger: { trigger:el, start:'top 88%', once:true } });
     });
 
@@ -703,6 +717,20 @@ void function() {
     light.style.setProperty('--my', '-60%');
   });
 }();
+
+/* -- BFCACHE & RESIZE SAFETY -- */
+window.addEventListener('pageshow', function(e) {
+  var pt = document.getElementById('page-trans');
+  if (pt) { pt.style.display = 'none'; pt.style.pointerEvents = 'none'; }
+  var pe = document.getElementById('page-entry');
+  if (pe) { pe.style.display = 'none'; }
+  var pre = document.getElementById('pre');
+  if (pre && e.persisted) { pre.remove(); }
+  if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+});
+window.addEventListener('load', function() {
+  if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+});
 </script>
 </body>
 </html>

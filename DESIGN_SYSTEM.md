@@ -94,7 +94,7 @@ letter-spacing:-.02em;color:var(--cream)}
 .logo-tag{font-family:var(--mono);font-size:.46rem;letter-spacing:.12em;
 border:1px solid var(--c);color:var(--b);padding:.12em .45em;border-radius:20px}
 .nav-links{display:flex;gap:2.2rem}
-@media(max-width:720px){.nav-links{display:none}}
+/* Mobile nav links stay visible — never display:none */
 .nl{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.2em;
 text-transform:uppercase;color:var(--b);text-decoration:none;cursor:none;transition:color .2s}
 .nl:hover{color:var(--cream)}
