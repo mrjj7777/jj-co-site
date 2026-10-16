@@ -352,12 +352,12 @@ font-weight:700;letter-spacing:-.025em;line-height:1.2}
 .out-step{font-family:var(--mono);font-size:.52rem;color:var(--b);margin-left:auto}
 
 /* ─── WHY: Principle Reel (cardless, pinned, compact 3D particle sphere) ─── */
-#why{overflow:hidden;position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;
-padding-top:clamp(5.5rem,11vh,7.5rem);padding-bottom:clamp(3.6rem,9vh,5rem)}
+#why{overflow:hidden;position:relative;height:100vh;height:100svh;box-sizing:border-box;display:flex;flex-direction:column;
+padding-top:clamp(4.5rem,9vh,6.5rem);padding-bottom:clamp(2.5rem,6vh,4rem)}
 #why>*{position:relative;z-index:1}
-.pr-stage{flex:1;display:grid;grid-template-columns:minmax(220px,.78fr) 1.55fr;gap:clamp(2rem,6vw,6.5rem);
-align-items:center;margin-top:clamp(1rem,3vh,2.5rem)}
-.pr-num{position:relative;width:min(28vw,360px);aspect-ratio:1;margin:0 auto;display:flex;align-items:center;justify-content:center}
+.pr-stage{flex:1;min-height:0;display:grid;grid-template-columns:minmax(220px,.78fr) 1.55fr;gap:clamp(2rem,6vw,6.5rem);
+align-items:center;margin-top:clamp(.8rem,2vh,1.8rem)}
+.pr-num{position:relative;width:min(26vw,340px);aspect-ratio:1;margin:0 auto;display:flex;align-items:center;justify-content:center}
 .pr-fx{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
 .pr-dwin{position:relative;z-index:2;height:1.05em;overflow:hidden;text-align:center;pointer-events:none;
 font-size:clamp(3.2rem,min(6vw,11vh),5.6rem);line-height:1}
@@ -365,21 +365,19 @@ font-size:clamp(3.2rem,min(6vw,11vh),5.6rem);line-height:1}
 .pr-dtrack span{display:block;height:1.05em;line-height:1.05;font-family:'Instrument Serif',serif;font-style:italic;
 background:linear-gradient(180deg,#f2efe9 15%,#8be8b0 95%);-webkit-background-clip:text;background-clip:text;
 -webkit-text-fill-color:transparent;color:transparent;padding:0 .08em}
-.pr-items{position:relative;min-height:clamp(260px,40vh,400px)}
-.pr-item{position:absolute;left:0;top:50%;width:100%;transform:translateY(-50%);visibility:hidden}
-.pr-item.on{visibility:visible}
-.pr-k{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#7ecf82;margin-bottom:1.3rem}
+.pr-items{position:relative;height:100%;min-height:240px}
+.pr-item{position:absolute;left:0;top:50%;width:100%;transform:translateY(-50%);opacity:0;pointer-events:none;will-change:transform,opacity}
+.pr-item.on{opacity:1;pointer-events:auto}
+.pr-k{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#7ecf82;margin-bottom:1.2rem}
 .pr-t{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;line-height:1.06;color:var(--cream);
-font-size:clamp(1.9rem,3.7vw,3.5rem);margin-bottom:1.5rem;max-width:18ch}
-.pr-t .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}
-.pr-t .w>span{display:inline-block;will-change:transform}
+font-size:clamp(1.9rem,3.6vw,3.4rem);margin-bottom:1.4rem;max-width:18ch}
 .pr-b{font-family:'Inter',sans-serif;font-size:clamp(.82rem,1vw,.95rem);line-height:1.9;color:rgba(242,239,233,.55);max-width:540px}
 @media(max-width:768px){
-  #why{min-height:0;display:block}
+  #why{height:auto;min-height:0;display:block}
   .pr-stage{display:block;margin-top:2.2rem}
   .pr-num{display:none}
-  .pr-items{min-height:0}
-  .pr-item{position:static;transform:none;visibility:visible;padding:1.8rem 0;border-top:1px solid rgba(242,239,233,.1)}
+  .pr-items{height:auto;min-height:0}
+  .pr-item{position:static;transform:none;opacity:1;pointer-events:auto;padding:1.8rem 0;border-top:1px solid rgba(242,239,233,.1)}
   .pr-t{max-width:none;font-size:clamp(1.5rem,6.4vw,2rem);margin-bottom:1rem}
 }
 
@@ -784,8 +782,8 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
 
 <!-- ⑥ WHY -->
 <section id="why" class="sp" data-sec="why">
-  <p class="lbl rv">Why J&amp;J Co.</p>
-  <h2 class="h2 rv"><span class="ts">Engineered</span> <span class="ti">differently.</span></h2>
+  <p class="lbl">Why J&amp;J Co.</p>
+  <h2 class="h2"><span class="ts">Engineered</span> <span class="ti">differently.</span></h2>
   <div class="pr-stage">
     <div class="pr-num" aria-hidden="true">
       <canvas class="pr-fx"></canvas>
@@ -900,7 +898,8 @@ ScrollTrigger.config({ ignoreMobileResize: true, limitCallbacks: true });
 
   var vert = [
     'precision highp float;',
-    'uniform float uT,uMx,uSc,uPR;',
+    'uniform float uT,uSc,uPR,uHover;',
+    'uniform vec2 uMouse;',
     'attribute float aR;',
     'varying float vD;',
     'vec3 jm3(vec3 x){return x-floor(x*(1./289.))*289.;}',
@@ -931,9 +930,17 @@ ScrollTrigger.config({ ignoreMobileResize: true, limitCallbacks: true });
     '}',
     'void main(){',
     '  vec3 pos=position;float t=uT*.2;',
-    '  float n=jn(pos*1.5+vec3(t,t*.7,t*.5))*.35+jn(pos*3.+vec3(-t*.8,t*.6,t))*.18+uMx*.08;',
+    '  float n=jn(pos*1.5+vec3(t,t*.7,t*.5))*.35+jn(pos*3.+vec3(-t*.8,t*.6,t))*.18;',
     '  float sc=uSc*.6;pos+=normalize(pos)*n;pos.y*=1.-sc*.35;pos.xz*=1.+sc*.28;',
-    '  vD=n;vec4 mv=modelViewMatrix*vec4(pos,1.);gl_Position=projectionMatrix*mv;',
+    '  vD=n;vec4 mv=modelViewMatrix*vec4(pos,1.);',
+    '  vec4 pr=projectionMatrix*mv;vec2 ndc=pr.xy/pr.w;',
+    '  vec2 diff=ndc-uMouse;float dist=length(diff);',
+    '  vec2 dir=dist>0.0001?diff/dist:vec2(0.);',
+    '  float falloff=exp(-dist*dist*55.)*uHover;',
+    '  vec2 jitter=vec2(sin(aR*43.+t*3.),cos(aR*67.-t*2.5));',
+    '  vec2 push=(dir*(.05+.13*aR*aR)+jitter*.04)*falloff;',
+    '  mv.xy+=push*(-mv.z*.45);',
+    '  gl_Position=projectionMatrix*mv;',
     '  gl_PointSize=(2.6+aR*2.0)*uPR*(1.8/-mv.z);',
     '}'
   ].join('\n');
@@ -963,19 +970,31 @@ ScrollTrigger.config({ ignoreMobileResize: true, limitCallbacks: true });
   }
   geo.setAttribute('position', new THREE.BufferAttribute(pts, 3));
   geo.setAttribute('aR',       new THREE.BufferAttribute(rnd, 1));
-  var uni = { uT: {value:0}, uMx: {value:0}, uSc: {value:0}, uPR: {value:dpr} };
+  var uni = { uT: {value:0}, uSc: {value:0}, uPR: {value:dpr}, uHover: {value:0}, uMouse: {value:new THREE.Vector2(9,9)} };
   var mat = new THREE.ShaderMaterial({ vertexShader: vert, fragmentShader: frag,
     uniforms: uni, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending });
   var mesh = new THREE.Points(geo, mat);
   mesh.position.y = dims.isMob ? 0.25 : 0;
   scene.add(mesh);
 
-  var tmx = 0, mx = 0, sp = 0;
-  window.addEventListener('mousemove', function(e) { tmx = (e.clientX / innerWidth - .5) * 2; });
-  window.addEventListener('touchmove', function(e) {
-    if (e.touches && e.touches[0]) tmx = (e.touches[0].clientX / innerWidth - .5) * 2;
-  }, { passive: true });
-  window.addEventListener('scroll',    function() {
+  var tHover = 0, sp = 0;
+  window.addEventListener('mousemove', function(e) {
+    if (scrollY > innerHeight) { tHover = 0; return; }
+    var b = cv.getBoundingClientRect();
+    if (e.clientX < b.left || e.clientX > b.right || e.clientY < b.top || e.clientY > b.bottom) {
+      tHover = 0; return;
+    }
+    var nx = ((e.clientX - b.left) / b.width) * 2 - 1;
+    var ny = -(((e.clientY - b.top) / b.height) * 2 - 1);
+    var rDist = Math.sqrt(nx * nx + ny * ny);
+    if (rDist <= 0.48) {
+      uni.uMouse.value.set(nx, ny);
+      tHover = 1.0;
+    } else {
+      tHover = 0.0;
+    }
+  });
+  window.addEventListener('scroll', function() {
     var ms = document.documentElement.scrollHeight - innerHeight;
     sp = ms > 0 ? Math.min(scrollY / ms, 1) : 0;
   }, { passive: true });
@@ -994,13 +1013,11 @@ ScrollTrigger.config({ ignoreMobileResize: true, limitCallbacks: true });
   (function animate() {
     requestAnimationFrame(animate);
     var t = clk.getElapsedTime();
-    mx              += (tmx - mx) * .04;
-    uni.uMx.value   += (mx - uni.uMx.value) * .06;
+    uni.uHover.value += (tHover - uni.uHover.value) * .12;
     uni.uSc.value   += (sp - uni.uSc.value) * .06;
     uni.uT.value     = t;
-    mesh.rotation.y  = t * .05 + mx * .2;
+    mesh.rotation.y  = t * .05;
     mesh.rotation.x  = t * .025;
-    cam.position.x  += (mx * .3 - cam.position.x) * .025;
     ren.render(scene, cam);
   })();
 })();
@@ -1124,7 +1141,7 @@ document.querySelectorAll('[data-sec]').forEach(function(el) {
     pin: '#qscrub',
     pinSpacing: true,
     anticipatePin: 0,
-    scrub: 1,
+    scrub: true,
     onUpdate: function(self) {
       var raw    = self.progress * N;
       var active = Math.floor(raw);
@@ -1220,10 +1237,11 @@ void main() {
   }
 
   /* ═══ AURORA CURTAIN 1, main green band ═══ */
+  vec2 md2 = (uv - uMouse) * vec2(ar, 1.0);
   float w1 = wave(uvx * 1.0, t * 1.2);
-  float mInf = exp(-pow(uvx - uMouse.x * ar, 2.0) * 2.5) * uMStr;
+  float mInf = exp(-dot(md2, md2) * 18.0) * uMStr;
   float center1 = 0.38 + w1 * 0.12;
-  center1 += (uMouse.y - center1) * 0.18 * mInf;
+  center1 += (uMouse.y - center1) * 0.14 * mInf;
   float dist1 = uv.y - center1;
   float band1 = exp(-dist1 * dist1 * 6.0);
   /* Internal shimmer via sine ripples */
@@ -1268,10 +1286,9 @@ void main() {
   /* ── Warm horizon glow ── */
   col += vec3(0.04, 0.08, 0.04) * exp(-uv.y * 3.0) * 0.8;
 
-  /* ── Cursor halo: aurora brightens softly around pointer ── */
-  vec2 md2 = (uv - uMouse) * vec2(ar, 1.0);
-  float halo = exp(-dot(md2, md2) * 7.0) * uMStr;
-  col += vec3(0.08, 0.42, 0.26) * halo * (0.35 + band1 * 0.9 + band2 * 0.5);
+  /* ── Cursor halo: aurora brightens softly right at pointer ── */
+  float halo = exp(-dot(md2, md2) * 18.0) * uMStr;
+  col += vec3(0.08, 0.42, 0.26) * halo * (0.25 + band1 * 0.8 + band2 * 0.4);
 
   /* ── Soft vignette ── */
   col *= 1.0 - 0.3 * length((uv - 0.5) * vec2(1.1, 0.8));
@@ -1286,12 +1303,11 @@ void main() {
       uMouse: { value: new THREE.Vector2(0.5, 0.4) },
       uMStr: { value: 0.0 }
     };
-    var tMx = 0.5, tMy = 0.4, tStr = 0;
+    var tStr = 0;
     window.addEventListener('mousemove', function(e) {
       var r = parent.getBoundingClientRect();
-      if (e.clientY >= r.top && e.clientY <= r.bottom) {
-        tMx = (e.clientX - r.left) / r.width;
-        tMy = 1.0 - (e.clientY - r.top) / r.height;
+      if (e.clientY >= r.top && e.clientY <= r.bottom && e.clientX >= r.left && e.clientX <= r.right) {
+        uniforms.uMouse.value.set((e.clientX - r.left) / r.width, 1.0 - (e.clientY - r.top) / r.height);
         tStr = 1;
       } else { tStr = 0; }
     });
@@ -1309,10 +1325,7 @@ void main() {
     function animate() {
       requestAnimationFrame(animate);
       uniforms.uTime.value += 0.012;
-      var um = uniforms.uMouse.value;
-      um.x += (tMx - um.x) * 0.06;
-      um.y += (tMy - um.y) * 0.06;
-      uniforms.uMStr.value += (tStr - uniforms.uMStr.value) * 0.05;
+      uniforms.uMStr.value += (tStr - uniforms.uMStr.value) * 0.08;
       renderer.render(scene, camera);
     }
     requestAnimationFrame(animate);
@@ -1344,20 +1357,20 @@ void main() {
       var nextR = next.classList.contains('is-right');
       curEng = idx;
       gsap.killTweensOf([prev, next]);
-      gsap.to(prev, { opacity: 0, x: prevR ? 36 : -36, duration: 0.38, ease: 'power2.out' });
-      gsap.fromTo(next, { opacity: 0, x: nextR ? 36 : -36 }, { opacity: 1, x: 0, duration: 0.48, ease: 'power3.out' });
+      gsap.to(prev, { opacity: 0, x: prevR ? 36 : -36, duration: 0.35, ease: 'power2.out' });
+      gsap.fromTo(next, { opacity: 0, x: nextR ? 36 : -36 }, { opacity: 1, x: 0, duration: 0.42, ease: 'power3.out' });
       pips.forEach(function(pip, i) { pip.classList.toggle('on', i === idx); });
     }
     ScrollTrigger.create({
       trigger: '#eng',
       start: 'top top',
-      end: '+=130%',
+      end: '+=140%',
       pin: '#eng',
       pinSpacing: true,
       anticipatePin: 0,
       onUpdate: function(self) {
         var total = stages.length;
-        var idx = Math.min(Math.floor(self.progress * total), total - 1);
+        var idx = Math.min(total - 1, Math.floor((self.progress + 0.08) * total));
         goEng(idx);
       }
     });
@@ -1442,7 +1455,7 @@ void function() {
     var curSrv = 0;
     stages.forEach(function(s, i) {
       s.style.opacity = i === 0 ? '1' : '0';
-      s.style.transform = i === 0 ? 'translate(-50%,-50%) scale(1) translateY(0px)' : 'translate(-50%,-50%) scale(0.95) translateY(16px)';
+      s.style.transform = i === 0 ? 'translate(-50%,-50%) scale(1) translateY(0px)' : 'translate(-50%,-50%) scale(0.96) translateY(0px)';
     });
     function goSrv(idx) {
       if (idx === curSrv) return;
@@ -1451,20 +1464,20 @@ void function() {
       gsap.killTweensOf([prev, next]);
       gsap.to(prev, {
         opacity: 0,
-         duration: 0.35,
+        duration: 0.32,
         ease: 'power2.out',
         onUpdate: function() {
           var op = parseFloat(prev.style.opacity) || 0;
-          prev.style.transform = 'translate(-50%,-50%) scale(' + (0.95 + op * 0.05) + ') translateY(' + ((1 - op) * -14) + 'px)';
+          prev.style.transform = 'translate(-50%,-50%) scale(' + (0.96 + op * 0.04) + ')';
         }
       });
       gsap.fromTo(next, { opacity: 0 }, {
         opacity: 1,
-        duration: 0.45,
+        duration: 0.40,
         ease: 'power3.out',
         onUpdate: function() {
           var op = parseFloat(next.style.opacity) || 0;
-          next.style.transform = 'translate(-50%,-50%) scale(' + (0.95 + op * 0.05) + ') translateY(' + ((1 - op) * 14) + 'px)';
+          next.style.transform = 'translate(-50%,-50%) scale(' + (0.96 + op * 0.04) + ')';
         }
       });
       pips.forEach(function(pip, i) { pip.classList.toggle('on', i === idx); });
@@ -1472,13 +1485,13 @@ void function() {
     ScrollTrigger.create({
       trigger: '#srv',
       start: 'top top',
-      end: '+=155%',
+      end: '+=165%',
       pin: '#srv',
       pinSpacing: true,
       anticipatePin: 0,
       onUpdate: function(self) {
         var total = stages.length;
-        var idx = Math.min(Math.floor(self.progress * total), total - 1);
+        var idx = Math.min(total - 1, Math.floor((self.progress + 0.07) * total));
         goSrv(idx);
       }
     });
@@ -1507,10 +1520,10 @@ void function() {
   pills.forEach(function(p, idx) { p.addEventListener('click', function() { go(idx); }); });
   dots.forEach(function(d, idx)  { d.addEventListener('click', function() { go(idx); }); });
   ScrollTrigger.create({
-    trigger:'#out', start:'top top', end:'+=85%',
+    trigger:'#out', start:'top top', end:'+=95%',
     pin:'#out', pinSpacing:true, anticipatePin:0,
     onUpdate: function(self) {
-      go(Math.min(Math.floor(self.progress * cards.length), cards.length-1));
+      go(Math.min(cards.length - 1, Math.floor((self.progress + 0.10) * cards.length)));
     }
   });
 })();
@@ -1522,16 +1535,6 @@ void function() {
   if (!stage) return;
   var items = [].slice.call(root.querySelectorAll('.pr-item'));
   var N = items.length;
-
-  /* split every title into masked words */
-  items.forEach(function(it) {
-    var h = it.querySelector('.pr-t');
-    var txt = h.textContent.trim();
-    h.setAttribute('aria-label', txt);
-    h.innerHTML = txt.split(/\s+/).map(function(w) {
-      return '<span class="w" aria-hidden="true"><span>' + w + '</span></span>';
-    }).join(' ');
-  });
 
   var mob = window.innerWidth <= 768;
   var rt;
@@ -1559,9 +1562,9 @@ void function() {
   ];
 
   /* Compact Volumetric 3D Particle Cloud:
-     - Floats freely when cursor is outside .pr-num
-     - When cursor enters .pr-num, particles near the cursor softly part/scatter in 3D with zero black hole and zero ring
-     - Zero jump on scroll step changes */
+     - Floats freely when cursor is anywhere outside the visible particle sphere (rDist > 0.46)
+     - When cursor tip touches inside the visible sphere (rDist <= 0.46), ONLY the particles directly under the cursor tip gently part
+     - Zero black hole, zero ring, zero jump on scroll */
   var cv = root.querySelector('.pr-fx');
   var numBox = root.querySelector('.pr-num');
   if (cv && typeof THREE !== 'undefined') {
@@ -1629,12 +1632,11 @@ void function() {
       '  vec2 diff = ndc - uMouse;',
       '  float dist = length(diff);',
       '  vec2 dir = dist > 0.0001 ? diff / dist : vec2(0.0);',
-      '  /* Soft Gaussian-like scatter only for a subset of particles (aR) right near the cursor tip — never carves a hole or ring */',
-      '  float falloff = exp(-dist * dist * 18.0) * uHover;',
+      '  /* Tight local scatter ONLY right under cursor tip — rest of sphere is 100% undisturbed */',
+      '  float falloff = exp(-dist * dist * 60.0) * uHover;',
       '  vec2 jitter = vec2(sin(aR * 43.0 + t * 3.0), cos(aR * 67.0 - t * 2.5));',
-      '  vec2 push = (dir * (0.04 + 0.14 * aR * aR) + jitter * 0.06) * falloff;',
+      '  vec2 push = (dir * (0.04 + 0.13 * aR * aR) + jitter * 0.04) * falloff;',
       '  mv.xy += push * (-mv.z * 0.45);',
-      '  mv.z  -= falloff * (aR - 0.5) * 0.25;',
       '  vD = n;',
       '  gl_Position = projectionMatrix * mv;',
       '  gl_PointSize = (1.55 + aR * 1.35) * uPR * (1.6 / -mv.z);',
@@ -1661,7 +1663,6 @@ void function() {
     for (var i = 0; i < PCOUNT; i++) {
       var phi = Math.acos(1 - 2 * (i + .5) / PCOUNT);
       var tht = Math.PI * (1 + Math.sqrt(5)) * i;
-      /* Volumetric radial distribution (fills interior + surface so center is rich and never hollow) */
       var rPick = Math.random();
       var rad = rPick < 0.35 ? (0.35 + 0.62 * Math.pow(Math.random(), 0.6)) : (0.96 + (Math.random() - .5) * .08);
       pts[i*3]   = rad * Math.sin(phi) * Math.cos(tht);
@@ -1686,19 +1687,16 @@ void function() {
     var mesh = new THREE.Points(geo, mat);
     scene.add(mesh);
 
-    var tMouse = { x: 9, y: 9 }, sMouse = { x: 9, y: 9 };
     var tHover = 0, inView = false;
 
-    /* ONLY react when cursor enters inside .pr-num (the particle animation area) */
+    /* ONLY react when cursor is strictly inside the visible particle sphere (rDist <= 0.46) */
     numBox.addEventListener('mousemove', function(e) {
       var b = cv.getBoundingClientRect();
       var nx = ((e.clientX - b.left) / b.width) * 2 - 1;
       var ny = -(((e.clientY - b.top) / b.height) * 2 - 1);
       var rDist = Math.sqrt(nx * nx + ny * ny);
-      if (rDist <= 0.85) {
-        tMouse.x = nx;
-        tMouse.y = ny;
-        if (tHover === 0) { sMouse.x = nx; sMouse.y = ny; }
+      if (rDist <= 0.46) {
+        uni.uMouse.value.set(nx, ny);
         tHover = 1.0;
       } else {
         tHover = 0.0;
@@ -1711,12 +1709,8 @@ void function() {
     gsap.ticker.add(function() {
       if (!inView) return;
       var t = clk.getElapsedTime();
-      sMouse.x += (tMouse.x - sMouse.x) * 0.18;
-      sMouse.y += (tMouse.y - sMouse.y) * 0.18;
-      uni.uMouse.value.set(sMouse.x, sMouse.y);
-      uni.uHover.value += (tHover - uni.uHover.value) * 0.12;
+      uni.uHover.value += (tHover - uni.uHover.value) * 0.14;
       uni.uT.value = t;
-      /* Continuous, free, calm rotation — never jumps on scroll or outside hover */
       mesh.rotation.y = t * 0.055;
       mesh.rotation.x = t * 0.028;
       ren.render(scene, cam);
@@ -1724,17 +1718,8 @@ void function() {
     window.__prUni = uni;
   }
 
-  function parts(it) {
-    return {
-      w: [].slice.call(it.querySelectorAll('.w > span')),
-      f: [it.querySelector('.pr-k'), it.querySelector('.pr-b')]
-    };
-  }
   items.forEach(function(it, i) {
-    if (i === 0) return;
-    var p = parts(it);
-    gsap.set(p.w, { yPercent: 110 });
-    gsap.set(p.f, { opacity: 0 });
+    gsap.set(it, { opacity: i === 0 ? 1 : 0, x: i === 0 ? 0 : 28, yPercent: -50 });
   });
 
   var cur = 0;
@@ -1742,31 +1727,27 @@ void function() {
     if (i === cur) return;
     var dir = i > cur ? 1 : -1;
     var prev = items[cur], next = items[i];
-    var a = parts(prev), b = parts(next);
-    gsap.killTweensOf(a.w.concat(a.f, b.w, b.f));
     cur = i;
+    gsap.killTweensOf([prev, next]);
 
-    gsap.to(a.w, { yPercent: -110 * dir, duration: .38, ease: 'power3.in', stagger: .015 });
-    gsap.to(a.f, { opacity: 0, y: -12 * dir, duration: .3, ease: 'power2.in',
-      onComplete: function() { if (items[cur] !== prev) prev.classList.remove('on'); } });
-
+    prev.classList.remove('on');
     next.classList.add('on');
-    gsap.fromTo(b.w, { yPercent: 110 * dir }, { yPercent: 0, duration: .65, ease: 'expo.out', stagger: .035, delay: .12 });
-    gsap.fromTo(b.f, { opacity: 0, y: 14 * dir }, { opacity: 1, y: 0, duration: .6, ease: 'power3.out', stagger: .07, delay: .2 });
+    gsap.to(prev, { opacity: 0, x: -24 * dir, duration: 0.32, ease: 'power2.out' });
+    gsap.fromTo(next, { opacity: 0, x: 24 * dir }, { opacity: 1, x: 0, duration: 0.42, ease: 'power3.out' });
 
-    gsap.to(track, { yPercent: -(100 / N) * i, duration: .7, ease: 'expo.out', overwrite: true });
+    gsap.to(track, { yPercent: -(100 / N) * i, duration: 0.48, ease: 'power3.out', overwrite: true });
     if (window.__prUni) {
       var c = tones[i];
-      gsap.to(window.__prUni.uCol.value, { x: c[0], y: c[1], z: c[2], duration: 0.9, ease: 'power2.out' });
+      gsap.to(window.__prUni.uCol.value, { x: c[0], y: c[1], z: c[2], duration: 0.6, ease: 'power2.out' });
     }
   }
 
   ScrollTrigger.create({
-    trigger: root, start: 'top top', end: '+=130%',
+    trigger: root, start: 'top top', end: '+=145%',
     pin: true, pinSpacing: true, anticipatePin: 0, invalidateOnRefresh: true,
     onUpdate: function(self) {
       var p = self.progress;
-      go(Math.min(N - 1, Math.floor(p * N)));
+      go(Math.min(N - 1, Math.floor((p + 0.08) * N)));
     }
   });
 }();
