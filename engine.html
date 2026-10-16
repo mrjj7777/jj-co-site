@@ -47,9 +47,7 @@ border:1px solid var(--c);color:var(--b);padding:.12em .45em;border-radius:20px}
 .nl{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.2em;
 text-transform:uppercase;color:var(--b);text-decoration:none;cursor:none;transition:all .2s;white-space:nowrap}
 .nl:hover,.nl.active{color:var(--cream)}
-.nav-live{display:flex;align-items:center;gap:.45rem;font-family:var(--mono);
-font-size:.52rem;color:var(--b);letter-spacing:.04em;flex-shrink:0}
-@media(max-width:900px){.nav-live{display:none}}
+@media(max-width:900px){}
 @media(max-width:768px){
   #nav{padding:.75rem 1rem;background:rgba(8,7,5,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-color:var(--d);flex-wrap:wrap;gap:.45rem}
   .logo{font-size:.86rem}
@@ -61,8 +59,6 @@ font-size:.52rem;color:var(--b);letter-spacing:.04em;flex-shrink:0}
   #nav{justify-content:space-between}
   .nav-links{width:100%;justify-content:space-between;padding-top:.45rem;border-top:1px solid var(--d);margin-left:0}
 }
-.pls{width:6px;height:6px;border-radius:50%;background:var(--green);
-box-shadow:0 0 8px rgba(126,207,130,.9);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
     /* Grain */
@@ -132,9 +128,6 @@ box-shadow:0 0 8px rgba(126,207,130,.9);animation:blink 2s infinite}
     .phase-metric-lbl { color: var(--cream); opacity: .7; }
 
     /* Progress Line between phases */
-    .progress-line-container { position: absolute; left: clamp(1.5rem,5vw,4rem); right: clamp(1.5rem,5vw,4rem); height: 1px; background: var(--d); z-index: 5; }
-    .progress-line { height: 100%; width: 0%; background: var(--gold); transform-origin: left; }
-
     /* Section 3: Tech Stack */
     .tech-stack { padding: 8rem clamp(1.5rem,5vw,4rem); text-align: center; border-top: 1px solid var(--d); position: relative; z-index: 2; background: var(--ink); }
     .tech-label { font-family: var(--mono); font-size: .65rem; letter-spacing: .2em; color: var(--a); text-transform: uppercase; margin-bottom: 3rem; }
@@ -206,8 +199,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       <a href="services.html" class="nl">Services</a>
       <a href="contact.html" class="nl">Contact</a>
     </nav>
-    <div class="nav-live"><span class="pls"></span><span id="navt">MORBI • ONLINE</span></div>
-  </header>
+</header>
 
   <div class="content-wrapper">
     
@@ -237,8 +229,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
             <span class="phase-metric-lbl">turnaround</span>
           </div>
         </div>
-        <div class="progress-line-container" style="bottom: 0;"><div class="progress-line"></div></div>
-      </div>
+</div>
 
       <!-- Phase 2 -->
       <div class="phase-section ps-2">
@@ -252,8 +243,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
             <span class="phase-metric-lbl">model per task</span>
           </div>
         </div>
-        <div class="progress-line-container" style="bottom: 0;"><div class="progress-line"></div></div>
-      </div>
+</div>
 
       <!-- Phase 3 -->
       <div class="phase-section ps-3">
@@ -267,8 +257,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
             <span class="phase-metric-lbl">integrations</span>
           </div>
         </div>
-        <div class="progress-line-container" style="bottom: 0;"><div class="progress-line"></div></div>
-      </div>
+</div>
 
       <!-- Phase 4 -->
       <div class="phase-section ps-4">
@@ -282,8 +271,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
             <span class="phase-metric-lbl">before go-live</span>
           </div>
         </div>
-        <div class="progress-line-container" style="bottom: 0;"><div class="progress-line"></div></div>
-      </div>
+</div>
 
       <!-- Phase 5 -->
       <div class="phase-section ps-5">
@@ -378,16 +366,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     });
 
     // Clock
-    void function updateClock() {
-      var now = new Date();
-      var ist = new Date(now.getTime() + (330 + now.getTimezoneOffset()) * 60000);
-      var h = ist.getHours(), m = ist.getMinutes();
-      var ap = h >= 12 ? 'PM' : 'AM';
-      h = h % 12 || 12;
-      var el = document.getElementById('navt');
-      if (el) el.textContent = 'MORBI ' + (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ' ' + ap + ' \u00b7 ONLINE';
-      setTimeout(updateClock, 10000);
-    }();
+    void ();
 
     // Page Transition (Exit)
     document.querySelectorAll('a[href$=".html"]').forEach(function(link) {
@@ -474,10 +453,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     phases.forEach((phase) => {
       const els   = phase.querySelectorAll('.phase-label, .phase-title, .phase-desc, .phase-metric');
       const ghost = phase.querySelector('.phase-ghost');
-      const line  = phase.querySelector('.progress-line');
-
-      gsap.fromTo(els,
-        { y: 32, opacity: 0 },
+      const line  = phase.querySelector(',
         {
           y: 0, opacity: 1,
           stagger: 0.08,

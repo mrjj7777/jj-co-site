@@ -55,9 +55,7 @@ border:1px solid var(--c);color:var(--b);padding:.12em .45em;border-radius:20px}
 .nl{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.2em;
 text-transform:uppercase;color:var(--b);text-decoration:none;cursor:none;transition:all .2s;white-space:nowrap}
 .nl:hover,.nl.active{color:var(--cream)}
-.nav-live{display:flex;align-items:center;gap:.45rem;font-family:var(--mono);
-font-size:.52rem;color:var(--b);letter-spacing:.04em;flex-shrink:0}
-@media(max-width:900px){.nav-live{display:none}}
+@media(max-width:900px){}
 @media(max-width:768px){
   #nav{padding:.75rem 1rem;background:rgba(8,7,5,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-color:var(--d);flex-wrap:wrap;gap:.45rem}
   .logo{font-size:.86rem}
@@ -69,8 +67,6 @@ font-size:.52rem;color:var(--b);letter-spacing:.04em;flex-shrink:0}
   #nav{justify-content:space-between}
   .nav-links{width:100%;justify-content:space-between;padding-top:.45rem;border-top:1px solid var(--d);margin-left:0}
 }
-.pls{width:6px;height:6px;border-radius:50%;background:var(--green);
-box-shadow:0 0 8px rgba(126,207,130,.9);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
 #ft{background:rgba(5,4,3,.98);position:relative;z-index:2;
@@ -132,12 +128,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     .srv-panel.left { align-items: flex-start; text-align: left; }
     .srv-cont { position: relative; z-index: 2; max-width: 600px; }
     
-    .ghost-num { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--mono); font-size: clamp(8rem, 20vw, 22rem); color: var(--cream); opacity: 0.035; font-weight: 500; pointer-events: none; line-height: 1; z-index: 0; }
-    .srv-panel.left .ghost-num { left: 75%; }
-    .srv-panel.right .ghost-num { left: 25%; }
-
-    .srv-num { font-family: var(--mono); font-size: 0.8rem; color: var(--gold); margin-bottom: 1rem; }
-    .srv-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; margin-bottom: 0.5rem; }
+    .srv-panel.left .srv-panel.right .srv-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; margin-bottom: 0.5rem; }
     .srv-subtitle { font-family: var(--mono); font-size: 0.75rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
     .srv-desc { font-family: 'Inter', sans-serif; font-size: clamp(0.9rem, 1.2vw, 1rem); color: var(--a); line-height: 1.6; max-width: 550px; margin-bottom: 2.5rem; }
     
@@ -153,8 +144,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       .hero { padding-top: 6rem; min-height: 85vh; height: auto; }
       .srv-panel, .srv-panel.right, .srv-panel.left { min-height: auto; padding: 4.5rem 1.5rem; align-items: flex-start; text-align: left; }
       .srv-panel.right .srv-metrics { justify-content: flex-start; }
-      .srv-panel.left .ghost-num, .srv-panel.right .ghost-num { left: auto; right: 1rem; transform: translateY(-50%); font-size: 7rem; }
-      .srv-metrics { gap: 2rem; }
+      .srv-panel.left .srv-metrics { gap: 2rem; }
     }
 
     /* CTA Section */
@@ -188,8 +178,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       <a href="services.html" class="nl active">Services</a>
       <a href="contact.html" class="nl">Contact</a>
     </nav>
-    <div class="nav-live"><span class="pls"></span><span id="navt">MORBI • ONLINE</span></div>
-  </header>
+</header>
 
   <div class="srv-bg"></div>
 
@@ -207,10 +196,8 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       
       <!-- Service 1 -->
       <div class="srv-panel left">
-        <div class="ghost-num">01</div>
-        <div class="srv-cont">
-          <div class="srv-num">01</div>
-          <h2 class="srv-title">AI Call Agents</h2>
+<div class="srv-cont">
+<h2 class="srv-title">AI Call Agents</h2>
           <div class="srv-subtitle">Outbound Automation</div>
           <p class="srv-desc">Autonomous voice agents that handle thousands of calls simultaneously. Human-like conversational logic capable of qualifying leads, booking meetings, and providing customer support without script constraints.</p>
           <div class="srv-metrics">
@@ -228,10 +215,8 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       
       <!-- Service 2 -->
       <div class="srv-panel right">
-        <div class="ghost-num">02</div>
-        <div class="srv-cont">
-          <div class="srv-num">02</div>
-          <h2 class="srv-title">Social Media Pipeline</h2>
+<div class="srv-cont">
+<h2 class="srv-title">Social Media Pipeline</h2>
           <div class="srv-subtitle">Content Intelligence</div>
           <p class="srv-desc">Automated research, generation, and publishing pipelines. AI analyzes market trends, crafts highly engaging content tailored to your brand voice, and distributes it across all major platforms completely autonomously.</p>
           <div class="srv-metrics">
@@ -249,10 +234,8 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
 
       <!-- Service 3 -->
       <div class="srv-panel left">
-        <div class="ghost-num">03</div>
-        <div class="srv-cont">
-          <div class="srv-num">03</div>
-          <h2 class="srv-title">Workflow Automation</h2>
+<div class="srv-cont">
+<h2 class="srv-title">Workflow Automation</h2>
           <div class="srv-subtitle">Operations Engineering</div>
           <p class="srv-desc">We replace fragmented manual workflows with cohesive automated systems. Invoicing, onboarding, reporting, and data entry are handled instantly by integrated scripts, entirely removing operational bottlenecks.</p>
           <div class="srv-metrics">
@@ -270,10 +253,8 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
 
       <!-- Service 4 -->
       <div class="srv-panel right">
-        <div class="ghost-num">04</div>
-        <div class="srv-cont">
-          <div class="srv-num">04</div>
-          <h2 class="srv-title">Lead Generation</h2>
+<div class="srv-cont">
+<h2 class="srv-title">Lead Generation</h2>
           <div class="srv-subtitle">Growth Architecture</div>
           <p class="srv-desc">Hyper-targeted, multi-channel outreach pipelines. Our systems scrape prospect data, enrich it, and deploy personalized campaigns at scale, delivering warm, qualified leads directly into your calendar.</p>
           <div class="srv-metrics">
@@ -291,10 +272,8 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
 
       <!-- Service 5 -->
       <div class="srv-panel left">
-        <div class="ghost-num">05</div>
-        <div class="srv-cont">
-          <div class="srv-num">05</div>
-          <h2 class="srv-title">CRM Integration</h2>
+<div class="srv-cont">
+<h2 class="srv-title">CRM Integration</h2>
           <div class="srv-subtitle">Data Infrastructure</div>
           <p class="srv-desc">A unified data layer connecting all your disparate software. We engineer custom webhooks and API integrations that synchronize customer data instantly, providing a single source of truth without manual entry.</p>
           <div class="srv-metrics">
@@ -312,10 +291,8 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
 
       <!-- Service 6 -->
       <div class="srv-panel right">
-        <div class="ghost-num">06</div>
-        <div class="srv-cont">
-          <div class="srv-num">06</div>
-          <h2 class="srv-title">Custom AI Software</h2>
+<div class="srv-cont">
+<h2 class="srv-title">Custom AI Software</h2>
           <div class="srv-subtitle">Proprietary Engineering</div>
           <p class="srv-desc">Bespoke software solutions built exactly for your business model. From internal dashboard tools to specialized client-facing portals, we build lightweight, scalable applications with zero ongoing licensing fees.</p>
           <div class="srv-metrics">
@@ -401,16 +378,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     });
 
     // Clock
-    void function updateClock() {
-      var now = new Date();
-      var ist = new Date(now.getTime() + (330 + now.getTimezoneOffset()) * 60000);
-      var h = ist.getHours(), m = ist.getMinutes();
-      var ap = h >= 12 ? 'PM' : 'AM';
-      h = h % 12 || 12;
-      var el = document.getElementById('navt');
-      if (el) el.textContent = 'MORBI ' + (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ' ' + ap + ' \u00b7 ONLINE';
-      setTimeout(updateClock, 10000);
-    }();
+    void ();
 
     // Cursor
     var curEl = document.getElementById('cur'), dotEl = document.getElementById('dot');
@@ -466,10 +434,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
 
     panels.forEach(function(panel) {
       var children = panel.querySelectorAll('.srv-cont > *');
-      var ghost = panel.querySelector('.ghost-num');
-
-      gsap.fromTo(children,
-        { y: 30, opacity: 0 },
+      var ghost = panel.querySelector(',
         {
           y: 0, opacity: 1,
           duration: 0.75,

@@ -48,9 +48,7 @@ border:1px solid var(--c);color:var(--b);padding:.12em .45em;border-radius:20px}
 .nl{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.2em;
 text-transform:uppercase;color:var(--b);text-decoration:none;cursor:none;transition:all .2s;white-space:nowrap}
 .nl:hover,.nl.active{color:var(--cream)}
-.nav-live{display:flex;align-items:center;gap:.45rem;font-family:var(--mono);
-font-size:.52rem;color:var(--b);letter-spacing:.04em;flex-shrink:0}
-@media(max-width:900px){.nav-live{display:none}}
+@media(max-width:900px){}
 @media(max-width:768px){
   #nav{padding:.75rem 1rem;background:rgba(8,7,5,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-color:var(--d);flex-wrap:wrap;gap:.45rem}
   .logo{font-size:.86rem}
@@ -62,8 +60,6 @@ font-size:.52rem;color:var(--b);letter-spacing:.04em;flex-shrink:0}
   #nav{justify-content:space-between}
   .nav-links{width:100%;justify-content:space-between;padding-top:.45rem;border-top:1px solid var(--d);margin-left:0}
 }
-.pls{width:6px;height:6px;border-radius:50%;background:var(--green);
-box-shadow:0 0 8px rgba(126,207,130,.9);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
 /* FOOTER */
@@ -121,9 +117,7 @@ section { padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem); }
 .hero-line1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(2.8rem, 7vw, 6.5rem); letter-spacing: -0.02em; display: block; }
 .hero-line2 { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: clamp(2.8rem, 7vw, 6.5rem); color: var(--gold); display: block; }
 .hero-sub { font-size: clamp(1rem, 1.5vw, 1.25rem); color: var(--a); max-width: 600px; opacity: 0; line-height: 1.6; }
-.hero-scroll { position: absolute; bottom: 3rem; left: clamp(1.5rem, 5vw, 4rem); width: 1px; height: 60px; background: var(--c); overflow: hidden; }
-.hero-scroll-in { width: 100%; height: 50%; background: var(--gold); animation: scrolldown 2s cubic-bezier(0.77, 0, 0.175, 1) infinite; }
-@keyframes scrolldown { 0% { transform: translateY(-100%); } 100% { transform: translateY(200%); } }
+100% { transform: translateY(200%); } }
 
 /* SPLIT TEXT UTIL */
 .word { display: inline-block; overflow: hidden; vertical-align: top; }
@@ -205,7 +199,6 @@ section { padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem); }
     <a href="services.html" class="nl">Services</a>
     <a href="contact.html" class="nl">Contact</a>
   </nav>
-  <div class="nav-live"><span class="pls"></span><span id="navt">MORBI • ONLINE</span></div>
 </header>
 
 <main>
@@ -215,9 +208,7 @@ section { padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem); }
       <span class="hero-line1 split-word">Infrastructure</span>
       <span class="hero-line2 split-word">not tools.</span>
     </h1>
-    <p class="hero-sub">We engineer custom AI systems, not resell SaaS with a margin on top.</p>
-    <div class="hero-scroll"><div class="hero-scroll-in"></div></div>
-  </section>
+    <p class="hero-sub">We engineer custom AI systems, not resell SaaS with a margin on top.</p></section>
 
   <section id="founder">
     <span class="lbl rv">Founder</span>
@@ -342,16 +333,7 @@ document.querySelectorAll('a,button,.wc,.faq-q,.cta-btn').forEach(function(el) {
 });
 
 // CLOCK
-void function updateClock() {
-  var now = new Date();
-  var ist = new Date(now.getTime() + (330 + now.getTimezoneOffset()) * 60000);
-  var h = ist.getHours(), m = ist.getMinutes();
-  var ap = h >= 12 ? 'PM' : 'AM';
-  h = h % 12 || 12;
-  var el = document.getElementById('navt');
-  if (el) el.textContent = 'MORBI ' + (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ' ' + ap + ' \u00b7 ONLINE';
-  setTimeout(updateClock, 10000);
-}();
+void ();
 
 // NAV SCROLL
 ScrollTrigger.create({

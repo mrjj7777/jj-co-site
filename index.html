@@ -82,9 +82,7 @@ border:1px solid var(--c);color:var(--b);padding:.12em .45em;border-radius:20px}
 .nl{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.2em;
 text-transform:uppercase;color:var(--b);text-decoration:none;cursor:none;transition:all .2s;white-space:nowrap}
 .nl:hover,.nl.active{color:var(--cream)}
-.nav-live{display:flex;align-items:center;gap:.45rem;font-family:var(--mono);
-font-size:.52rem;color:var(--b);letter-spacing:.04em;flex-shrink:0}
-@media(max-width:900px){.nav-live{display:none}}
+@media(max-width:900px){}
 @media(max-width:768px){
   #nav{padding:.75rem 1rem;background:rgba(8,7,5,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-color:var(--d);flex-wrap:wrap;gap:.45rem}
   .logo{font-size:.86rem}
@@ -96,8 +94,6 @@ font-size:.52rem;color:var(--b);letter-spacing:.04em;flex-shrink:0}
   #nav{justify-content:space-between}
   .nav-links{width:100%;justify-content:space-between;padding-top:.45rem;border-top:1px solid var(--d);margin-left:0}
 }
-.pls{width:6px;height:6px;border-radius:50%;background:var(--green);
-box-shadow:0 0 8px rgba(126,207,130,.9);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
 /* ─── SIDE DOTS ─── */
@@ -237,7 +233,6 @@ transition:background .3s,box-shadow .3s}
 .eng-pip.on{background:var(--green);box-shadow:0 0 8px var(--green)}
 @media(max-width:860px){.eng-pips{right:1rem}}
 
-
 /* ─── SERVICES — CSS Aurora (warm gold) ─── */
 #srv{position:relative;z-index:2;height:100vh;overflow:hidden;
 background-color:#030403;
@@ -280,7 +275,6 @@ display:flex;flex-direction:row;gap:12px;z-index:2}
 .srv-pip{width:6px;height:6px;border-radius:50%;background:rgba(242,239,233,.12);
 transition:background .3s,box-shadow .3s}
 .srv-pip.on{background:var(--gold);box-shadow:0 0 8px var(--gold)}
-
 
 /* ─── STUDIO creative text ─── */
 .stu-right{display:flex;flex-direction:column;gap:0}
@@ -333,8 +327,7 @@ font-size:clamp(5rem,12vw,13rem);letter-spacing:-.04em;line-height:.85;
 opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}
 .out-m.on{opacity:1;transform:translateY(0)}
 .out-cue{display:flex;align-items:center;gap:.6rem;margin-top:.8rem}
-.out-arr{color:var(--b);animation:bounce 2s ease-in-out infinite;display:inline-block;font-size:1.1rem}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+50%{transform:translateY(7px)}}
 .out-cue-t{font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--b)}
 .out-pills{display:flex;gap:.5rem;margin-bottom:1.4rem;flex-wrap:wrap}
 .out-pill{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;
@@ -509,7 +502,6 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
     <a href="services.html"     class="nl">Services</a>
     <a href="contact.html" class="nl">Contact</a>
   </nav>
-  <div class="nav-live" aria-label="Studio status"><span class="pls" aria-hidden="true"></span><span id="navt">MORBI • ONLINE</span></div>
 </header>
 
 <!-- ① HERO -->
@@ -759,9 +751,7 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
         <div class="out-m"    id="om1">Daily</div>
         <div class="out-m"    id="om2">Auto</div>
       </div>
-      <div class="out-cue">
-        <span class="out-arr" aria-hidden="true">↓</span>
-        <span class="out-cue-t">Scroll for more</span>
+      <div class="out-cue"><span class="out-cue-t">Scroll for more</span>
       </div>
     </div>
     <div class="out-r">
@@ -1070,14 +1060,6 @@ function heroIn() {
 }
 
 /* ── NAV CLOCK ── */
-function updateClock() {
-  var now = new Date();
-  var ist = new Date(now.getTime() + 5.5 * 3600000);
-  var h   = String(ist.getUTCHours()).padStart(2,'0');
-  var m   = String(ist.getUTCMinutes()).padStart(2,'0');
-  var el  = document.getElementById('navt');
-  if (el) el.textContent = 'MORBI [' + h + ':' + m + ' IST] \u2022 ONLINE';
-}
 setInterval(updateClock, 30000); updateClock();
 ScrollTrigger.create({ start:'top -60px', onUpdate: function(s) {
   document.getElementById('nav').classList.toggle('scl', s.progress > 0);
@@ -1107,7 +1089,6 @@ document.querySelectorAll('[data-sec]').forEach(function(el) {
   }, { threshold: .3 }).observe(el);
 });
 
-
 /* ── WHY CARDS, Slide from sides with stagger ── */
 void function() {
   var cards = document.querySelectorAll('.wc-anim');
@@ -1130,7 +1111,6 @@ void function() {
     );
   });
 }();
-
 
 /* (#why and .rv moved below #out to preserve strict DOM pin order) */
 
@@ -1205,8 +1185,6 @@ void function() {
     }
   });
 })();
-
-
 
 /* ══════════════════════════════════════════════════════════════
    ENGINE, Three.js GLSL Fragment Shader Aurora
@@ -1681,7 +1659,6 @@ void function() {
     });
   });
 }();
-
 
 /* -- BFCACHE & RESIZE SAFETY -- */
 window.addEventListener('pageshow', function(e) {

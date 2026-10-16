@@ -59,9 +59,7 @@ border:1px solid var(--c);color:var(--b);padding:.12em .45em;border-radius:20px}
 .nl{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.2em;
 text-transform:uppercase;color:var(--b);text-decoration:none;cursor:none;transition:all .2s;white-space:nowrap}
 .nl:hover,.nl.active{color:var(--cream)}
-.nav-live{display:flex;align-items:center;gap:.45rem;font-family:var(--mono);
-font-size:.52rem;color:var(--b);letter-spacing:.04em;flex-shrink:0}
-@media(max-width:900px){.nav-live{display:none}}
+@media(max-width:900px){}
 @media(max-width:768px){
   #nav{padding:.75rem 1rem;background:rgba(8,7,5,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-color:var(--d);flex-wrap:wrap;gap:.45rem}
   .logo{font-size:.86rem}
@@ -73,8 +71,6 @@ font-size:.52rem;color:var(--b);letter-spacing:.04em;flex-shrink:0}
   #nav{justify-content:space-between}
   .nav-links{width:100%;justify-content:space-between;padding-top:.45rem;border-top:1px solid var(--d);margin-left:0}
 }
-.pls{width:6px;height:6px;border-radius:50%;background:var(--green);
-box-shadow:0 0 8px rgba(126,207,130,.9);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
     /* Grain Overlay */
@@ -177,11 +173,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       max-width:600px;
       line-height:1.6;
     }
-    .scroll-ind {
-      position:absolute;bottom:2rem;left:clamp(1.5rem,5vw,4rem);
-      font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;
-      color:var(--b);display:flex;align-items:center;gap:1rem;
-    }
     .scroll-line {
       width:1px;height:40px;background:var(--c);position:relative;overflow:hidden;
     }
@@ -257,16 +248,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     }
     .avail-box {
       display:flex;align-items:center;gap:1rem;margin-bottom:1rem;
-    }
-    .avail-dot {
-      width:10px;height:10px;border-radius:50%;background:var(--green);
-      box-shadow:0 0 12px rgba(126,207,130,0.8);animation:blink 2s infinite;
-    }
-    .avail-text {
-      font-family:'Space Grotesk',sans-serif;font-size:1.1rem;color:var(--cream);
-    }
-    .avail-slots {
-      font-family:var(--mono);font-size:0.85rem;color:var(--gold);letter-spacing:0.05em;
     }
     @media(max-width:768px){ .loc-stat { flex-direction:column; gap:4rem; } }
 
@@ -367,8 +348,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       <a href="services.html" class="nl">Services</a>
       <a href="contact.html" class="nl active">Contact</a>
     </nav>
-    <div class="nav-live"><span class="pls"></span><span id="navt">MORBI • ONLINE</span></div>
-  </header>
+</header>
 
   <main>
     <!-- Section 1: Hero -->
@@ -378,11 +358,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
         <div class="hero-t1" id="split-1">Let's build</div>
         <div class="hero-t2" id="split-2">something extraordinary.</div>
       </div>
-      <div class="hero-sub rv">We take on a small number of engagements at a time. If you're serious about replacing manual processes with autonomous AI systems, let's talk.</div>
-      <div class="scroll-ind rv">
-        SCROLL
-        <div class="scroll-line"><div class="scroll-dot"></div></div>
-      </div>
+      <div class="hero-sub rv">We take on a small number of engagements at a time. If you're serious about replacing manual processes with autonomous AI systems, let's talk.</div></div>
     </section>
 
     <!-- Section 2: Contact Methods -->
@@ -416,12 +392,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       </div>
       <div class="ls-col">
         <div class="ls-label">AVAILABILITY</div>
-        <div class="avail-box">
-          <div class="avail-dot"></div>
-          <div class="avail-text">Currently accepting projects</div>
-        </div>
-        <div class="avail-slots">2 SLOTS OPEN</div>
-      </div>
+        <div class="avail-box"></div></div>
     </section>
 
     <!-- Section 4: FAQ -->
@@ -511,22 +482,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     });
 
     // Clocks
-    void function updateClock() {
-      var now = new Date();
-      var ist = new Date(now.getTime() + (330 + now.getTimezoneOffset()) * 60000);
-      var h = ist.getHours(), m = ist.getMinutes();
-      var ap = h >= 12 ? 'PM' : 'AM';
-      var dH = h % 12 || 12;
-      var timeStr = (dH < 10 ? '0' : '') + dH + ':' + (m < 10 ? '0' : '') + m + ' ' + ap;
-      
-      var el = document.getElementById('navt');
-      if (el) el.textContent = 'MORBI ' + timeStr + ' \u00b7 ONLINE';
-      
-      var locEl = document.getElementById('loc-clock');
-      if (locEl) locEl.textContent = timeStr + ' IST';
-      
-      setTimeout(updateClock, 10000);
-    }();
+    void ();
 
     // Page Entry Animation & Hero Split, run immediately without waiting for slow window.load
     (function runEntry() {
