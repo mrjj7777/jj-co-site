@@ -21,7 +21,7 @@
   --ink:#080705;--cream:#F2EFE9;
   --a:rgba(242,239,233,.7);--b:rgba(242,239,233,.35);
   --c:rgba(242,239,233,.12);--d:rgba(242,239,233,.05);
-  --gold:#7ecf82;--green:#7ecf82;
+  --gold:#d4b896;--green:#7ecf82;
   --card:rgba(11,9,7,.97);
   --mono:'JetBrains Mono',monospace;
 }
@@ -82,6 +82,8 @@ border:1px solid var(--c);color:var(--b);padding:.12em .45em;border-radius:20px}
 .nl{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.2em;
 text-transform:uppercase;color:var(--b);text-decoration:none;cursor:none;transition:all .2s;white-space:nowrap}
 .nl:hover,.nl.active{color:var(--cream)}
+.nl[href="contact.html"]{border:1px solid rgba(212,184,150,.45);color:var(--gold);padding:.42em 1em;border-radius:100px;background:rgba(212,184,150,.06)}
+.nl[href="contact.html"]:hover{background:var(--gold);color:var(--ink)}
 .nav-live{display:flex;align-items:center;gap:.45rem;font-family:var(--mono);
 font-size:.52rem;color:var(--b);letter-spacing:.04em;flex-shrink:0}
 @media(max-width:900px){.nav-live{display:none}}
@@ -91,6 +93,7 @@ font-size:.52rem;color:var(--b);letter-spacing:.04em;flex-shrink:0}
   .logo-tag{display:none}
   .nav-links{display:flex!important;gap:.65rem;margin-left:auto}
   .nl{font-size:.52rem;letter-spacing:.1em;color:var(--a)}
+  .nl[href="contact.html"]{padding:.36em .78em;font-size:.5rem}
 }
 @media(max-width:430px){
   #nav{justify-content:space-between}
@@ -116,6 +119,7 @@ color:var(--b);opacity:0;transform:translateX(5px);transition:all .2s;white-spac
 .lbl{font-family:'Space Grotesk',sans-serif;font-size:.56rem;font-weight:500;
 letter-spacing:.28em;text-transform:uppercase;color:var(--b);
 display:flex;align-items:center;gap:.6em;margin-bottom:1.4rem}
+.lbl::before{content:'';width:20px;height:1px;background:var(--c)}
 .h2{font-size:clamp(2rem,4.5vw,5rem);line-height:1.02;letter-spacing:-.035em}
 .ts{font-family:'Space Grotesk',sans-serif;font-weight:700}
 .ti{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
@@ -174,7 +178,7 @@ background:var(--ink);position:relative;overflow:hidden}
 width:80vmax;height:80vmax;border-radius:50%;
 background:radial-gradient(circle,rgba(242,239,233,.018) 0%,transparent 68%);pointer-events:none}
 .qs-accent{position:absolute;left:0;top:18%;bottom:18%;width:2px;
-background:linear-gradient(to bottom,transparent,rgba(126,207,130,.35),transparent)}
+background:linear-gradient(to bottom,transparent,rgba(212,184,150,.35),transparent)}
 .qs-tag{display:flex;align-items:center;gap:.7rem;font-family:var(--mono);font-size:.52rem;
 letter-spacing:.22em;text-transform:uppercase;color:var(--b);margin-bottom:2.8rem;opacity:1}
 .qs-tag-line{width:20px;height:1px;background:var(--c);flex-shrink:0}
@@ -183,6 +187,7 @@ font-size:clamp(2rem,4.6vw,5.2rem);line-height:1.22;letter-spacing:-.025em;max-w
 .qw{display:inline-block;color:rgba(242,239,233,.22);will-change:color,text-shadow}
 .qs-attr{font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;
 color:rgba(242,239,233,0);margin-top:2.6rem;display:flex;align-items:center;gap:.8rem}
+.qs-attr::before{content:'';width:20px;height:1px;background:rgba(242,239,233,.18)}
 .qs-ctr{position:absolute;top:clamp(1.5rem,3vw,2.5rem);right:clamp(1.5rem,5vw,4rem);
 font-family:var(--mono);font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;
 color:rgba(242,239,233,.15);display:flex;align-items:center;gap:.5rem;opacity:0}
@@ -238,18 +243,18 @@ transition:background .3s,box-shadow .3s}
 @media(max-width:860px){.eng-pips{right:1rem}}
 
 
-/* ─── SERVICES — Deep Black + Aurora Emerald/Teal ─── */
+/* ─── SERVICES — CSS Aurora (warm gold) ─── */
 #srv{position:relative;z-index:2;height:100vh;overflow:hidden;
-background-color:#030504;
+background-color:#030403;
 background-image:
-  radial-gradient(45% 55% at 15% 40%, rgba(126,207,130,0.16) 0%, transparent 70%),
-  radial-gradient(40% 50% at 80% 25%, rgba(45,212,191,0.12) 0%, transparent 70%),
-  radial-gradient(50% 60% at 55% 80%, rgba(16,185,129,0.12) 0%, transparent 70%),
-  radial-gradient(35% 45% at 35% 75%, rgba(20,184,166,0.10) 0%, transparent 70%)}
+  radial-gradient(45% 55% at 15% 40%, rgba(40,140,90,0.14) 0%, transparent 70%),
+  radial-gradient(40% 50% at 80% 25%, rgba(30,120,120,0.11) 0%, transparent 70%),
+  radial-gradient(50% 60% at 55% 80%, rgba(20,100,70,0.12) 0%, transparent 70%),
+  radial-gradient(35% 45% at 35% 75%, rgba(25,90,90,0.10) 0%, transparent 70%)}
 #srv::before{content:"";position:absolute;inset:-25%;
-background:conic-gradient(from 140deg at 45% 35%, #021a12, #0d4a32, #0a3d38, #042419, #021a12);
-filter:blur(90px) saturate(1.2);opacity:0.45;z-index:0;
-animation:srv-drift 28s ease-in-out infinite alternate}
+background:conic-gradient(from 140deg at 45% 35%, #021510, #0b3a2a, #0a3236, #04201a, #021510);
+filter:blur(90px) saturate(1.3);opacity:0.35;z-index:0;
+animation:srv-drift 22s ease-in-out infinite alternate}
 @keyframes srv-drift{from{transform:translate3d(-5%,-3%,0) rotate(0deg)}
 to{transform:translate3d(5%,4%,0) rotate(10deg)}}
 @media(prefers-reduced-motion:reduce){#srv::before{animation:none}}
@@ -259,7 +264,7 @@ justify-content:center;padding:0 clamp(2rem,8vw,8rem);overflow:hidden}
 .srv-stage{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
 width:100%;opacity:0;text-align:center;pointer-events:none}
 .ss-big-num{font-family:'Instrument Serif',serif;font-style:italic;
-font-size:clamp(5rem,12vw,9rem);color:rgba(126,207,130,0.06);line-height:1;
+font-size:clamp(5rem,12vw,9rem);color:rgba(242,239,233,0.05);line-height:1;
 margin-bottom:-1.5rem;letter-spacing:-.04em;pointer-events:none;user-select:none}
 .ss-line{width:60px;height:1px;background:var(--gold);margin:0 auto 1.4rem;opacity:.4}
 .ss-num{font-family:var(--mono);font-size:.65rem;color:var(--gold);letter-spacing:.2em;
@@ -292,7 +297,7 @@ font-size:clamp(1.1rem,1.4vw,1.3rem);color:var(--cream);letter-spacing:-.01em}
 .stu-what{display:flex;align-items:center;gap:.8rem;margin-bottom:1.4rem}
 .stu-what-lbl{font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;
 text-transform:uppercase;color:var(--gold);white-space:nowrap;opacity:.7}
-.stu-what-line{flex:1;height:1px;background:rgba(126,207,130,.15)}
+.stu-what-line{flex:1;height:1px;background:rgba(212,184,150,.15)}
 .stu-blocks{display:flex;flex-direction:column;gap:.9rem;margin-bottom:1.6rem}
 .stu-blk{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem .5rem}
 .stu-blk-big{font-family:'Space Grotesk',sans-serif;font-weight:700;
@@ -373,20 +378,21 @@ transition:border-color .4s,transform .4s cubic-bezier(.22,1,.36,1),box-shadow .
   .why-g{flex-direction:column;width:100%;padding-right:0}
   .wc,.wc.big{width:100%;min-height:auto}
 }
-.wc:hover{border-color:rgba(126,207,130,.2);transform:translateY(-6px) scale(1.01);
-box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 30px rgba(126,207,130,.04)}
+.wc:hover{border-color:rgba(212,184,150,.2);transform:translateY(-6px) scale(1.01);
+box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 30px rgba(212,184,150,.04)}
 /* Animated border glow on hover */
 .wc::before{content:"";position:absolute;inset:-1px;border-radius:17px;
-background:conic-gradient(from var(--wc-angle,0deg),transparent 40%,rgba(126,207,130,.15) 50%,transparent 60%);
+background:conic-gradient(from var(--wc-angle,0deg),transparent 40%,rgba(212,184,150,.15) 50%,transparent 60%);
 opacity:0;transition:opacity .5s;z-index:-1;pointer-events:none}
 .wc:hover::before{opacity:1;animation:wc-spin 4s linear infinite}
 @keyframes wc-spin{to{--wc-angle:360deg}}
 @property --wc-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
 .wc-glow{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;
-background:radial-gradient(ellipse at 50% -20%,rgba(126,207,130,.06),transparent 70%)}
+background:radial-gradient(ellipse at 50% -20%,rgba(212,184,150,.06),transparent 70%)}
 .wc:hover .wc-glow{opacity:1}
 .wc-n{font-family:var(--mono);font-size:.58rem;color:var(--gold);letter-spacing:.14em;
 margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.wc-n::after{content:"";flex:1;height:1px;background:rgba(212,184,150,.1)}
 .wc-t{font-family:'Space Grotesk',sans-serif;font-size:clamp(.95rem,1.4vw,1.2rem);
 font-weight:700;letter-spacing:-.02em;margin-bottom:.7rem;color:var(--cream);line-height:1.25}
 .wc:hover .wc-t{color:#fff}
@@ -516,12 +522,13 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
 <section id="hero" data-sec="hero" aria-label="Hero">
   <div class="h-vg" aria-hidden="true"></div>
   <div class="hc">
+    <p class="hey" id="hey"><span class="hey-ln" aria-hidden="true"></span>AI Automation &amp; Engineering Studio — Morbi, India</p>
     <h1 class="h1">
       <span class="hl"><span class="hli ts">We replace</span></span>
       <span class="hl"><span class="hli ti">manual work</span></span>
       <span class="hl"><span class="hli ts">with AI.</span></span>
     </h1>
-    <p class="hsb" id="hsb">From AI call agents to content pipelines to full business workflow automation. J&J Co. engineers the systems that run your operation 24/7, without adding headcount.</p>
+    <p class="hsb" id="hsb">From AI call agents to content pipelines to full business workflow automation — J&J Co. engineers the systems that run your operation 24/7, without adding headcount.</p>
     <div class="ctas" id="ctas">
       <a href="#contact" class="btn btn-p">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -550,9 +557,9 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
   <div class="qs-sticky" id="qs-sticky">
     <div class="qs-glow" aria-hidden="true"></div>
     <div class="qs-accent" aria-hidden="true"></div>
-    <div class="qs-tag" id="qs-tag"><span>Operating Principle</span></div>
+    <div class="qs-tag" id="qs-tag"><span class="qs-tag-line"></span><span>J&amp;J Co. — Operating Principle</span></div>
     <p class="qs-text" id="qs-text">Most businesses are still paying people to do work that AI executes better, faster, and at a fraction of the cost. We build the systems that change that.</p>
-    <div class="qs-attr" id="qs-attr">JJ, Founder &amp; Systems Architect</div>
+    <div class="qs-attr" id="qs-attr">— JJ, Founder &amp; Systems Architect</div>
     <div class="qs-ctr" id="qs-ctr"><span id="qs-ctr-n">00</span><div class="qs-ctr-fill"><div class="qs-ctr-prog" id="qs-prog"></div></div></div>
   </div>
 </div>
@@ -571,7 +578,7 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       </div>
     </div>
     <div class="stu-right">
-      <p class="stu-lead rv">Founded by <strong>JJ</strong>, a systems architect who spent years building the<br>
+      <p class="stu-lead rv">Founded by <strong>JJ</strong> — a systems architect who spent years building the<br>
       <span class="stu-em">exact infrastructure</span> enterprise teams pay agencies millions for.</p>
 
       <div class="stu-what rv">
@@ -594,7 +601,7 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
         </div>
       </div>
 
-      <p class="stu-principle rv">Every system custom-engineered from scratch.<br>
+      <p class="stu-principle rv"><span class="stu-dash">—</span> Every system custom-engineered from scratch.<br>
       <span class="stu-no">No templates. No SaaS wrappers. No vendor lock-in.</span></p>
 
       <div class="tags rv">
@@ -618,7 +625,7 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       <div class="eng-stage is-left" id="eng-stage-0">
         <div class="es-num">Phase 01</div>
         <h2 class="es-title">Discovery &amp; Architecture</h2>
-        <p class="es-desc">We audit every manual step in your business and design the complete AI system blueprint before writing a single line of code.</p>
+        <p class="es-desc">We audit every manual step in your business and design the complete AI system blueprint — before writing a single line of code.</p>
         <div class="es-metrics">
           <div class="es-metric"><span class="es-lbl">47</span> touchpoints mapped</div>
           <div class="es-metric"><span class="es-lbl">72h</span> audit turnaround</div>
@@ -636,7 +643,7 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       <div class="eng-stage is-left" id="eng-stage-2">
         <div class="es-num">Phase 03</div>
         <h2 class="es-title">Build &amp; Integration</h2>
-        <p class="es-desc">Your entire tool stack connected. AI agents wired into one coherent operating system that runs without human intervention.</p>
+        <p class="es-desc">Your entire tool stack connected — AI agents wired into one coherent operating system that runs without human intervention.</p>
         <div class="es-metrics">
           <div class="es-metric"><span class="es-lbl">API-first</span> integrations</div>
           <div class="es-metric"><span class="es-lbl">Your stack</span> fully connected</div>
@@ -654,7 +661,7 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       <div class="eng-stage is-left" id="eng-stage-4">
         <div class="es-num">Phase 05</div>
         <h2 class="es-title">Deploy &amp; Compound</h2>
-        <p class="es-desc">System goes live and self-optimises, improving every week with zero manual intervention. Results compound automatically.</p>
+        <p class="es-desc">System goes live and self-optimises — improving every week with zero manual intervention. Results compound automatically.</p>
         <div class="es-metrics">
           <div class="es-metric"><span class="es-lbl">Monitored</span> after launch</div>
           <div class="es-metric"><span class="es-lbl">Weekly</span> optimisation</div>
@@ -678,9 +685,10 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
     <div class="srv-stages" id="srv-stages">
       <div class="srv-stage" id="srv-stage-0">
         <div class="ss-big-num">01</div>
+        <div class="ss-line"></div>
         <div class="ss-num">Service 01</div>
         <h2 class="ss-title">AI Call Agents<span class="ss-sub">Outbound Automation</span></h2>
-        <p class="ss-desc">Autonomous AI voice agents that prospect, call, qualify, and book meetings without a sales team. Your pipeline runs 24/7.</p>
+        <p class="ss-desc">Autonomous AI voice agents that prospect, call, qualify, and book meetings — without a sales team. Your pipeline runs 24/7.</p>
         <div class="ss-metrics">
           <div class="ss-metric"><span class="ss-lbl">24/7</span> calling capacity</div>
           <div class="ss-metric"><span class="ss-lbl">₹0</span> per seat</div>
@@ -688,6 +696,7 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       </div>
       <div class="srv-stage" id="srv-stage-1">
         <div class="ss-big-num">02</div>
+        <div class="ss-line"></div>
         <div class="ss-num">Service 02</div>
         <h2 class="ss-title">Social Media Pipeline<span class="ss-sub">Content Intelligence</span></h2>
         <p class="ss-desc">Brief-to-published content automation across all platforms. Zero content burnout. Your brand voice preserved perfectly.</p>
@@ -698,6 +707,7 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       </div>
       <div class="srv-stage" id="srv-stage-2">
         <div class="ss-big-num">03</div>
+        <div class="ss-line"></div>
         <div class="ss-num">Service 03</div>
         <h2 class="ss-title">Workflow Automation<span class="ss-sub">Operations Engineering</span></h2>
         <p class="ss-desc">Every repetitive process mapped and automated end to end. No recurring SaaS subscription. You own the infrastructure.</p>
@@ -708,6 +718,7 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       </div>
       <div class="srv-stage" id="srv-stage-3">
         <div class="ss-big-num">04</div>
+        <div class="ss-line"></div>
         <div class="ss-num">Service 04</div>
         <h2 class="ss-title">Lead Generation Systems<span class="ss-sub">Growth Architecture</span></h2>
         <p class="ss-desc">Automated pipelines that identify, enrich, score, and deliver qualified leads straight into your CRM. Growth on autopilot.</p>
@@ -718,6 +729,7 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       </div>
       <div class="srv-stage" id="srv-stage-4">
         <div class="ss-big-num">05</div>
+        <div class="ss-line"></div>
         <div class="ss-num">Service 05</div>
         <h2 class="ss-title">CRM &amp; Stack Integration<span class="ss-sub">Data Infrastructure</span></h2>
         <p class="ss-desc">Your entire tool ecosystem connected into one coherent data layer. Zero manual data entry across every platform.</p>
@@ -728,6 +740,7 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       </div>
       <div class="srv-stage" id="srv-stage-5">
         <div class="ss-big-num">06</div>
+        <div class="ss-line"></div>
         <div class="ss-num">Service 06</div>
         <h2 class="ss-title">Custom AI Software<span class="ss-sub">Proprietary Engineering</span></h2>
         <p class="ss-desc">Bespoke AI tools built around your exact business logic. You own the code outright. No vendor lock-in, ever.</p>
@@ -772,16 +785,19 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       </div>
       <div class="out-cards">
         <div class="out-c on" id="oc0">
-          <div class="out-tt">Round-the-Clock Outbound, Zero Additional Headcount</div>
-          <p class="out-bd">Our AI call agent system is designed to replace manual cold calling. The agent prospects, calls, and books meetings autonomously while your team focuses exclusively on closing.</p>
+          <span class="out-badge">◎ Target Outcome</span>
+          <div class="out-tt">Round-the-Clock Outbound — Zero Additional Headcount</div>
+          <p class="out-bd">Our AI call agent system is designed to replace manual cold calling. The agent prospects, calls, and books meetings autonomously — while your team focuses exclusively on closing.</p>
         </div>
         <div class="out-c" id="oc1">
+          <span class="out-badge">◎ Target Outcome</span>
           <div class="out-tt">Content That Publishes Itself</div>
-          <p class="out-bd">Our social media AI pipeline covers ideation, copy, visual briefing, and scheduled publishing across Instagram, LinkedIn, and YouTube Shorts, so you get back the hours you spend on content every week.</p>
+          <p class="out-bd">Our social media AI pipeline covers ideation, copy, visual briefing, and scheduled publishing across Instagram, LinkedIn, and YouTube Shorts — so you get back the hours you spend on content every week.</p>
         </div>
         <div class="out-c" id="oc2">
+          <span class="out-badge">◎ Target Outcome</span>
           <div class="out-tt">Client Onboarding on Autopilot</div>
-          <p class="out-bd">Contracts, briefing forms, project setup, and the welcome sequence run as one automated workflow, replacing the multi-day email back-and-forth with zero manual input.</p>
+          <p class="out-bd">Contracts, briefing forms, project setup, and the welcome sequence run as one automated workflow — replacing the multi-day email back-and-forth with zero manual input.</p>
         </div>
       </div>
       <div class="out-nav">
@@ -804,33 +820,33 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
   <div class="why-g">
     <div class="wc big">
       <div class="wc-glow"></div>
-      <div class="wc-n">01</div>
+      <div class="wc-n">01 //</div>
       <div class="wc-t">We build systems, not subscriptions</div>
-      <p class="wc-b">Most AI agencies resell SaaS access with a margin on top and call it "automation." We engineer custom infrastructure built on your business logic, your data, your rules, not a vendor's product limitations. Every system is bespoke, production-grade, and transfers to you on delivery. No platform dependency, no ongoing licensing, no hostage code.</p>
+      <p class="wc-b">Most AI agencies resell SaaS access with a margin on top and call it "automation." We engineer custom infrastructure built on your business logic, your data, your rules — not a vendor's product limitations. Every system is bespoke, production-grade, and transfers to you on delivery. No platform dependency, no ongoing licensing, no hostage code.</p>
     </div>
     <div class="wc">
       <div class="wc-glow"></div>
-      <div class="wc-n">02</div>
+      <div class="wc-n">02 //</div>
       <div class="wc-t">Accountable to revenue, not activity</div>
-      <p class="wc-b">We scope every engagement around a specific, measurable business outcome: more qualified meetings, reduced operational hours, faster onboarding. We don't close the project until the metric moves. No vague deliverables, no activity theatre.</p>
+      <p class="wc-b">We scope every engagement around a specific, measurable business outcome — more qualified meetings, reduced operational hours, faster onboarding. We don't close the project until the metric moves. No vague deliverables, no activity theatre.</p>
     </div>
     <div class="wc">
       <div class="wc-glow"></div>
-      <div class="wc-n">03</div>
+      <div class="wc-n">03 //</div>
       <div class="wc-t">You own everything we build</div>
-      <p class="wc-b">All code, agent logic, workflow configurations, and integrations are transferred to you on project completion. You own it outright. If you ever decide to run it internally or hand it to another team, you can with zero friction.</p>
+      <p class="wc-b">All code, agent logic, workflow configurations, and integrations are transferred to you on project completion. You own it outright. If you ever decide to run it internally or hand it to another team — you can, with zero friction.</p>
     </div>
     <div class="wc">
       <div class="wc-glow"></div>
-      <div class="wc-n">04</div>
+      <div class="wc-n">04 //</div>
       <div class="wc-t">Selective client intake</div>
-      <p class="wc-b">We work with a deliberately small number of clients at any given time. Built for depth and precision. You get direct access to the engineer building your system, fast iteration cycles, and a partner who is genuinely invested in your result.</p>
+      <p class="wc-b">We work with a deliberately small number of clients at any given time. Not to be exclusive — to be effective. You get direct access to the engineer building your system, fast iteration cycles, and a partner who is genuinely invested in your result.</p>
     </div>
     <div class="wc">
       <div class="wc-glow"></div>
-      <div class="wc-n">05</div>
+      <div class="wc-n">05 //</div>
       <div class="wc-t">First working prototype in 48 hours</div>
-      <p class="wc-b">Once a project is scoped and agreed, we deliver a working prototype of your first system within 48 hours. Real output, real logic, running in your stack before most agencies have finished their discovery questionnaire.</p>
+      <p class="wc-b">Once a project is scoped and agreed, we deliver a working prototype of your first system within 48 hours. Real output, real logic, running in your stack — before most agencies have finished their discovery questionnaire.</p>
     </div>
   </div>
   </div>
@@ -892,7 +908,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, CustomEase);
 CustomEase.create('expo', '0.16,1,0.3,1');
 ScrollTrigger.config({ ignoreMobileResize: true, limitCallbacks: true });
 
-/* ── THREE.JS PARTICLE SPHERE (GLSL — Addictive Mouse Vortex & Repulsion Physics) ── */
+/* ── THREE.JS PARTICLE SPHERE (GLSL — fully fixed for mobile & desktop) ── */
 (function() {
   var cv  = document.getElementById('gl');
   var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -915,11 +931,9 @@ ScrollTrigger.config({ ignoreMobileResize: true, limitCallbacks: true });
 
   var vert = [
     'precision highp float;',
-    'uniform float uT,uMx,uMy,uSc,uPR,uAspect,uMVel;',
-    'uniform vec2 uMouse;',
+    'uniform float uT,uMx,uSc,uPR;',
     'attribute float aR;',
     'varying float vD;',
-    'varying float vForce;',
     'vec3 jm3(vec3 x){return x-floor(x*(1./289.))*289.;}',
     'vec4 jm4(vec4 x){return x-floor(x*(1./289.))*289.;}',
     'vec4 jp(vec4 x){return jm4((x*34.+1.)*x);}',
@@ -947,38 +961,22 @@ ScrollTrigger.config({ ignoreMobileResize: true, limitCallbacks: true });
     '  return 42.*dot(m2*m2,vec4(dot(q0,x0),dot(q1,x1),dot(q2,x2),dot(q3,x3)));',
     '}',
     'void main(){',
-    '  vec3 pos=position;float t=uT*.09;',
+    '  vec3 pos=position;float t=uT*.2;',
     '  float n=jn(pos*1.5+vec3(t,t*.7,t*.5))*.35+jn(pos*3.+vec3(-t*.8,t*.6,t))*.18+uMx*.08;',
     '  float sc=uSc*.6;pos+=normalize(pos)*n;pos.y*=1.-sc*.35;pos.xz*=1.+sc*.28;',
-    '  vec4 mv=modelViewMatrix*vec4(pos,1.);',
-    '  vec4 clip=projectionMatrix*mv;',
-    '  vec2 ndc=clip.xy/max(clip.w,0.0001);',
-    '  vec2 diff=(ndc-uMouse)*vec2(uAspect,1.0);',
-    '  float dist=length(diff);',
-    '  float radius=0.48+uMVel*0.18;',
-    '  float f=smoothstep(radius,0.0,dist);',
-    '  float f2=f*f;',
-    '  vec2 dir=normalize(diff+vec2(0.0001));',
-    '  vec2 swirl=vec2(-dir.y,dir.x);',
-    '  float wave=sin(dist*18.0-uT*6.0)*0.12*f;',
-    '  mv.xy+=(dir*(0.42+uMVel*0.25)+swirl*(0.28+aR*0.18))*f2+dir*wave;',
-    '  mv.z+=f2*0.55;',
-    '  vD=n;vForce=f;',
-    '  gl_Position=projectionMatrix*mv;',
-    '  gl_PointSize=(2.6+aR*2.0+f2*4.2)*uPR*(1.8/-mv.z);',
+    '  vD=n;vec4 mv=modelViewMatrix*vec4(pos,1.);gl_Position=projectionMatrix*mv;',
+    '  gl_PointSize=(2.6+aR*2.0)*uPR*(1.8/-mv.z);',
     '}'
   ].join('\n');
 
   var frag = [
-    'precision highp float;varying float vD;varying float vForce;',
+    'precision highp float;varying float vD;',
     'void main(){',
     '  float d=length(gl_PointCoord-vec2(.5));if(d>.5)discard;',
     '  float n=vD*.5+.5;',
-    '  vec3 baseCol=mix(vec3(.95,.97,.96),vec3(.49,.81,.51),n*.42);',
-    '  vec3 glowCol=mix(vec3(.49,.88,.58),vec3(.28,.88,.82),vForce*.45);',
-    '  vec3 col=mix(baseCol,glowCol,vForce*.85);',
-    '  float a=(1.-smoothstep(.22,.5,d))*(mix(.16,.65,smoothstep(0.,.4,n))+vForce*.55);',
-    '  gl_FragColor=vec4(col,min(1.0,a));',
+    '  vec3 col=mix(vec3(.96,.94,.91),vec3(.88,.76,.58),n*.38);',
+    '  float a=(1.-smoothstep(.25,.5,d))*mix(.16,.65,smoothstep(0.,.4,n));',
+    '  gl_FragColor=vec4(col,a);',
     '}'
   ].join('\n');
 
@@ -996,39 +994,18 @@ ScrollTrigger.config({ ignoreMobileResize: true, limitCallbacks: true });
   }
   geo.setAttribute('position', new THREE.BufferAttribute(pts, 3));
   geo.setAttribute('aR',       new THREE.BufferAttribute(rnd, 1));
-  var uni = {
-    uT: {value:0}, uMx: {value:0}, uMy: {value:0}, uSc: {value:0},
-    uPR: {value:dpr}, uAspect: {value:dims.w/dims.h}, uMVel: {value:0},
-    uMouse: {value: new THREE.Vector2(99, 99)}
-  };
+  var uni = { uT: {value:0}, uMx: {value:0}, uSc: {value:0}, uPR: {value:dpr} };
   var mat = new THREE.ShaderMaterial({ vertexShader: vert, fragmentShader: frag,
     uniforms: uni, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending });
   var mesh = new THREE.Points(geo, mat);
   mesh.position.y = dims.isMob ? 0.25 : 0;
   scene.add(mesh);
 
-  var tmx = 0, tmy = 0, mx = 0, my = 0, sp = 0;
-  var targetNdcX = 99, targetNdcY = 99, curNdcX = 99, curNdcY = 99;
-  var lastCx = 0, lastCy = 0, mVel = 0;
-
-  function handlePointer(clientX, clientY) {
-    tmx = (clientX / window.innerWidth - .5) * 2;
-    tmy = (clientY / window.innerHeight - .5) * 2;
-    var rect = cv.getBoundingClientRect();
-    if (rect.width > 0 && rect.height > 0) {
-      targetNdcX = ((clientX - rect.left) / rect.width) * 2 - 1;
-      targetNdcY = -(((clientY - rect.top) / rect.height) * 2 - 1);
-    }
-    var dx = clientX - lastCx, dy = clientY - lastCy;
-    mVel = Math.min(1.5, Math.sqrt(dx*dx + dy*dy) * 0.035);
-    lastCx = clientX; lastCy = clientY;
-  }
-
-  window.addEventListener('mousemove', function(e) { handlePointer(e.clientX, e.clientY); });
+  var tmx = 0, mx = 0, sp = 0;
+  window.addEventListener('mousemove', function(e) { tmx = (e.clientX / innerWidth - .5) * 2; });
   window.addEventListener('touchmove', function(e) {
-    if (e.touches && e.touches[0]) handlePointer(e.touches[0].clientX, e.touches[0].clientY);
+    if (e.touches && e.touches[0]) tmx = (e.touches[0].clientX / innerWidth - .5) * 2;
   }, { passive: true });
-  window.addEventListener('mouseleave', function() { targetNdcX = 99; targetNdcY = 99; });
   window.addEventListener('scroll',    function() {
     var ms = document.documentElement.scrollHeight - innerHeight;
     sp = ms > 0 ? Math.min(scrollY / ms, 1) : 0;
@@ -1037,7 +1014,6 @@ ScrollTrigger.config({ ignoreMobileResize: true, limitCallbacks: true });
     var d = getGlDims();
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     uni.uPR.value = dpr;
-    uni.uAspect.value = d.w / d.h;
     ren.setPixelRatio(dpr);
     ren.setSize(d.w, d.h, false);
     cam.aspect = d.w / d.h;
@@ -1049,32 +1025,19 @@ ScrollTrigger.config({ ignoreMobileResize: true, limitCallbacks: true });
   (function animate() {
     requestAnimationFrame(animate);
     var t = clk.getElapsedTime();
-    mx              += (tmx - mx) * .06;
-    my              += (tmy - my) * .06;
-    mVel            *= 0.92;
-    if (targetNdcX > 50) {
-      curNdcX += (99 - curNdcX) * 0.08;
-      curNdcY += (99 - curNdcY) * 0.08;
-    } else {
-      curNdcX += (targetNdcX - curNdcX) * 0.14;
-      curNdcY += (targetNdcY - curNdcY) * 0.14;
-    }
-    uni.uMouse.value.set(curNdcX, curNdcY);
-    uni.uMVel.value += (mVel - uni.uMVel.value) * 0.15;
+    mx              += (tmx - mx) * .04;
     uni.uMx.value   += (mx - uni.uMx.value) * .06;
-    uni.uMy.value   += (my - uni.uMy.value) * .06;
     uni.uSc.value   += (sp - uni.uSc.value) * .06;
     uni.uT.value     = t;
-    mesh.rotation.y  = t * .025 + mx * .32;
-    mesh.rotation.x  = t * .012 + my * .24;
-    cam.position.x  += (mx * .28 - cam.position.x) * .04;
-    cam.position.y  += (-my * .22 - cam.position.y) * .04;
+    mesh.rotation.y  = t * .05 + mx * .2;
+    mesh.rotation.x  = t * .025;
+    cam.position.x  += (mx * .3 - cam.position.x) * .025;
     ren.render(scene, cam);
   })();
 })();
 
 /* ── LENIS — single driver via gsap.ticker ── */
-var lenis = new Lenis({ lerp: .045, smoothWheel: true, wheelMultiplier: .65 });
+var lenis = new Lenis({ lerp: .07, smoothWheel: true, wheelMultiplier: .92 });
 gsap.ticker.add(function(time) { lenis.raf(time * 1000); });
 gsap.ticker.lagSmoothing(0);
 lenis.on('scroll', ScrollTrigger.update);
@@ -1118,6 +1081,7 @@ setTimeout(function() {
 
 function heroIn() {
   var tl = gsap.timeline({ defaults: { ease: 'expo' } });
+  tl.fromTo('#hey',   { opacity:0, y:10 }, { opacity:1, y:0, duration:.9 }, 0);
   tl.to('.hli',       { y:0, duration:1.3, stagger:.07 }, .08);
   tl.fromTo(['#hsb','#ctas'], { opacity:0, y:18 }, { opacity:1, y:0, duration:.9, stagger:.1 }, .5);
 }
@@ -1222,7 +1186,7 @@ void function() {
   ScrollTrigger.create({
     trigger: '#qscrub',
     start: 'top top',
-    end: '+=240%',
+    end: '+=150%',
     pin: '#qscrub',
     pinSpacing: true,
     anticipatePin: 1,
@@ -1292,6 +1256,8 @@ void function() {
 precision highp float;
 uniform float uTime;
 uniform vec2 uResolution;
+uniform vec2 uMouse;
+uniform float uMStr;
 
 /* Smooth value via layered sines — zero blockiness */
 float wave(float x, float t) {
@@ -1323,7 +1289,9 @@ void main() {
 
   /* ═══ AURORA CURTAIN 1 — main green band ═══ */
   float w1 = wave(uvx * 1.0, t * 1.2);
+  float mInf = exp(-pow(uvx - uMouse.x * ar, 2.0) * 2.5) * uMStr;
   float center1 = 0.38 + w1 * 0.12;
+  center1 += (uMouse.y - center1) * 0.18 * mInf;
   float dist1 = uv.y - center1;
   float band1 = exp(-dist1 * dist1 * 6.0);
   /* Internal shimmer via sine ripples */
@@ -1368,6 +1336,11 @@ void main() {
   /* ── Warm horizon glow ── */
   col += vec3(0.04, 0.08, 0.04) * exp(-uv.y * 3.0) * 0.8;
 
+  /* ── Cursor halo: aurora brightens softly around pointer ── */
+  vec2 md2 = (uv - uMouse) * vec2(ar, 1.0);
+  float halo = exp(-dot(md2, md2) * 7.0) * uMStr;
+  col += vec3(0.08, 0.42, 0.26) * halo * (0.35 + band1 * 0.9 + band2 * 0.5);
+
   /* ── Soft vignette ── */
   col *= 1.0 - 0.3 * length((uv - 0.5) * vec2(1.1, 0.8));
 
@@ -1377,8 +1350,20 @@ void main() {
 
     var uniforms = {
       uTime: { value: 0.0 },
-      uResolution: { value: new THREE.Vector2(W, H) }
+      uResolution: { value: new THREE.Vector2(W, H) },
+      uMouse: { value: new THREE.Vector2(0.5, 0.4) },
+      uMStr: { value: 0.0 }
     };
+    var tMx = 0.5, tMy = 0.4, tStr = 0;
+    window.addEventListener('mousemove', function(e) {
+      var r = parent.getBoundingClientRect();
+      if (e.clientY >= r.top && e.clientY <= r.bottom) {
+        tMx = (e.clientX - r.left) / r.width;
+        tMy = 1.0 - (e.clientY - r.top) / r.height;
+        tStr = 1;
+      } else { tStr = 0; }
+    });
+    document.addEventListener('mouseleave', function() { tStr = 0; });
 
     var material = new THREE.ShaderMaterial({
       vertexShader: vertexShader,
@@ -1391,7 +1376,11 @@ void main() {
 
     function animate() {
       requestAnimationFrame(animate);
-      uniforms.uTime.value += 0.009;
+      uniforms.uTime.value += 0.012;
+      var um = uniforms.uMouse.value;
+      um.x += (tMx - um.x) * 0.06;
+      um.y += (tMy - um.y) * 0.06;
+      uniforms.uMStr.value += (tStr - uniforms.uMStr.value) * 0.05;
       renderer.render(scene, camera);
     }
     requestAnimationFrame(animate);
@@ -1402,123 +1391,12 @@ void main() {
       renderer.setSize(W, H, false);
       uniforms.uResolution.value.set(W, H);
     });
-
-    /* ── Interactive Addictive Mouse-Reactive Particle Overlay in #eng ── */
-    var pCvs = document.createElement('canvas');
-    pCvs.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none';
-    pCvs.setAttribute('aria-hidden', 'true');
-    parent.insertBefore(pCvs, canvas.nextSibling);
-    var pCtx = pCvs.getContext('2d');
-    var pW = W, pH = H, pNodes = [];
-    var eMouse = { x: -9999, y: -9999, vx: 0, vy: 0, lx: 0, ly: 0, active: false };
-
-    function initEngParticles() {
-      pW = pCvs.width  = parent.offsetWidth  || window.innerWidth;
-      pH = pCvs.height = parent.offsetHeight || window.innerHeight;
-      pNodes = [];
-      var count = window.innerWidth < 768 ? 55 : 110;
-      for (var i = 0; i < count; i++) {
-        var ox = Math.random() * pW, oy = Math.random() * pH;
-        pNodes.push({
-          x: ox, y: oy, ox: ox, oy: oy,
-          vx: (Math.random() - 0.5) * 0.35,
-          vy: (Math.random() - 0.5) * 0.35,
-          r: Math.random() * 2.2 + 0.8,
-          hue: Math.random() > 0.3 ? '126,207,130' : '126,207,130'
-        });
-      }
-    }
-    initEngParticles();
-    window.addEventListener('resize', initEngParticles);
-
-    window.addEventListener('mousemove', function(e) {
-      var rect = parent.getBoundingClientRect();
-      if (e.clientY >= rect.top - 100 && e.clientY <= rect.bottom + 100) {
-        var nx = e.clientX - rect.left;
-        var ny = e.clientY - rect.top;
-        eMouse.vx = nx - eMouse.lx;
-        eMouse.vy = ny - eMouse.ly;
-        eMouse.x = eMouse.lx = nx;
-        eMouse.y = eMouse.ly = ny;
-        eMouse.active = true;
-      } else {
-        eMouse.active = false;
-      }
-    });
-
-    (function drawEngParticles() {
-      requestAnimationFrame(drawEngParticles);
-      pCtx.clearRect(0, 0, pW, pH);
-      eMouse.vx *= 0.9; eMouse.vy *= 0.9;
-
-      if (eMouse.active) {
-        var grad = pCtx.createRadialGradient(eMouse.x, eMouse.y, 0, eMouse.x, eMouse.y, 190);
-        grad.addColorStop(0, 'rgba(126,207,130,0.12)');
-        grad.addColorStop(0.5, 'rgba(126,207,130,0.04)');
-        grad.addColorStop(1, 'rgba(0,0,0,0)');
-        pCtx.fillStyle = grad;
-        pCtx.beginPath();
-        pCtx.arc(eMouse.x, eMouse.y, 190, 0, Math.PI * 2);
-        pCtx.fill();
-      }
-
-      for (var i = 0; i < pNodes.length; i++) {
-        var n = pNodes[i];
-        n.x += n.vx; n.y += n.vy;
-        if (n.x < 0) n.x = pW; if (n.x > pW) n.x = 0;
-        if (n.y < 0) n.y = pH; if (n.y > pH) n.y = 0;
-
-        var mDist = 9999;
-        if (eMouse.active) {
-          var dx = n.x - eMouse.x, dy = n.y - eMouse.y;
-          mDist = Math.sqrt(dx * dx + dy * dy);
-          var maxR = 210;
-          if (mDist < maxR && mDist > 0.1) {
-            var force = (1 - mDist / maxR);
-            var f2 = force * force;
-            var ux = dx / mDist, uy = dy / mDist;
-            /* Addictive vortex swirl + elastic push + mouse momentum */
-            n.x += ux * f2 * 5.5 + (-uy) * f2 * 3.2 + eMouse.vx * force * 0.18;
-            n.y += uy * f2 * 5.5 + (ux)  * f2 * 3.2 + eMouse.vy * force * 0.18;
-
-            /* Neural line to mouse cursor */
-            pCtx.strokeStyle = 'rgba(' + n.hue + ',' + (force * 0.45).toFixed(3) + ')';
-            pCtx.lineWidth = 0.6 + force * 0.8;
-            pCtx.beginPath();
-            pCtx.moveTo(eMouse.x, eMouse.y);
-            pCtx.lineTo(n.x, n.y);
-            pCtx.stroke();
-          }
-        }
-
-        /* Particle-to-particle constellation lines */
-        for (var j = i + 1; j < pNodes.length; j++) {
-          var n2 = pNodes[j];
-          var cdx = n.x - n2.x, cdy = n.y - n2.y;
-          var cd = Math.sqrt(cdx * cdx + cdy * cdy);
-          if (cd < 130) {
-            var boost = (eMouse.active && mDist < 210) ? 0.24 : 0.09;
-            pCtx.strokeStyle = 'rgba(126,207,130,' + ((1 - cd / 130) * boost).toFixed(3) + ')';
-            pCtx.lineWidth = 0.45;
-            pCtx.beginPath();
-            pCtx.moveTo(n.x, n.y);
-            pCtx.lineTo(n2.x, n2.y);
-            pCtx.stroke();
-          }
-        }
-
-        var glow = (eMouse.active && mDist < 210) ? (1 - mDist / 210) : 0;
-        pCtx.fillStyle = 'rgba(' + n.hue + ',' + (0.45 + glow * 0.55).toFixed(2) + ')';
-        pCtx.beginPath();
-        pCtx.arc(n.x, n.y, n.r + glow * 2.2, 0, Math.PI * 2);
-        pCtx.fill();
-      }
-    })();
   }
 
-  initShaderAurora();
+  if (document.readyState === 'complete') initShaderAurora();
+  else window.addEventListener('load', initShaderAurora);
 
-  /* ── GSAP ScrollTrigger Pin + Smooth Unhurried Stage Transitions ── */
+  /* ── GSAP ScrollTrigger Pin + Alternating Side-Slide ── */
   var stages = gsap.utils.toArray('.eng-stage');
   var pips   = gsap.utils.toArray('.eng-pip');
   if (stages.length > 0) {
@@ -1527,11 +1405,10 @@ void main() {
     ScrollTrigger.create({
       trigger: '#eng',
       start: 'top top',
-      end: '+=550%',
+      end: '+=400%',
       pin: '#eng',
       pinSpacing: true,
       anticipatePin: 1,
-      scrub: 1.5,
       onUpdate: function(self) {
         var p = self.progress;
         var total = stages.length;
@@ -1539,19 +1416,20 @@ void main() {
         var segP = (p * total) - idx;
 
         stages.forEach(function(s, i) {
-          var isRight = s.classList.contains('is-right');
           if (i === idx) {
             var op;
-            if (i === 0 && segP < 0.2) { op = 1; }
-            else if (i === total - 1 && segP > 0.8) { op = 1; }
-            else if (segP < 0.2) { op = segP / 0.2; }
+            if (segP < 0.2) { op = segP / 0.2; }
             else if (segP > 0.8) { op = (1 - segP) / 0.2; }
             else { op = 1; }
             op = Math.max(0, Math.min(1, op));
-            var slideX = (1 - op) * (isRight ? 40 : -40);
-            gsap.to(s, { opacity: op, x: slideX, yPercent: -50, duration: 0.55, ease: 'power2.out', overwrite: 'auto' });
+            var isRight = s.classList.contains('is-right');
+            var slideX = (1 - op) * (isRight ? 60 : -60);
+            s.style.opacity = op;
+            s.style.transform = 'translateY(-50%) translateX(' + slideX + 'px)';
           } else {
-            gsap.to(s, { opacity: 0, x: isRight ? 40 : -40, yPercent: -50, duration: 0.55, ease: 'power2.out', overwrite: 'auto' });
+            s.style.opacity = '0';
+            var isR = s.classList.contains('is-right');
+            s.style.transform = 'translateY(-50%) translateX(' + (isR ? 60 : -60) + 'px)';
           }
         });
 
@@ -1574,114 +1452,67 @@ void function() {
   var srv = document.getElementById('srv');
   if (!srv) return;
 
-  /* Interactive Constellation + Addictive Mouse Vortex Canvas for #srv */
+  /* Create a small canvas for constellation dots + lines overlay */
   var cvs = document.createElement('canvas');
-  cvs.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.85';
+  cvs.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.35';
   cvs.setAttribute('aria-hidden', 'true');
   srv.insertBefore(cvs, srv.firstChild);
 
   var ctx = cvs.getContext('2d');
   var W, H, nodes = [];
-  var sMouse = { x: -9999, y: -9999, vx: 0, vy: 0, lx: 0, ly: 0, active: false };
 
   function resize() {
     W = cvs.width  = srv.offsetWidth  || window.innerWidth;
     H = cvs.height = srv.offsetHeight || window.innerHeight;
     nodes = [];
-    var count = window.innerWidth < 768 ? 50 : 95;
-    for (var i = 0; i < count; i++) {
+    for (var i = 0; i < 45; i++) {
       nodes.push({
         x: Math.random() * W,
         y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        r: Math.random() * 2.0 + 0.8
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15,
+        r: Math.random() * 1.8 + 0.6
       });
     }
   }
   resize();
   window.addEventListener('resize', resize);
 
-  window.addEventListener('mousemove', function(e) {
-    var rect = srv.getBoundingClientRect();
-    if (e.clientY >= rect.top - 100 && e.clientY <= rect.bottom + 100) {
-      var nx = e.clientX - rect.left;
-      var ny = e.clientY - rect.top;
-      sMouse.vx = nx - sMouse.lx;
-      sMouse.vy = ny - sMouse.ly;
-      sMouse.x = sMouse.lx = nx;
-      sMouse.y = sMouse.ly = ny;
-      sMouse.active = true;
-    } else {
-      sMouse.active = false;
-    }
-  });
-
   function draw() {
     requestAnimationFrame(draw);
     ctx.clearRect(0, 0, W, H);
-    sMouse.vx *= 0.9; sMouse.vy *= 0.9;
 
-    if (sMouse.active) {
-      var g = ctx.createRadialGradient(sMouse.x, sMouse.y, 0, sMouse.x, sMouse.y, 200);
-      g.addColorStop(0, 'rgba(126,207,130,0.14)');
-      g.addColorStop(1, 'rgba(126,207,130,0)');
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(sMouse.x, sMouse.y, 200, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    for (var i = 0; i < nodes.length; i++) {
-      var n = nodes[i];
+    /* Move nodes */
+    nodes.forEach(function(n) {
       n.x += n.vx; n.y += n.vy;
-      if (n.x < 0) n.x = W; if (n.x > W) n.x = 0;
-      if (n.y < 0) n.y = H; if (n.y > H) n.y = 0;
+      if (n.x < 0 || n.x > W) n.vx = -n.vx;
+      if (n.y < 0 || n.y > H) n.vy = -n.vy;
+    });
 
-      var mDist = 9999;
-      if (sMouse.active) {
-        var mdx = n.x - sMouse.x, mdy = n.y - sMouse.y;
-        mDist = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (mDist < 220 && mDist > 0.1) {
-          var f = 1 - mDist / 220;
-          var f2 = f * f;
-          var ux = mdx / mDist, uy = mdy / mDist;
-          n.x += ux * f2 * 5.0 + (-uy) * f2 * 3.0 + sMouse.vx * f * 0.16;
-          n.y += uy * f2 * 5.0 + (ux)  * f2 * 3.0 + sMouse.vy * f * 0.16;
-
-          ctx.strokeStyle = 'rgba(126,207,130,' + (f * 0.45).toFixed(3) + ')';
-          ctx.lineWidth = 0.6 + f * 0.7;
-          ctx.beginPath();
-          ctx.moveTo(sMouse.x, sMouse.y);
-          ctx.lineTo(n.x, n.y);
-          ctx.stroke();
-        }
-      }
-
+    /* Draw connecting lines */
+    for (var i = 0; i < nodes.length; i++) {
       for (var j = i + 1; j < nodes.length; j++) {
-        var dx = n.x - nodes[j].x;
-        var dy = n.y - nodes[j].y;
+        var dx = nodes[i].x - nodes[j].x;
+        var dy = nodes[i].y - nodes[j].y;
         var d = Math.sqrt(dx * dx + dy * dy);
-        if (d < 150) {
-          var alpha = (1 - d / 150) * ((sMouse.active && mDist < 220) ? 0.28 : 0.12);
-          ctx.strokeStyle = 'rgba(126,207,130,' + alpha.toFixed(3) + ')';
-          ctx.lineWidth = 0.45;
+        if (d < 180) {
+          ctx.strokeStyle = 'rgba(160,220,190,' + ((1 - d / 180) * 0.10) + ')';
+          ctx.lineWidth = 0.4;
           ctx.beginPath();
-          ctx.moveTo(n.x, n.y);
+          ctx.moveTo(nodes[i].x, nodes[i].y);
           ctx.lineTo(nodes[j].x, nodes[j].y);
           ctx.stroke();
         }
       }
-      var glow = (sMouse.active && mDist < 220) ? (1 - mDist / 220) : 0;
-      ctx.fillStyle = 'rgba(126,207,130,' + (0.45 + glow * 0.55).toFixed(2) + ')';
+      ctx.fillStyle = 'rgba(180,230,205,0.45)';
       ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r + glow * 2.0, 0, Math.PI * 2);
+      ctx.arc(nodes[i].x, nodes[i].y, nodes[i].r, 0, Math.PI * 2);
       ctx.fill();
     }
   }
   requestAnimationFrame(draw);
 
-  /* ── GSAP ScrollTrigger Pin + Smooth Unhurried Stage Transitions ── */
+  /* ── GSAP ScrollTrigger Pin + Alternating Side-Slide ── */
   var stages = gsap.utils.toArray('.srv-stage');
   var pips   = gsap.utils.toArray('.srv-pip');
   if (stages.length > 0) {
@@ -1690,11 +1521,10 @@ void function() {
     ScrollTrigger.create({
       trigger: '#srv',
       start: 'top top',
-      end: '+=620%',
+      end: '+=450%',
       pin: '#srv',
       pinSpacing: true,
       anticipatePin: 1,
-      scrub: 1.5,
       onUpdate: function(self) {
         var p = self.progress;
         var total = stages.length;
@@ -1704,17 +1534,17 @@ void function() {
         stages.forEach(function(s, i) {
           if (i === idx) {
             var op;
-            if (i === 0 && segP < 0.2) { op = 1; }
-            else if (i === total - 1 && segP > 0.8) { op = 1; }
-            else if (segP < 0.2) { op = segP / 0.2; }
+            if (segP < 0.2) { op = segP / 0.2; }
             else if (segP > 0.8) { op = (1 - segP) / 0.2; }
             else { op = 1; }
             op = Math.max(0, Math.min(1, op));
-            var sc = 0.95 + op * 0.05;
-            var ty = (1 - op) * 16;
-            gsap.to(s, { opacity: op, scale: sc, y: ty, xPercent: -50, yPercent: -50, duration: 0.55, ease: 'power2.out', overwrite: 'auto' });
+            var sc = 0.92 + op * 0.08;
+            var ty = (1 - op) * 20;
+            s.style.opacity = op;
+            s.style.transform = 'translate(-50%,-50%) scale(' + sc + ') translateY(' + ty + 'px)';
           } else {
-            gsap.to(s, { opacity: 0, scale: 0.95, y: 16, xPercent: -50, yPercent: -50, duration: 0.55, ease: 'power2.out', overwrite: 'auto' });
+            s.style.opacity = '0';
+            s.style.transform = 'translate(-50%,-50%) scale(0.92) translateY(20px)';
           }
         });
 
@@ -1748,7 +1578,7 @@ void function() {
   pills.forEach(function(p, idx) { p.addEventListener('click', function() { go(idx); }); });
   dots.forEach(function(d, idx)  { d.addEventListener('click', function() { go(idx); }); });
   ScrollTrigger.create({
-    trigger:'#out', start:'top top', end:'+=280%',
+    trigger:'#out', start:'top top', end:'+=160%',
     pin:'#out', pinSpacing:true, anticipatePin:1,
     onUpdate: function(self) {
       go(Math.min(Math.floor(self.progress * cards.length), cards.length-1));
