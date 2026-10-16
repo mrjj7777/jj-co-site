@@ -363,7 +363,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     </section>
 
     <!-- Section 2: Contact Methods -->
-    <section class="contact-sec">
+    <section class="contact-sec" id="methods">
       <div class="methods">
         <div class="method-col m-1">
           <div class="m-label">WHATSAPP</div>
@@ -421,7 +421,7 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     <section class="cta-sec rv">
       <div class="cta-t1">The best time to automate</div>
       <div class="cta-t2">was yesterday.</div>
-      <a href="https://wa.me/919537097033" target="_blank" class="btn">START YOUR PROJECT &rarr;</a>
+      <a href="#methods" class="btn" id="start-project">START YOUR PROJECT &rarr;</a>
     </section>
 
   </main>
@@ -470,6 +470,12 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
     gsap.ticker.add(function(time) { lenis.raf(time * 1000); });
     gsap.ticker.lagSmoothing(0);
     lenis.on('scroll', ScrollTrigger.update);
+
+  document.getElementById('start-project').addEventListener('click', function(e) {
+    e.preventDefault();
+    lenis.scrollTo('#methods', { offset: -80, duration: 1.6 });
+  });
+
 
     // Nav Scroll Background
     ScrollTrigger.create({
