@@ -537,7 +537,7 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
   <div class="qs-sticky" id="qs-sticky">
     <div class="qs-glow" aria-hidden="true"></div>
     <div class="qs-accent" aria-hidden="true"></div>
-    <div class="qs-tag" id="qs-tag"><span>Operating Principle</span></div>
+    
     <p class="qs-text" id="qs-text">Most businesses are still paying people to do work that AI executes better, faster, and at a fraction of the cost. We build the systems that change that.</p>
     <div class="qs-attr" id="qs-attr">JJ, Founder &amp; Systems Architect</div>
     <div class="qs-ctr" id="qs-ctr"><span id="qs-ctr-n">00</span><div class="qs-ctr-fill"><div class="qs-ctr-prog" id="qs-prog"></div></div></div>
@@ -652,7 +652,6 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
     <div class="srv-stages" id="srv-stages">
       <div class="srv-stage" id="srv-stage-0">
         <div class="ss-big-num">01</div>
-        <div class="ss-num">Service 01</div>
         <h2 class="ss-title">AI Call Agents<span class="ss-sub">Outbound Automation</span></h2>
         <p class="ss-desc">Autonomous AI voice agents that prospect, call, qualify, and book meetings, without a sales team. Your pipeline runs 24/7.</p>
         <div class="ss-metrics">
@@ -662,7 +661,6 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       </div>
       <div class="srv-stage" id="srv-stage-1">
         <div class="ss-big-num">02</div>
-        <div class="ss-num">Service 02</div>
         <h2 class="ss-title">Social Media Pipeline<span class="ss-sub">Content Intelligence</span></h2>
         <p class="ss-desc">Brief-to-published content automation across all platforms. Zero content burnout. Your brand voice preserved perfectly.</p>
         <div class="ss-metrics">
@@ -672,7 +670,6 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       </div>
       <div class="srv-stage" id="srv-stage-2">
         <div class="ss-big-num">03</div>
-        <div class="ss-num">Service 03</div>
         <h2 class="ss-title">Workflow Automation<span class="ss-sub">Operations Engineering</span></h2>
         <p class="ss-desc">Every repetitive process mapped and automated end to end. No recurring SaaS subscription. You own the infrastructure.</p>
         <div class="ss-metrics">
@@ -682,7 +679,6 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       </div>
       <div class="srv-stage" id="srv-stage-3">
         <div class="ss-big-num">04</div>
-        <div class="ss-num">Service 04</div>
         <h2 class="ss-title">Lead Generation Systems<span class="ss-sub">Growth Architecture</span></h2>
         <p class="ss-desc">Automated pipelines that identify, enrich, score, and deliver qualified leads straight into your CRM. Growth on autopilot.</p>
         <div class="ss-metrics">
@@ -692,7 +688,6 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       </div>
       <div class="srv-stage" id="srv-stage-4">
         <div class="ss-big-num">05</div>
-        <div class="ss-num">Service 05</div>
         <h2 class="ss-title">CRM &amp; Stack Integration<span class="ss-sub">Data Infrastructure</span></h2>
         <p class="ss-desc">Your entire tool ecosystem connected into one coherent data layer. Zero manual data entry across every platform.</p>
         <div class="ss-metrics">
@@ -702,7 +697,6 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
       </div>
       <div class="srv-stage" id="srv-stage-5">
         <div class="ss-big-num">06</div>
-        <div class="ss-num">Service 06</div>
         <h2 class="ss-title">Custom AI Software<span class="ss-sub">Proprietary Engineering</span></h2>
         <p class="ss-desc">Bespoke AI tools built around your exact business logic. You own the code outright. No vendor lock-in, ever.</p>
         <div class="ss-metrics">
@@ -733,15 +727,8 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
         <div class="out-m"    id="om1">Daily</div>
         <div class="out-m"    id="om2">Auto</div>
       </div>
-      <div class="out-cue"><span class="out-cue-t">Scroll for more</span>
-      </div>
     </div>
     <div class="out-r">
-      <div class="out-pills">
-        <div class="out-pill on" data-i="0">AI Call Agent</div>
-        <div class="out-pill"    data-i="1">Content Pipeline</div>
-        <div class="out-pill"    data-i="2">Workflow Automation</div>
-      </div>
       <div class="out-cards">
         <div class="out-c on" id="oc0">
           <div class="out-tt">Round-the-Clock Outbound, Zero Additional Headcount</div>
@@ -760,7 +747,6 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
         <div class="out-nd on" data-i="0"></div>
         <div class="out-nd"    data-i="1"></div>
         <div class="out-nd"    data-i="2"></div>
-        <span class="out-step" id="out-step">01 / 03</span>
       </div>
     </div>
   </div>
@@ -1112,7 +1098,7 @@ document.querySelectorAll('[data-sec]').forEach(function(el) {
   });
 
   var N = spans.length;
-  gsap.set([tagEl, ctrEl], { opacity: 1 });
+  gsap.set(ctrEl, { opacity: 1 });
   gsap.set(attrEl, { color: 'rgba(242,239,233,0.35)' });
   if (spans[0]) spans[0].style.color = 'rgb(242,239,233)';
 
@@ -1145,8 +1131,6 @@ document.querySelectorAll('[data-sec]').forEach(function(el) {
           sp.style.textShadow = 'none';
         }
       });
-
-      tagEl.style.opacity  = Math.min(1, self.progress * 10).toString();
       ctrEl.style.opacity  = Math.min(1, self.progress * 10).toString();
       if (ctrN) ctrN.textContent = String(Math.min(active+1,N)).padStart(2,'0')+' / '+String(N).padStart(2,'0');
       if (ctrP) ctrP.style.width = Math.min(100, Math.round(self.progress*100)) + '%';
@@ -1501,7 +1485,6 @@ void function() {
     cards.forEach(function(c,j)   { c.classList.toggle('on', j===i); });
     dots.forEach(function(d,j)    { d.classList.toggle('on', j===i); });
     pills.forEach(function(p,j)   { p.classList.toggle('on', j===i); });
-    step.textContent = String(i+1).padStart(2,'0') + ' / 03';
     cur = i;
   }
   pills.forEach(function(p, idx) { p.addEventListener('click', function() { go(idx); }); });

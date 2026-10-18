@@ -214,7 +214,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       <!-- Phase 1 -->
       <div class="phase-section ps-1">
         <div class="phase-content">
-          <div class="phase-label">PHASE 01</div>
           <h2 class="phase-title">Discovery &amp; Audit</h2>
           <p class="phase-desc">We map your existing tools, workflows, and hidden bottlenecks. We identify where manual effort is bleeding time and where automation can have the highest immediate impact.</p>
           <div class="phase-metric">
@@ -227,7 +226,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       <!-- Phase 2 -->
       <div class="phase-section ps-2">
         <div class="phase-content">
-          <div class="phase-label">PHASE 02</div>
           <h2 class="phase-title">Model Selection</h2>
           <p class="phase-desc">We don't just use one AI. We match the precise LLM architecture (OpenAI, Anthropic, open-source) to each specific problem to balance intelligence, speed, and cost-efficiency.</p>
           <div class="phase-metric">
@@ -240,7 +238,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       <!-- Phase 3 -->
       <div class="phase-section ps-3">
         <div class="phase-content">
-          <div class="phase-label">PHASE 03</div>
           <h2 class="phase-title">Build &amp; Integration</h2>
           <p class="phase-desc">The entire stack is connected via robust APIs and serverless functions. Data flows seamlessly from your CRM to AI agents and back, with zero human intervention required.</p>
           <div class="phase-metric">
@@ -253,7 +250,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       <!-- Phase 4 -->
       <div class="phase-section ps-4">
         <div class="phase-content">
-          <div class="phase-label">PHASE 04</div>
           <h2 class="phase-title">QA &amp; Hardening</h2>
           <p class="phase-desc">Systems are stress-tested in sandbox environments. Edge cases are eliminated, fallbacks are programmed, and rate limits are managed before a single workflow touches production.</p>
           <div class="phase-metric">
@@ -266,7 +262,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
       <!-- Phase 5 -->
       <div class="phase-section ps-5">
         <div class="phase-content">
-          <div class="phase-label">PHASE 05</div>
           <h2 class="phase-title">Deploy &amp; Compound</h2>
           <p class="phase-desc">Once live, the system begins generating value immediately. We monitor, tweak, and optimise, ensuring that the automation compounds your operational efficiency over time.</p>
           <div class="phase-metric">
@@ -276,20 +271,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
         </div>
       </div>
       
-    </section>
-
-    <!-- Tech Stack -->
-    <section class="tech-stack">
-      <div class="tech-label">BUILT WITH</div>
-      <div class="tech-list">
-        <span class="tech-item">Python</span>
-        <span class="tech-item">Node.js</span>
-        <span class="tech-item">OpenAI</span>
-        <span class="tech-item">Anthropic</span>
-        <span class="tech-item">Make</span>
-        <span class="tech-item">n8n</span>
-        <span class="tech-item">Custom APIs</span>
-      </div>
     </section>
 
     <!-- CTA -->
@@ -455,21 +436,6 @@ text-decoration:none;cursor:none;letter-spacing:.04em;transition:color .2s}
         }
       );
     });
-
-    // Tech Stack reveal
-    gsap.fromTo('.tech-item', 
-      { y: 30, opacity: 0 },
-      { 
-        y: 0, opacity: 1, 
-        stagger: 0.05, 
-        duration: 0.8, 
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.tech-stack',
-          start: 'top 80%'
-        }
-      }
-    );
 
     // CTA reveal
     gsap.fromTo('.cta-title, .btn',
