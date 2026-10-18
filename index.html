@@ -780,31 +780,25 @@ letter-spacing:.14em;text-transform:uppercase;color:var(--b);cursor:none;transit
   <h2 class="h2"><span class="ts">Engineered</span> <span class="ti">differently.</span></h2>
   <div class="pr-stage">
     <div class="pr-num" aria-hidden="true">
-      <div class="pr-dwin"><div class="pr-dtrack"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div></div>
     </div>
     <div class="pr-items">
       <article class="pr-item on" data-i="0">
-        <p class="pr-k">Principle 01</p>
         <h3 class="pr-t">We build systems, not subscriptions</h3>
         <p class="pr-b">Most AI agencies resell SaaS access with a margin on top and call it "automation." We engineer custom infrastructure built on your business logic, your data, your rules, not a vendor's product limitations. Every system is bespoke, production-grade, and transfers to you on delivery. No platform dependency, no ongoing licensing, no hostage code.</p>
       </article>
       <article class="pr-item" data-i="1">
-        <p class="pr-k">Principle 02</p>
         <h3 class="pr-t">Accountable to revenue, not activity</h3>
         <p class="pr-b">We scope every engagement around a specific, measurable business outcome, more qualified meetings, reduced operational hours, faster onboarding. We don't close the project until the metric moves. No vague deliverables, no activity theatre.</p>
       </article>
       <article class="pr-item" data-i="2">
-        <p class="pr-k">Principle 03</p>
         <h3 class="pr-t">You own everything we build</h3>
         <p class="pr-b">All code, agent logic, workflow configurations, and integrations are transferred to you on project completion. You own it outright. If you ever decide to run it internally or hand it to another team, you can, with zero friction.</p>
       </article>
       <article class="pr-item" data-i="3">
-        <p class="pr-k">Principle 04</p>
         <h3 class="pr-t">Selective client intake</h3>
         <p class="pr-b">We work with a deliberately small number of clients at any given time. Not to be exclusive, to be effective. You get direct access to the engineer building your system, fast iteration cycles, and a partner who is genuinely invested in your result.</p>
       </article>
       <article class="pr-item" data-i="4">
-        <p class="pr-k">Principle 05</p>
         <h3 class="pr-t">First working prototype in 48 hours</h3>
         <p class="pr-b">Once a project is scoped and agreed, we deliver a working prototype of your first system within 48 hours. Real output, real logic, running in your stack, before most agencies have finished their discovery questionnaire.</p>
       </article>
@@ -1550,7 +1544,7 @@ void function() {
     return;
   }
 
-  var track = root.querySelector('.pr-dtrack');
+  
   var tones = [
     [0.49, 0.86, 0.64],
     [0.36, 0.84, 0.78],
@@ -1579,6 +1573,7 @@ void function() {
       uHover:  { value: 0 },
       uRot:    { value: 0 },
       uR:      { value: 150 },
+      uP:      { value: 0 },
       uMouse:  { value: new THREE.Vector2(-9999, -9999) },
       uCenter: { value: new THREE.Vector2(200, 300) },
       uSize:   { value: new THREE.Vector2(1000, 700) },
@@ -1600,7 +1595,7 @@ void function() {
 
     var vert = [
       'precision highp float;',
-      'uniform float uT, uPR, uHover, uRot, uR;',
+      'uniform float uT, uPR, uHover, uRot, uR, uP;',
       'uniform vec2 uMouse, uCenter, uSize;',
       'attribute float aR, aK;',
       'varying float vD, vA, vK;',
@@ -1631,7 +1626,7 @@ void function() {
       '  return 42.*dot(m2*m2,vec4(dot(q0,x0),dot(q1,x1),dot(q2,x2),dot(q3,x3)));',
       '}',
       'void main(){',
-      '  float t = uT * .2;',
+      '  float t = uT * .2 + uP * 2.;',
       '  vec2 p2; float depth; float sc;',
       '  if (aK > .5) {',
       '    vec3 q = position;',
@@ -1672,7 +1667,7 @@ void function() {
       '  float d = length(gl_PointCoord - vec2(.5));',
       '  if (d > .5) discard;',
       '  float n = clamp(vD * .85 + .5, 0., 1.);',
-      '  vec3 col = mix(vec3(.94, .96, .94), uCol, .40 + n * .48);',
+      '  vec3 col = vec3(mix(.55, 1., n));',
       '  float a = (1. - smoothstep(.22, .5, d)) * mix(.07, .34, smoothstep(0., .55, n)) * vA;',
       '  a *= vK > .5 ? 1. : .45;',
       '  gl_FragColor = vec4(col, a);',
@@ -1725,7 +1720,8 @@ void function() {
       var t = clk.getElapsedTime();
       uni.uHover.value += (tHover - uni.uHover.value) * 0.14;
       uni.uT.value = t;
-      uni.uRot.value = t * 0.07;
+      uni.uP.value += ((window.__prP || 0) - uni.uP.value) * 0.06;
+      uni.uRot.value = t * 0.07 + uni.uP.value * 4.0;
       ren.render(scene, cam);
     });
     window.__prUni = uni;
@@ -1747,12 +1743,6 @@ void function() {
     next.classList.add('on');
     gsap.to(prev, { opacity: 0, x: -24 * dir, duration: 0.32, ease: 'power2.out' });
     gsap.fromTo(next, { opacity: 0, x: 24 * dir }, { opacity: 1, x: 0, duration: 0.42, ease: 'power3.out' });
-
-    gsap.to(track, { yPercent: -(100 / N) * i, duration: 0.48, ease: 'power3.out', overwrite: true });
-    if (window.__prUni) {
-      var c = tones[i];
-      gsap.to(window.__prUni.uCol.value, { x: c[0], y: c[1], z: c[2], duration: 0.6, ease: 'power2.out' });
-    }
   }
 
   ScrollTrigger.create({
@@ -1760,6 +1750,7 @@ void function() {
     pin: true, pinSpacing: true, anticipatePin: 0, invalidateOnRefresh: true,
     onUpdate: function(self) {
       var p = self.progress;
+      window.__prP = p;
       go(Math.min(N - 1, Math.floor((p + 0.08) * N)));
     }
   });
